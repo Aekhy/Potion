@@ -1,8 +1,8 @@
 import pygame
-from Case import Case
-from settings.ClasseSetting import *
-from Utils import *
-from group import draw_grp
+from inventory.settings import *
+from utils.texts import TextOutlined
+from utils.case import Case
+from utils.group import draw_grp
 
 class Slot():
     def __init__(self, item=None, quantity=0, x=0, y=0, size=DEFAULT_SLOT_SIZE, color=DEFAULT_SLOT_COLOR, item_name_font_size=DEFAULT_ITEM_NAME_FONT_SIZE, item_name_font_color=DEFAULT_ITEM_NAME_FONT_COLOR, quantity_font_size=DEFAULT_QUANTITY_FONT_SIZE, quantity_font_color = DEFAULT_QUANTITY_FONT_COLOR):

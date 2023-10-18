@@ -1,5 +1,5 @@
 import pygame
-from settings.ClasseSetting import DEFAULT_CASE_SIZE, DEFAULT_CASE_COLOR, DEFAULT_CASE_TYPE
+from utils.settings import DEFAULT_CASE_SIZE, DEFAULT_CASE_COLOR, DEFAULT_CASE_TYPE
 class Case(pygame.sprite.Sprite):
     def __init__(self, x, y, path="", size=DEFAULT_CASE_SIZE, color=DEFAULT_CASE_COLOR):
         super().__init__()

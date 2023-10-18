@@ -1,10 +1,12 @@
-from settings.ClasseSetting import *
-from Item import *
-from Slot import *
-from group import draw_grp
+
+from items.item import Item
+from inventory.slot import Slot
+from utils.group import draw_grp
+from utils.case import Case
+from inventory.settings import *
 
 class Inventory:
-    def __init__(self, x, y, inventory_structure):
+    def __init__(self, x, y, inventory_structure=DEFAULT_INVENTORY_LAYOUT):
         self.x = x
         self.y = y
         self.inventory, self.slot_list = self.make_inventory_and_slot_list(inventory_structure)

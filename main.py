@@ -1,8 +1,11 @@
-from Inventory import Inventory
-from Case import Case
-from settings.ClasseSetting import *
-from Utils import *
-from group import draw_grp
+from inventory.inventory import Inventory
+from utils.group import draw_grp
+from utils.texts import TextOutlined
+from utils.settings import *
+from general_settings.close_settings import *
+from general_settings.open_settings import *
+from inventory.settings import INVENTORY_SLOT_SIZE
+import pygame
 
 # initalise pygame module, pygame.display.init() is also automatically run.
 pygame.init()
@@ -21,7 +24,7 @@ clock = pygame.time.Clock()
 slots_take_allowed = []
 slots_drop_allowed = []
 # inventory
-inventory = Inventory((1920-5*INVENTORY_SLOT_SIZE)/2,1080-2*INVENTORY_SLOT_SIZE,DEFAULT_INVENTORY_LAYOUT)
+inventory = Inventory((1920-5*INVENTORY_SLOT_SIZE)/2,1080-2*INVENTORY_SLOT_SIZE)
 inventory_rect = inventory.get_rect()
 inventory_slot_list = inventory.get_slot_list()
 
