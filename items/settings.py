@@ -1,5 +1,6 @@
 DEFAULT_MAX_STACK = 10
-
+DEFAULT_INGREDIENT_MAX_STACK = 5
+DEFAULT_POTION_MAX_STACK = 3
 
 #__________ Ingredients __________
 
@@ -10,6 +11,7 @@ ACTIVE = "actif"
 EXCIPIENT = "excipient"
 
 #-- characteristics --
+# Base
 GAS = "gaz"
 LIQUID = "liquide"
 SOLID = "solide"
@@ -20,6 +22,7 @@ PSYCHIC = "psychique"
 MINOR = "mineur"
 MAJOR = "majeur"
 
+# Active
 HOT = "chaud"
 COLD = "froid"
 DRY = "sec"
