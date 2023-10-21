@@ -1,0 +1,32 @@
+{
+    "eau":{
+        "type": "base",
+        "characteristics": ["liquide","humide"],
+        "max_stack": 5,
+        "path": ""
+    },
+    "lavande":{
+        "type": "base",
+        "characteristics": ["lumineux","sec"],
+        "max_stack": 5,
+        "path": ""
+    },
+    "sel":{
+        "type": "actif",
+        "characteristics": ["sec", "mineur"],
+        "max_stack": 5,
+        "path": ""
+    },
+    "braises":{
+        "type": "actif",
+        "characteristics": ["sec", "chaud"],
+        "max_stack": 5,
+        "path": ""
+    },
+    "crapaud":{
+        "type": "actif",
+        "characteristics": ["humide", "froid"],
+        "max_stack": 5,
+        "path": ""
+    }
+}

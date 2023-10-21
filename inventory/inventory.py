@@ -1,5 +1,5 @@
 
-from items.item import Item
+from items.ingredients import Ingredient
 from inventory.slot import Slot
 from utils.group import draw_grp
 from utils.case import Case
@@ -24,7 +24,7 @@ class Inventory:
     def make_usable_slot(self, element, i, j):
         # TEMPORAIRE POUR LE DEBUG ----------
         if 'item_name' in element.keys():
-            item = Item(element["item_name"])
+            item = Ingredient(element["item_name"])
             quantity = element["quantity"]
         else:
             item = None
