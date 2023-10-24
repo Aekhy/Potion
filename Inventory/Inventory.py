@@ -2,14 +2,14 @@ from .Item import Item
 from .Slot import Slot
 from .Utils import *
 from .config import *
+from .Case import Case
 
 class Inventory:
-    def __init__(self, game, x, y, inventory_structure):
+    def __init__(self, game, x, y, inventory_structure=DEFAULT_INVENTORY_LAYOUT):
         self.game = game
         self.x = x
         self.y = y
-        if inventory_structure == []:
-            inventory_structure = DEFAULT_INVENTORY_LAYOUT
+        self._inventory_structure = inventory_structure
         self._inventory, self._slot_list = self.make_inventory_and_slot_list(inventory_structure)
         self._rect = self.make_inventory_rect(self._slot_list)
     

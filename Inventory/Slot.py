@@ -45,35 +45,35 @@ class Slot():
 
     @property
     def size(self):
-        return _size
+        return self._size
 
     @property
-    def x():
-        return _x
+    def x(self):
+        return self._x
 
     @property
-    def y():
-        return _y
+    def y(self):
+        return self._y
 
     @property
-    def color():
-        return _color
+    def color(self):
+        return self._color
 
     @property
-    def item_name_font_size():
-        return _item_name_font_size
+    def item_name_font_size(self):
+        return self._item_name_font_size
 
     @property
-    def item_name_font_color():
-        return _item_name_font_color
+    def item_name_font_color(self):
+        return self._item_name_font_color
 
     @property
-    def quantity_font_size():
-        return _quantity_font_size
+    def quantity_font_size(self):
+        return self._quantity_font_size
 
     @property
-    def quantity_font_color():
-        return _quantity_font_color
+    def quantity_font_color(self):
+        return self._quantity_font_color
 
     @property
     def item(self):
