@@ -1,6 +1,7 @@
 import pygame
-from settings.ClasseSetting import *
-from settings.setting import outline
+from .config import *
+
+outline = True
 
 class TextSprite(pygame.sprite.Sprite):
     def __init__(self, text, font_size=DEFAULT_TEXT_FONT_SIZE, font_color=DEFAULT_TEXT_FONT_COLOR, font_path=DEFAULT_TEXT_FONT_PATH):
