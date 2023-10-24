@@ -369,7 +369,7 @@ class Potion(Item):
                 elif self._active.effect == None and new_effect in [FERMENTATION, DISTILLATION, SUBLIMATION]:
                     self._active.effect = new_effect
 
-    # for now, this code is in potion but it will be else where in the end (in the chauldron for example)
+    # for now, this code is in potion but it will be else where in the end (in the cauldron for example)
     def update_info(self):
         """
         The function updates the name and description of a potion based on its

@@ -41,7 +41,7 @@ class Tool:
 # to apply the effect
 
 # Please change my class name and my name property
-# The heater will probably be one aspect of the chauldron
+# The heater will probably be one aspect of the cauldron
 class Heater(Tool):
     def __init__(self):
         super().__init__("outil de chauffe", Base, HEATING)
@@ -70,7 +70,7 @@ class Ferment(Tool):
         super().__init__("outil de fermentation", Active, FERMENTATION)
 
 # We propably want this class to herit from Tool
-class Chauldron:
+class Cauldron:
     def __init__(self):
         self._base = None
         self._active = None
