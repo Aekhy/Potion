@@ -46,8 +46,13 @@ class Game:
                     self.inGame = False
                     self.running = False
                 case pyg.MOUSEBUTTONDOWN:
-                    if event.type == pyg.MOUSEBUTTONDOWN and (event.button == 1 or event.button == 3) :
+                    if (event.button == 1 or event.button == 3) :
                         self.on_click(event)
+                case pyg.MOUSEMOTION:
+                    if self.holding_item['bool']:
+                        self.holding_item['image'].rect.move_ip(event.rel)
+                        self.holding_item['name'].move_ip(event.rel)
+                        self.holding_item['quantity'].move_ip(event.rel)
 
     def on_click(self, event):
         pos = event.pos
@@ -59,6 +64,7 @@ class Game:
                     # DEBUG : A decomposer
                     self.slot_source = slot
                     self.holding_item['item'] = slot.item
+                    print("heeeeeelo",self.holding_item['item'].name)
                     self.holding_item['quantity'] = slot.quantity if event.button == 3 else 1
                     slot.take_item(self.holding_item['quantity'])
                     self.holding_item['bool'] = True
@@ -69,29 +75,69 @@ class Game:
                     self.holding_item['image'].image = slot.item_image_sprite.image.copy()
                     self.holding_item['image'].rect = slot.item_image_sprite.rect.copy()
                     self.holding_item['image']._layer = LAYERS['inventory'] + 1
-                    print(slot.item)
+                    
                     self.holding_item['name'] = TextOutlined(slot.x+slot.size/2,
-                                                        slot.y+slot.size/2,
-                                                        slot.item.name,
-                                                        LAYERS['inventory'] + 2,
-                                                        "center",
-                                                        slot.item_name_font_size,
-                                                        slot.item_name_font_color)
+                                                            slot.y+slot.size/2,
+                                                            self.holding_item['item'].name,
+                                                            LAYERS['inventory'] + 2,
+                                                            "center",
+                                                            slot.item_name_font_size,
+                                                            slot.item_name_font_color)
 
                     self.holding_item['quantity'] = TextOutlined(slot.x+slot.size,
-                                                        slot.y+slot.size,
-                                                        str(self.holding_item['quantity']),
-                                                        LAYERS['inventory'] + 2,
-                                                        "bottomright",
-                                                        slot.quantity_font_size,
-                                                        slot.quantity_font_color)
+                                                                slot.y+slot.size,
+                                                                str(self.holding_item['quantity']),
+                                                                LAYERS['inventory'] + 2,
+                                                                "bottomright",
+                                                                slot.quantity_font_size,
+                                                                slot.quantity_font_color)
                     self.game_sprites.add(self.holding_item['image'])
                     self.holding_item['name'].add_to_group(self.game_sprites)
                     self.holding_item['quantity'].add_to_group(self.game_sprites)
 
 
     def on_release(self, event):
-        pass
+        if holding_item:
+                # if we released over the inventory zone
+                drop_allowed = False
+                if inventory_rect.collidepoint(event.pos):
+                    for slot in slots_drop_allowed:
+                        # if we released over a slot
+                        if slot.get_rect().collidepoint(event.pos) and slot.has_room(holding_item_item):
+                        
+                            # if that slot had room for our item
+                            drop_allowed = True
+                            holding_item_item, holding_item_quantity = slot.add_item(holding_item_item, holding_item_quantity)
+                            # update graphisme quantity
+                            # we want the quantity sprite rightly positionned in term of 
+                            # distance from the center of the image
+                            # important to get the right place to place the quantity
+                            dx = holding_item_image_sprite.rect.x - slot_source.item_image_sprite.rect.x  
+                            dy = holding_item_image_sprite.rect.y - slot_source.item_image_sprite.rect.y 
+                            x = slot_source.get_rect().x + slot_source.size + dx
+                            y = slot_source.get_rect().y + slot_source.size + dy
+
+                            holding_item_quantity_sprite.kill()
+                            holding_item_quantity_sprite = TextOutlined(x,
+                                                                        y,
+                                                                        str(holding_item_quantity),
+                                                                        3,
+                                                                        "bottomright",
+                                                                        slot.quantity_font_size,
+                                                                        slot.quantity_font_color)
+                            holding_item_quantity_sprite.add_to_group(draw_grp)
+
+                            if holding_item_quantity == 0:
+                                holding_item = False
+
+                if not drop_allowed:
+                    slot_source.add_item(holding_item_item, holding_item_quantity)
+                    holding_item = False
+                
+                if not holding_item:
+                    holding_item_image_sprite.kill()
+                    holding_item_name_sprite.kill()
+                    holding_item_quantity_sprite.kill()
 
     def update(self):
         # Async game updates
@@ -106,12 +152,7 @@ class Game:
         self.game_sprites.draw(self.screen)
         self.slots_sprites.draw(self.screen)
 
-        if self.holding_item['bool']:
-            pos = pyg.mouse.get_pos()
-            rel = pyg.mouse.get_rel()
-            self.holding_item['image'].rect.move_ip(rel)
-            self.holding_item['name'].move_ip(rel)
-            self.holding_item['quantity'].move_ip(rel)
+        
 
         # Show the final screen
         pyg.display.update()

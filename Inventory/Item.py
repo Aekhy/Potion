@@ -10,6 +10,8 @@ class Item():
     
     @property
     def name(self):
+        print("j'ai été appellé")
+        print(self._name)
         return self._name
     
     @property
