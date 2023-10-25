@@ -3,7 +3,7 @@ import pygame as pyg
 
 class Cauldron(pyg.sprite.Sprite):
     # Cauldron is a subclass of Sprite
-    def __init__(self, game):
+    def __init__(self, game, x, y):
 
         self.game = game
         self.group = self.game.game_sprites
@@ -11,17 +11,17 @@ class Cauldron(pyg.sprite.Sprite):
 
         self._layer = LAYERS['cauldron']
         # The cauldron is always on the center of the screen
-        self._x = SCREEN_WIDTH / 2 - CAULDRON_WIDTH / 2
-        self._y = SCREEN_HEIGHT / 2 - CAULDRON_HEIGHT / 2
-        self._width = CAULDRON_WIDTH
-        self._height = CAULDRON_HEIGHT
+        self._x = x
+        self._y = y
+        self._width = CAULDRON_SIZE
+        self._height = CAULDRON_SIZE
 
         self._image = pyg.Surface((self._width, self._height))
         self._image.fill(CAULDRON_COLOR)
 
         self._rect = self._image.get_rect()
-        self._rect.x = self._x
-        self._rect.y = self._y
+        self._rect.x = self._x # type: ignore
+        self._rect.y = self._y # type: ignore
 
     @property
     def image(self):

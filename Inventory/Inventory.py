@@ -5,7 +5,7 @@ from .config import *
 from .Case import Case
 
 class Inventory:
-    def __init__(self, game, x, y, inventory_structure=DEFAULT_INVENTORY_LAYOUT):
+    def __init__(self, game, x, y, inventory_structure=INVENTORY_LAYOUT):
         self.game = game
         self.x = x
         self.y = y
@@ -43,8 +43,8 @@ class Inventory:
         # ---------------------------------
 
     def make_unusable_slot(self, i, j):
-        Kase = Case(self.group, self.x+j*INVENTORY_SLOT_SIZE,self.y+i*INVENTORY_SLOT_SIZE,"",INVENTORY_SLOT_SIZE)
-        self.group.add(Kase)
+        Kase = Case(self.group, self.x+j*INVENTORY_SLOT_SIZE,self.y+i*INVENTORY_SLOT_SIZE,"",INVENTORY_SLOT_SIZE) # type: ignore
+        self.group.add(Kase) # type: ignore
     
     def make_inventory_and_slot_list(self, inventory_structure):
         inventory = []
@@ -68,4 +68,4 @@ class Inventory:
             if len(self._slot_list)>=2:
                 for slot in slot_list[1:]:
                     inventory_rect = inventory_rect.union(slot.rect)
-        return inventory_rect
+        return inventory_rect # type: ignore

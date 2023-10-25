@@ -1,7 +1,7 @@
 from .config import *
 
 class Item():
-    def __init__(self, name: str, max_stack: int = DEFAULT_MAX_STACK, img=""):
+    def __init__(self, name: str, max_stack: int = MAX_STACK_DEFAULT, img=""):
         self._img = img
         self._name = name
         self._max_stack = max_stack
@@ -10,8 +10,6 @@ class Item():
     
     @property
     def name(self):
-        print("j'ai été appellé")
-        print(self._name)
         return self._name
     
     @property

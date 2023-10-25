@@ -1,6 +1,7 @@
 from .Case import Case
 from .Utils import *
 from .config import *
+from config import LAYERS
 
 class Slot():
     def __init__(self, game, item=None, quantity=0, x=0, y=0, size=CASE_SIZE_DEFAULT, color=SLOT_COLOR_DEFAULT, item_name_font_size=ITEM_NAME_FONT_SIZE_DEFAULT, item_name_font_color=ITEM_NAME_FONT_COLOR_DEFAULT, quantity_font_size=QUANTITY_FONT_SIZE_DEFAULT, quantity_font_color = QUANTITY_FONT_COLOR_DEFAULT):
@@ -29,11 +30,10 @@ class Slot():
     
     @property
     def is_not_full(self):
-        return self._quantity<self._item.get_max_stack()
+        return self._quantity<self._item.max_stack # type: ignore
     
-    @property
     def has_room(self, item):
-        return self.is_empty or (self.is_not_full() and self._item == item)
+        return self.is_empty or (self.is_not_full and self._item == item)
 
     # ***** GETTERS *****
     @property
@@ -99,7 +99,7 @@ class Slot():
         item_left = item
         quantity_left = quantity
         new_quantity = self._quantity + quantity
-        max_stack = item.get_max_stack()
+        max_stack = item.max_stack
 
         if self.has_room(item):
             if self.is_empty:
@@ -150,7 +150,7 @@ class Slot():
     # Print order: - case < item_image < item_name and item_quantity
     def make_case_sprite(self):
         self.case_sprite = Case(self.group, self._x, self._y, "", self._size, self._color)
-        self.case_sprite._layer = LAYERS['inventory']
+        self.case_sprite._layer = LAYERS['inventory'] # type: ignore
 
     def make_quantity_sprite(self):
         self.quantity_sprite = TextOutlined(self._x+self._size,
@@ -162,7 +162,7 @@ class Slot():
                                             self._quantity_font_color)
 
     def make_item_name_sprite_custom(self):
-        name = self._item.name
+        name = self._item.name # type: ignore
         # self.item_name_sprite_custom is not a sprite, it's a class that contains many sprites
         # go see Utils.py
         self.item_name_sprite_custom = TextOutlined(self._x+self._size/2,
@@ -176,28 +176,15 @@ class Slot():
     def make_item_image_sprite(self):
         # we need proper image from item
         self.item_image_sprite = pygame.sprite.Sprite()
-        if self._item.img != "":
-            self.item_image_sprite.image = pygame.image.load(self._item.img).convert_alpha()
+        if self._item.img != "": # type: ignore
+            self.item_image_sprite.image = pygame.image.load(self._item.img).convert_alpha() # type: ignore
         else:
             self.item_image_sprite.image = pygame.Surface((20,20))
             self.item_image_sprite.image.fill("yellow")
 
         self.item_image_sprite.rect = self.item_image_sprite.image.get_rect(center = (self._x+self._size/2,self._y+self._size/2))
-        self.item_image_sprite._layer = LAYERS['inventory'] + 1
+        self.item_image_sprite._layer = LAYERS['inventory'] + 1 # type: ignore
 
-
-
-    def make_item_image_sprite(self):
-        # we need proper image from item
-        self.item_image_sprite = pygame.sprite.Sprite()
-        if self._item.img != "":
-            self.item_image_sprite.image = pygame.image.load(self._item.img).convert_alpha()
-        else:
-            self.item_image_sprite.image = pygame.Surface((20,20))
-            self.item_image_sprite.image.fill("yellow")
-
-        self.item_image_sprite.rect = self.item_image_sprite.image.get_rect(center = (self._x+self._size/2,self._y+self._size/2))
-        self.item_image_sprite._layer = 2
     
     def update_case_sprite(self):
         if hasattr(self, 'case_sprite'):

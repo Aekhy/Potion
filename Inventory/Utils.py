@@ -4,14 +4,14 @@ from .config import *
 outline = True
 
 class TextSprite(pygame.sprite.Sprite):
-    def __init__(self, text, font_size=DEFAULT_TEXT_FONT_SIZE, font_color=DEFAULT_TEXT_FONT_COLOR, font_path=DEFAULT_TEXT_FONT_PATH):
+    def __init__(self, text, font_size=TEXT_FONT_SIZE_DEFAULT, font_color=TEXT_FONT_COLOR_DEFAULT, font_path=TEXT_FONT_PATH_DEFAULT):
         super().__init__()
         self.font = pygame.font.Font(font_path, font_size)
         self.image = self.font.render(str(text), False, font_color)
         self.rect = self.image.get_rect()
 
 class TextOutlined():
-    def __init__(self, x, y, text, layer, rect_position="center", font_size=DEFAULT_TEXT_FONT_SIZE, font_color=DEFAULT_TEXT_FONT_COLOR, outline_font_color=DEFAULT_TEXT_OUTLINE_FONT_COLOR, font_path=DEFAULT_TEXT_FONT_PATH):
+    def __init__(self, x, y, text, layer, rect_position="center", font_size=TEXT_FONT_SIZE_DEFAULT, font_color=TEXT_FONT_COLOR_DEFAULT, outline_font_color=TEXT_OUTLINE_FONT_COLOR_DEFAULT, font_path=TEXT_FONT_PATH_DEFAULT):
         self.sprites = []
         # if the "step" is 1 render 9 sprites, if 2 render 4 + 1 added by hand sprites
         if outline:
@@ -29,13 +29,13 @@ class TextOutlined():
 
                     tmp = TextSprite(text, font_size, tmp_color, font_path)
                     self.place_rect(tmp, x-1+i, y-1+j, rect_position)
-                    tmp._layer = tmp_layer
+                    tmp._layer = tmp_layer # type: ignore
                     self.sprites.append(tmp)
 
         if not outline or self.pas == 2 :
             tmp = TextSprite(text, font_size, font_color, font_path)
             self.place_rect(tmp, x, y, rect_position)
-            tmp._layer = layer
+            tmp._layer = layer # type: ignore
             self.sprites.append(tmp)
 
     def place_rect(self, sprite, x, y, rect_position="center"):
