@@ -1,8 +1,8 @@
 from general_settings.private_settings import *
 from tools.tools import Cauldron
 from inventory.inventory import Inventory
-from inventory.Utils import TextOutlined
-from inventory.settings import INVENTORY_SLOT_SIZE
+from utils.texts import TextOutlined
+from inventory.settings import INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT
 import pygame as pyg
 
 
@@ -25,7 +25,7 @@ class Game:
         
         # Game objects
         self.cauldron = Cauldron(self, 100, 100)
-        self.inventory = Inventory(self, (SCREEN_WIDTH-5*INVENTORY_SLOT_SIZE)/2,SCREEN_HEIGHT-2*INVENTORY_SLOT_SIZE)
+        self.inventory = Inventory(self, (SCREEN_WIDTH-5*INVENTORY_SLOT_SIZE)/2,SCREEN_HEIGHT-2*INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT)
 
     def main(self):
         # Game loop

@@ -1,5 +1,5 @@
-from .Case import Case
-from .Utils import *
+from .case import Case
+from utils.texts import *
 from .settings import *
 from general_settings.private_settings import LAYERS
 
