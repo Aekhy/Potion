@@ -2,9 +2,11 @@ from items.ingredients import Ingredient
 from items.settings import *
 from items.settings import BASE
 from items.potions import Base, Active, Potion
-
+from .settings import *
+from general_settings.private_settings import LAYERS
+import pygame as pyg
 # we probably want this class to be a child of pygame.sprite.Sprite
-class Tool:
+class Tool(pyg.sprite.Sprite):
     def __init__(self, name: str, substance_type: Base | Active, effect:str, path: str = ""):
         self._name = name
         self._path = path
@@ -70,14 +72,43 @@ class Ferment(Tool):
         super().__init__("outil de fermentation", Active, FERMENTATION)
 
 # We propably want this class to herit from Tool
-class Cauldron:
-    def __init__(self):
+class Cauldron(pyg.sprite.Sprite):
+    def __init__(self, game, x, y):
         self._base = None
         self._active = None
         self._potion = None
-        pass
+    
+        self.game = game
+        self.group = self.game.game_sprites
+        pyg.sprite.Sprite.__init__(self, self.group)
+
+        self._layer = LAYERS['cauldron']
+        # The cauldron is always on the center of the screen
+        self._x = x
+        self._y = y
+        self._width = CAULDRON_SIZE
+        self._height = CAULDRON_SIZE
+
+        self._image = pyg.Surface((self._width, self._height))
+        self._image.fill(CAULDRON_COLOR)
+
+        self._rect = self._image.get_rect()
+        self._rect.x = self._x # type: ignore
+        self._rect.y = self._y # type: ignore
+
+    
+
+    
     # ______ getter & setter _______
 
+    @property
+    def image(self):
+        return self._image
+    
+    @property
+    def rect(self):
+        return self._rect
+    
     def get_mixture(self):
         # return the base
         if self._base != None and self._active == None:
@@ -100,6 +131,8 @@ class Cauldron:
 
     mixture = property(get_mixture)
     # _______________________
+    def update(self):
+        pass
 
     def add_ingredient(self, new_ingredient):
 
@@ -157,7 +190,7 @@ class Cauldron:
             self._active = self._potion.active
         return res
 
-    def add(self, something):
+    def add_thing(self, something):
         """
         If we can add something, return true.
         """

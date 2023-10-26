@@ -1,8 +1,8 @@
-from config import *
-from Cauldron import *
-from inventory.Inventory import Inventory
+from general_settings.private_settings import *
+from tools.tools import Cauldron
+from inventory.inventory import Inventory
 from inventory.Utils import TextOutlined
-from inventory.config import INVENTORY_SLOT_SIZE
+from inventory.settings import INVENTORY_SLOT_SIZE
 import pygame as pyg
 
 

@@ -1,4 +1,4 @@
-from .config import *
+from .settings import *
 
 class Item():
     def __init__(self, name: str, max_stack: int = MAX_STACK_DEFAULT, img=""):

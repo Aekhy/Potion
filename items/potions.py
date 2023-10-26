@@ -1,6 +1,6 @@
 from items.item import Item
 from items.settings import *
-from general_settings.close_settings import DEBUG
+from general_settings.private_settings import DEBUG
 
 # False to use V2
 USE_V1 = False

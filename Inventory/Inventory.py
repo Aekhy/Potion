@@ -1,50 +1,41 @@
-from .Item import Item
-from .Slot import Slot
-from .Utils import *
-from .config import *
-from .Case import Case
+
+from items.ingredients import Ingredient
+from inventory.slot import Slot
+from utils.group import draw_grp
+from utils.case import Case
+from inventory.settings import *
 
 class Inventory:
-    def __init__(self, game, x, y, inventory_structure=INVENTORY_LAYOUT):
-        self.game = game
+    def __init__(self, x, y, inventory_structure=DEFAULT_INVENTORY_LAYOUT):
         self.x = x
         self.y = y
-        self._inventory_structure = inventory_structure
-        self._inventory, self._slot_list = self.make_inventory_and_slot_list(inventory_structure)
-        self._rect = self.make_inventory_rect(self._slot_list)
+        self.inventory, self.slot_list = self.make_inventory_and_slot_list(inventory_structure)
+        self.rect = self.make_inventory_rect(self.slot_list)
+
+    def get_rect(self):
+        return self.rect
     
-    # ////////// PUBLIC \\\\\\\\\\
-
-    # ***** GETTERS *****
-
-    @property
-    def rect(self):
-        return self._rect
+    def get_inventory_layout(self):
+        return self.inventory
     
-    @property
-    def inventory_layout(self):
-        return self._inventory
+    def get_slot_list(self):
+        return self.slot_list
     
-    @property
-    def slot_list(self):
-        return self._slot_list
-
-    # ////////// PRIVATE \\\\\\\\\\
-
     def make_usable_slot(self, element, i, j):
         # TEMPORAIRE POUR LE DEBUG ----------
         if 'item_name' in element.keys():
-            item = Item(element["item_name"])
+            item = Ingredient(element["item_name"])
             quantity = element["quantity"]
         else:
             item = None
             quantity = 0
-        return Slot(self.game, item, quantity, self.x+j*INVENTORY_SLOT_SIZE, self.y+i*INVENTORY_SLOT_SIZE, INVENTORY_SLOT_SIZE)
+        return Slot(item, quantity, self.x+j*INVENTORY_SLOT_SIZE, self.y+i*INVENTORY_SLOT_SIZE, INVENTORY_SLOT_SIZE)
         # ---------------------------------
 
     def make_unusable_slot(self, i, j):
-        Kase = Case(self.group, self.x+j*INVENTORY_SLOT_SIZE,self.y+i*INVENTORY_SLOT_SIZE,"",INVENTORY_SLOT_SIZE) # type: ignore
-        self.group.add(Kase) # type: ignore
+        tmp = Case(self.x+j*INVENTORY_SLOT_SIZE,self.y+i*INVENTORY_SLOT_SIZE,"",INVENTORY_SLOT_SIZE)
+        draw_grp.add(tmp)
+        return tmp
     
     def make_inventory_and_slot_list(self, inventory_structure):
         inventory = []
@@ -64,8 +55,10 @@ class Inventory:
     
     def make_inventory_rect(self, slot_list):
         if len(slot_list)>=0:
-            inventory_rect = slot_list[0].rect
-            if len(self._slot_list)>=2:
+            inventory_rect = slot_list[0].get_rect()
+            if len(self.slot_list)>=2:
                 for slot in slot_list[1:]:
-                    inventory_rect = inventory_rect.union(slot.rect)
-        return inventory_rect # type: ignore
+                    inventory_rect = inventory_rect.union(slot.get_rect())
+        return inventory_rect
+
+        

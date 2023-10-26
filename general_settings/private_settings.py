@@ -1,3 +1,5 @@
+DEBUG = False
+
 # General settings constants
 FRAMERATE = 60
 
@@ -20,8 +22,3 @@ SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 750
 GAME_FONT_PATH = ''
 DEFAULT_FONT_SIZE = 25
-
-
-# Cauldron
-CAULDRON_SIZE = 200
-CAULDRON_COLOR = COLORS['red']
