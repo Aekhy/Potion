@@ -1,48 +1,89 @@
-import pygame
-from inventory.settings import *
-from utils.texts import TextOutlined
-from utils.case import Case
-from utils.group import draw_grp
+from .Case import Case
+from .Utils import *
+from .settings import *
+from general_settings.private_settings import LAYERS
 
 class Slot():
-    def __init__(self, item=None, quantity=0, x=0, y=0, size=DEFAULT_SLOT_SIZE, color=DEFAULT_SLOT_COLOR, item_name_font_size=DEFAULT_ITEM_NAME_FONT_SIZE, item_name_font_color=DEFAULT_ITEM_NAME_FONT_COLOR, quantity_font_size=DEFAULT_QUANTITY_FONT_SIZE, quantity_font_color = DEFAULT_QUANTITY_FONT_COLOR):
-        #-- Attributs --
-        self.item = item
-        self.quantity = quantity
-        self.size = size
-        self.x = x
-        self.y = y
-        self.color = color
-        self.item_name_font_size = item_name_font_size
-        self.item_name_font_color = item_name_font_color
-        self.quantity_font_size = quantity_font_size
-        self.quantity_font_color = quantity_font_color
-        
-        #-- Graphisme --
-        self.update_display()
-        
+    def __init__(self, game, item=None, quantity=0, x=0, y=0, size=CASE_SIZE_DEFAULT, color=SLOT_COLOR_DEFAULT, item_name_font_size=ITEM_NAME_FONT_SIZE_DEFAULT, item_name_font_color=ITEM_NAME_FONT_COLOR_DEFAULT, quantity_font_size=QUANTITY_FONT_SIZE_DEFAULT, quantity_font_color = QUANTITY_FONT_COLOR_DEFAULT):
+        self.game = game
+        self.group = self.game.slots_sprites
+        self._item = item
+        self._quantity = quantity
+        self._size = size
+        self._x = x
+        self._y = y
+        self._color = color
+        self._item_name_font_size = item_name_font_size
+        self._item_name_font_color = item_name_font_color
+        self._quantity_font_size = quantity_font_size
+        self._quantity_font_color = quantity_font_color
+        self.type = 'Slot'
 
-    # GETTER
-    def get_rect(self):
-        return self.case_sprite.rect
-    
-    def get_item(self):
-        return self.item
-    
-    def get_quantity(self):
-        return self.quantity
-    
-    # TOOLS - BOOL
+        self.update_display()
+
+    # ////////// PUBLIC \\\\\\\\\\
+
+    # ***** CONTROLS *****
+    @property
     def is_empty(self):
-        return self.quantity == 0
+        return self._quantity == 0
     
+    @property
     def is_not_full(self):
-        return self.quantity<self.item.get_max_stack()
+        return self._quantity<self._item.max_stack # type: ignore
     
     def has_room(self, item):
-        return self.is_empty() or (self.is_not_full() and self.item == item)
+        return self.is_empty or (self.is_not_full and self._item == item)
+
+    # ***** GETTERS *****
+    @property
+    def rect(self):
+        if(hasattr(self, 'case_sprite')):
+            return self.case_sprite.rect
+        else:
+            return None
+
+    @property
+    def size(self):
+        return self._size
+
+    @property
+    def x(self):
+        return self._x
+
+    @property
+    def y(self):
+        return self._y
+
+    @property
+    def color(self):
+        return self._color
+
+    @property
+    def item_name_font_size(self):
+        return self._item_name_font_size
+
+    @property
+    def item_name_font_color(self):
+        return self._item_name_font_color
+
+    @property
+    def quantity_font_size(self):
+        return self._quantity_font_size
+
+    @property
+    def quantity_font_color(self):
+        return self._quantity_font_color
+
+    @property
+    def item(self):
+        return self._item
+
+    @property
+    def quantity(self):
+        return self._quantity
     
-    # MOTEUR
+    # ***** ENGINE *****
     def add_calculation(self, item, quantity=1):
         """
         The function `add_calculation` adds an item to a container, updating the quantity and handling
@@ -57,19 +98,19 @@ class Slot():
         """
         item_left = item
         quantity_left = quantity
-        new_quantity = self.quantity + quantity
-        max_stack = item.get_max_stack()
+        new_quantity = self._quantity + quantity
+        max_stack = item.max_stack
 
         if self.has_room(item):
-            if self.is_empty():
-                self.item = item
+            if self.is_empty:
+                self._item = item
             if new_quantity > max_stack :
-                quantity_left = self.quantity + quantity - max_stack
-                self.quantity = max_stack
+                quantity_left = self._quantity + quantity - max_stack
+                self._quantity = max_stack
             else:
                 item_left = None
                 quantity_left = 0
-                self.quantity = new_quantity
+                self._quantity = new_quantity
         return item_left, quantity_left
     
     def take_calculation(self, quantity=1):
@@ -83,84 +124,96 @@ class Slot():
         """
         quantity_taken = 0
         item_taken = None
-        if not self.is_empty():
-            item_taken = self.item
-            if quantity < self.quantity:
+        if not self.is_empty:
+            item_taken = self._item
+            if quantity < self._quantity:
                 quantity_taken = quantity
-                self.quantity -= quantity
+                self._quantity -= quantity
             else:
-                quantity_taken = self.quantity
-                self.quantity = 0
-                self.item = None
+                quantity_taken = self._quantity
+                self._quantity = 0
+                self._item = None
         return item_taken, quantity_taken
+
+    def add_item(self, item, quantity=1):
+        item_left, quantity_left = self.add_calculation(item, quantity)
+        self.update_item_image_name_quantity_display()
+        return item_left,quantity_left
     
-    # AFFICHAGE - case < item_image < item_name et item_quantity
+    def take_item(self, quantity=1):
+        item_taken, quantity_taken = self.take_calculation(quantity)
+        self.update_item_image_name_quantity_display()
+        return item_taken, quantity_taken
+
+    
+    # ////////// PRIVATE \\\\\\\\\\
+    # Print order: - case < item_image < item_name and item_quantity
     def make_case_sprite(self):
-        self.case_sprite = Case(self.x, self.y, "", self.size, self.color)
-        self.case_sprite._layer = 1
+        self.case_sprite = Case(self.group, self._x, self._y, "", self._size, self._color)
+        self.case_sprite._layer = LAYERS['inventory'] # type: ignore
 
     def make_quantity_sprite(self):
-        self.quantity_sprite = TextOutlined(self.x+self.size,
-                                            self.y+self.size,
-                                            str(self.quantity),
-                                            3,
+        self.quantity_sprite = TextOutlined(self._x+self._size,
+                                            self._y+self._size,
+                                            str(self._quantity),
+                                            LAYERS['inventory'] + 2,
                                             "bottomright",
-                                            self.quantity_font_size,
-                                            self.quantity_font_color)
+                                            self._quantity_font_size,
+                                            self._quantity_font_color)
 
     def make_item_name_sprite_custom(self):
-        name = self.item.get_name()
-        layer = 3
+        name = self._item.name # type: ignore
         # self.item_name_sprite_custom is not a sprite, it's a class that contains many sprites
         # go see Utils.py
-        self.item_name_sprite_custom = TextOutlined(self.x+self.size/2,
-                                             self.y+self.size/2,
+        self.item_name_sprite_custom = TextOutlined(self._x+self._size/2,
+                                             self._y+self._size/2,
                                              name,
-                                             layer,
+                                             LAYERS['inventory'] + 2,
                                              "center",
-                                             self.item_name_font_size,
-                                             self.item_name_font_color)
+                                             self._item_name_font_size,
+                                             self._item_name_font_color)
         
     def make_item_image_sprite(self):
         # we need proper image from item
         self.item_image_sprite = pygame.sprite.Sprite()
-        if self.item.path != "":
-            self.item_image_sprite.image = pygame.image.load(self.item.path).convert_alpha()
+        if self._item.img != "": # type: ignore
+            self.item_image_sprite.image = pygame.image.load(self._item.img).convert_alpha() # type: ignore
         else:
             self.item_image_sprite.image = pygame.Surface((20,20))
             self.item_image_sprite.image.fill("yellow")
 
-        self.item_image_sprite.rect = self.item_image_sprite.image.get_rect(center = (self.x+self.size/2,self.y+self.size/2))
-        self.item_image_sprite._layer = 2
+        self.item_image_sprite.rect = self.item_image_sprite.image.get_rect(center = (self._x+self._size/2,self._y+self._size/2))
+        self.item_image_sprite._layer = LAYERS['inventory'] + 1 # type: ignore
+
     
     def update_case_sprite(self):
         if hasattr(self, 'case_sprite'):
             self.case_sprite.kill()
         self.make_case_sprite()
-        self.case_sprite.add(draw_grp)
+        self.case_sprite.add(self.group)
 
     def update_quantity_sprite(self):
         if hasattr(self, 'quantity_sprite'):
             self.quantity_sprite.kill()
-        if not self.is_empty():
+        if not self.is_empty:
             self.make_quantity_sprite()
-            self.quantity_sprite.add_to_group(draw_grp)
+            self.quantity_sprite.add_to_group(self.group)
 
     def update_item_name_sprite_custom(self):
         if hasattr(self, 'item_name_sprite_custom'):
             self.item_name_sprite_custom.kill()
-        if not self.is_empty():
+        if not self.is_empty:
             self.make_item_name_sprite_custom()
             # self.item_name_sprite_custom is not a sprite, it's a class that contains many sprites
             # it has it's own methode to add itself to a group 
-            self.item_name_sprite_custom.add_to_group(draw_grp)
+            self.item_name_sprite_custom.add_to_group(self.group)
 
     def update_item_image_sprite(self):
         if hasattr(self, 'item_image_sprite'):
             self.item_image_sprite.kill()
-        if not self.is_empty():
+        if not self.is_empty:
             self.make_item_image_sprite()
-            draw_grp.add(self.item_image_sprite)
+            self.group.add(self.item_image_sprite)
 
     def update_item_image_name_quantity_display(self):
         self.update_quantity_sprite()
@@ -180,21 +233,4 @@ class Slot():
             self.item_name_sprite_custom.kill()
         if hasattr(self, 'item_image_sprite'):
             self.item_image_sprite.kill()
-
-    # OTHERS - CALL MOTEUR AND AFFICHAGE FUNCTIONS
-    
-    def add_item(self, item, quantity=1):
-        item_left, quantity_left = self.add_calculation(item, quantity)
-        self.update_item_image_name_quantity_display()
-        return item_left,quantity_left
-    
-    def take_item(self, quantity=1):
-        item_taken, quantity_taken = self.take_calculation(quantity)
-        self.update_item_image_name_quantity_display()
-        return item_taken, quantity_taken
-
-        
-    
-    
-        
     

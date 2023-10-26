@@ -1,13 +1,14 @@
 import pygame
-from inventory.settings import *
-from general_settings.open_settings import outline
+from general_settings.public_settings import outline
+from .settings import *
+
+
 class TextSprite(pygame.sprite.Sprite):
     def __init__(self, text, font_size=TEXT_FONT_SIZE_DEFAULT, font_color=TEXT_FONT_COLOR_DEFAULT, font_path=TEXT_FONT_PATH_DEFAULT):
         super().__init__()
         self.font = pygame.font.Font(font_path, font_size)
         self.image = self.font.render(str(text), False, font_color)
         self.rect = self.image.get_rect()
-
 
 class TextOutlined():
     def __init__(self, x, y, text, layer, rect_position="center", font_size=TEXT_FONT_SIZE_DEFAULT, font_color=TEXT_FONT_COLOR_DEFAULT, outline_font_color=TEXT_OUTLINE_FONT_COLOR_DEFAULT, font_path=TEXT_FONT_PATH_DEFAULT):
