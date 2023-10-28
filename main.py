@@ -14,13 +14,7 @@ class Game:
         self.running = True
 
         self.state_stack = []
-        self.keybinds = {
-            
-        }
-        self.actions = {
-            
-        }
-
+        
         self.start()
 
     def start(self):
@@ -39,35 +33,16 @@ class Game:
         self.running = False
 
     # ////////// PRIVATE \\\\\\\\\\
+    def reset_keys(self):
+        self.actions = {}
 
     def events(self):
         # Game events management
-        for event in pyg.event.get():
-            match event.type:
-                case pyg.QUIT:
-                    self.inGame = False
-                    self.running = False
-                case pyg.MOUSEBUTTONDOWN:
-                    self.actions["primaryclick"] = event.button == 1
-                    self.actions["middleclick"] = event.button == 2
-                    self.actions["secondaryclick"] = event.button == 3
-                    self.actions["mouse_pos"] = event.pos
-
-                case pyg.MOUSEMOTION:
-                    self.actions["mouse_motion"] = True
-                    self.actions["mouse_rel"] = event.rel
-
-                case pyg.MOUSEBUTTONUP:
-                    self.actions["primaryclick"] = not event.button == 1
-                    self.actions["middleclick"] = not event.button != 2
-                    self.actions["secondaryclick"] = not event.button == 3
-
-                case _:
-                    pass
+        self.state_stack[-1].events()
 
     def update(self):
         # Async game updates
-        self.state_stack[-1].update(self.actions)
+        self.state_stack[-1].update()
 
     def draw(self):
         # Game sprite drawing loop

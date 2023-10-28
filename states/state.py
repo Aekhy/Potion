@@ -5,6 +5,9 @@ class State():
         self._game = game
         self._prev_state = None
 
+    def events(self):
+        pass
+
     def update(self, actions):
         pass
 
