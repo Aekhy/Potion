@@ -1,8 +1,8 @@
 from general_settings.private_settings import *
-from tools.tools import Cauldron
+from tools.tools import Cauldron, Freezer, Alembic
 from inventory.inventory import Inventory
 from utils.texts import TextOutlined
-from inventory.settings import INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT
+from inventory.settings import *
 import pygame as pyg
 
 
@@ -19,13 +19,15 @@ class Game:
         self.inGame = True
         # The game_sprites group will be updated at every tick
         self.game_sprites = pyg.sprite.LayeredUpdates()
-        self.slots_sprites = pyg.sprite.LayeredUpdates()
 
+        self.slots = {"take":[],"add":[]}
         self.holding_item = {'bool':False}
         
         # Game objects
         self.cauldron = Cauldron(self, 100, 100)
         self.inventory = Inventory(self, (SCREEN_WIDTH-5*INVENTORY_SLOT_SIZE)/2,SCREEN_HEIGHT-2*INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT)
+        self.freezer = Freezer(self,0,0)
+        self.alembic = Alembic(self,200,0) 
 
     def main(self):
         # Game loop
@@ -49,7 +51,9 @@ class Game:
                     
                 case pyg.MOUSEBUTTONDOWN:
                     if (event.button == 1 or event.button == 3) :
-                        if not self.holding_item['bool'] and (self.inventory.rect.collidepoint(event.pos)):
+                        if self.cauldron.finish_button.rect.collidepoint(event.pos):
+                            self.cauldron.finish()
+                        if not self.holding_item['bool']:
                             self.drag(event)
                             
                 case pyg.MOUSEMOTION:
@@ -63,7 +67,7 @@ class Game:
                         self.drop(event)
 
     def drag(self, event):
-        for slot in self.inventory.slot_list:
+        for slot in self.slots["take"]:
             if not slot.is_empty and slot.rect.collidepoint(event.pos):
                 # DEBUG : A decomposer
                 self.slot_source = slot
@@ -101,45 +105,54 @@ class Game:
     def drop(self, event):
         holding_item = self.holding_item
         if holding_item['bool']:
-            # if we released over the inventory zone
             drop_allowed = False
+            # if we released over the inventory zone
             if self.inventory.rect.collidepoint(event.pos):
-                for slot in self.inventory.slot_list:
+                for slot in self.slots["add"]:
                     # if we released over a slot
                     if slot.rect.collidepoint(event.pos) and slot.has_room(holding_item['item']):
                     
                         # if this slot has room for our item
                         drop_allowed = True
                         holding_item['item'], holding_item['quantity'] = slot.add_item(holding_item['item'], holding_item['quantity'])
-                        # update graphics quantity
-                        # we want the quantity sprite rightly positionned in term of 
-                        # distance from the center of the image
-                        # important to get the right place to place the quantity
-                        dx = holding_item['image'].rect.x - self.slot_source.item_image_sprite.rect.x # type: ignore
-                        dy = holding_item['image'].rect.y - self.slot_source.item_image_sprite.rect.y # type: ignore
-                        x = self.slot_source.rect.x + self.slot_source.size + dx
-                        y = self.slot_source.rect.y + self.slot_source.size + dy
-
-                        holding_item['quantity_sprite'].kill() # type: ignore
-                        holding_item['quantity_sprite'] = TextOutlined(x, y, # type: ignore
-                                                                    str(holding_item['quantity']),
-                                                                    LAYERS['inventory'] + 2,
-                                                                    "bottomright",
-                                                                    slot.quantity_font_size,
-                                                                    slot.quantity_font_color)
-                        holding_item['quantity_sprite'].add_to_group(self.game_sprites)
-
-                        if holding_item['quantity'] == 0:
-                            holding_item['bool'] = False
-
-            if not drop_allowed:
-                self.slot_source.add_item(holding_item['item'], holding_item['quantity'])
+            # if we released over the cauldron
+            if self.cauldron.rect.collidepoint(event.pos):
+                drop_allowed, holding_item['item'], holding_item['quantity'] = self.cauldron.add_thing(holding_item['item'],holding_item['quantity'])
+                print(drop_allowed, holding_item['item'], holding_item['quantity'])
+            if holding_item['quantity'] == 0:
                 holding_item['bool'] = False
-            
-            if not holding_item['bool']: # type: ignore
-                holding_item['image'].kill() # type: ignore
-                holding_item['name'].kill() # type: ignore
+                if self.cauldron.verify_slot(self.slot_source):
+                    self.cauldron.reset()
+
+            if drop_allowed and holding_item['bool']:
+                # update graphics quantity
+                # we want the quantity sprite rightly positionned in term of 
+                # distance from the center of the image
+                # important to get the right place to place the quantity
+                dx = holding_item['image'].rect.x - self.slot_source.item_image_sprite.rect.x # type: ignore
+                dy = holding_item['image'].rect.y - self.slot_source.item_image_sprite.rect.y # type: ignore
+                x = self.slot_source.rect.x + self.slot_source.size + dx
+                y = self.slot_source.rect.y + self.slot_source.size + dy
+
                 holding_item['quantity_sprite'].kill() # type: ignore
+                holding_item['quantity_sprite'] = TextOutlined(x, y, # type: ignore
+                                                            str(holding_item['quantity']),
+                                                            LAYERS['inventory'] + 2,
+                                                            "bottomright",
+                                                            QUANTITY_FONT_SIZE_DEFAULT,
+                                                            QUANTITY_FONT_COLOR_DEFAULT)
+                holding_item['quantity_sprite'].add_to_group(self.game_sprites)               
+            else:
+                if not drop_allowed:
+                    self.slot_source.add_item(holding_item['item'], holding_item['quantity'])
+                    holding_item['bool'] = False
+                
+                if not holding_item['bool']: # type: ignore
+                    holding_item['image'].kill() # type: ignore
+                    holding_item['name'].kill() # type: ignore
+                    holding_item['quantity_sprite'].kill() # type: ignore
+
+            
 
     def update(self):
         # Async game updates
@@ -148,10 +161,9 @@ class Game:
     def draw(self):
         # Game sprite drawing loop
         # Fill the screen with solid color
-        self.screen.fill(COLORS['black'])
+        self.screen.fill(COLORS['white'])
 
         # Print our sprites
-        self.slots_sprites.draw(self.screen)
         self.game_sprites.draw(self.screen)
         
 

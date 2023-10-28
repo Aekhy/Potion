@@ -18,7 +18,7 @@ INVENTORY_LAYOUT = [
      {"type":"Slot","item_name":"lavande","quantity":1},
      {"type":"Slot","item_name":"eau","quantity":5},
      {"type":"Slot","item_name":"crapaud","quantity":2},
-     {"type":"Slot"}],
+     {"type":"Slot","item_name":"braises","quantity":2}],
      [{"type":"Slot"},
       {"type":"Slot"},
       {"type":"Slot"}]

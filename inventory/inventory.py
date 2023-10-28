@@ -4,6 +4,7 @@ from inventory.slot import Slot
 from utils.group import draw_grp
 from inventory.case import Case
 from inventory.settings import *
+from general_settings.private_settings import LAYERS
 
 class Inventory:
     def __init__(self, game, x, y, inventory_structure=INVENTORY_LAYOUT):
@@ -35,16 +36,16 @@ class Inventory:
     def make_usable_slot(self, element, i, j):
         # TEMPORAIRE POUR LE DEBUG ----------
         if 'item_name' in element.keys():
-            item = Item(element["item_name"])
+            item = Ingredient(element["item_name"])
             quantity = element["quantity"]
         else:
             item = None
             quantity = 0
-        return Slot(self.game, item, quantity, self.x+j*INVENTORY_SLOT_SIZE, self.y+i*INVENTORY_SLOT_SIZE, INVENTORY_SLOT_SIZE)
+        return Slot(self.game, True, True, item, quantity, self.x+j*INVENTORY_SLOT_SIZE, self.y+i*INVENTORY_SLOT_SIZE, LAYERS["inventory"], INVENTORY_SLOT_SIZE)
         # ---------------------------------
 
     def make_unusable_slot(self, i, j):
-        Kase = Case(self.group, self.x+j*INVENTORY_SLOT_SIZE,self.y+i*INVENTORY_SLOT_SIZE,"",INVENTORY_SLOT_SIZE) # type: ignore
+        Kase = Case(self.group, self.x+j*INVENTORY_SLOT_SIZE,self.y+i*INVENTORY_SLOT_SIZE, LAYERS["inventory"],"",INVENTORY_SLOT_SIZE) # type: ignore
         self.group.add(Kase) # type: ignore
     
     def make_inventory_and_slot_list(self, inventory_structure):

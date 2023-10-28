@@ -10,11 +10,14 @@ COLORS = {
     'grey' : (127, 127, 127),
     'white' : (255, 255, 255),
     'red' : (255, 0, 0),
+    'darkred' : (139, 0, 0)
 }
 
 LAYERS = {
     'cauldron': 1,
-    'inventory': 2,     # Inventory takes 4 layers
+    'inventory': 2,     # Inventory takes 4 layers  -- for slots it's from 2 and 3
+    'tools': 2,
+    'max': 20
 }
 
 # Game

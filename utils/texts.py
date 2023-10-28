@@ -18,7 +18,7 @@ class TextOutlined():
             for i in range(0, 3, self.pas):
                 for j in range(0, 3, self.pas):
                     tmp_color = outline_font_color
-                    tmp_layer = layer-0.1
+                    tmp_layer = layer-0.01
 
                     # middle sprite text is above and different color from others
                     # if self.pas != 1 we need to add it by hand, not in loop
@@ -27,12 +27,17 @@ class TextOutlined():
                         tmp_layer = layer
 
                     tmp = TextSprite(text, font_size, tmp_color, font_path)
+                    if self.pas == 1 and (i==1 and j==1):
+                        self.rect = tmp.rect
                     self.place_rect(tmp, x-1+i, y-1+j, rect_position)
                     tmp._layer = tmp_layer # type: ignore
                     self.sprites.append(tmp)
 
         if not outline or self.pas == 2 :
             tmp = TextSprite(text, font_size, font_color, font_path)
+
+            self.rect = tmp.rect
+
             self.place_rect(tmp, x, y, rect_position)
             tmp._layer = layer # type: ignore
             self.sprites.append(tmp)

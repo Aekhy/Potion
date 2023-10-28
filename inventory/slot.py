@@ -4,14 +4,19 @@ from .settings import *
 from general_settings.private_settings import LAYERS
 
 class Slot():
-    def __init__(self, game, item=None, quantity=0, x=0, y=0, size=CASE_SIZE_DEFAULT, color=SLOT_COLOR_DEFAULT, item_name_font_size=ITEM_NAME_FONT_SIZE_DEFAULT, item_name_font_color=ITEM_NAME_FONT_COLOR_DEFAULT, quantity_font_size=QUANTITY_FONT_SIZE_DEFAULT, quantity_font_color = QUANTITY_FONT_COLOR_DEFAULT):
+    def __init__(self, game, can_take=True, can_add=True, item=None, quantity=0, x=0, y=0, layer=LAYERS["max"], size=CASE_SIZE_DEFAULT, color=SLOT_COLOR_DEFAULT, item_name_font_size=ITEM_NAME_FONT_SIZE_DEFAULT, item_name_font_color=ITEM_NAME_FONT_COLOR_DEFAULT, quantity_font_size=QUANTITY_FONT_SIZE_DEFAULT, quantity_font_color = QUANTITY_FONT_COLOR_DEFAULT):
         self.game = game
-        self.group = self.game.slots_sprites
+        if can_take:
+            self.game.slots["take"].append(self)
+        if can_add:
+            self.game.slots["add"].append(self)         
+        self.group = self.game.game_sprites
         self._item = item
         self._quantity = quantity
         self._size = size
         self._x = x
         self._y = y
+        self._layer = layer
         self._color = color
         self._item_name_font_size = item_name_font_size
         self._item_name_font_color = item_name_font_color
@@ -149,14 +154,14 @@ class Slot():
     # ////////// PRIVATE \\\\\\\\\\
     # Print order: - case < item_image < item_name and item_quantity
     def make_case_sprite(self):
-        self.case_sprite = Case(self.group, self._x, self._y, "", self._size, self._color)
-        self.case_sprite._layer = LAYERS['inventory'] # type: ignore
+        self.case_sprite = Case(self.group, self._x, self._y, self._layer, "", self._size, self._color)
+        self.case_sprite._layer = self._layer # type: ignore
 
     def make_quantity_sprite(self):
         self.quantity_sprite = TextOutlined(self._x+self._size,
                                             self._y+self._size,
                                             str(self._quantity),
-                                            LAYERS['inventory'] + 2,
+                                            self._layer + 0.2,
                                             "bottomright",
                                             self._quantity_font_size,
                                             self._quantity_font_color)
@@ -168,7 +173,7 @@ class Slot():
         self.item_name_sprite_custom = TextOutlined(self._x+self._size/2,
                                              self._y+self._size/2,
                                              name,
-                                             LAYERS['inventory'] + 2,
+                                             self._layer + 0.2,
                                              "center",
                                              self._item_name_font_size,
                                              self._item_name_font_color)
@@ -183,7 +188,7 @@ class Slot():
             self.item_image_sprite.image.fill("yellow")
 
         self.item_image_sprite.rect = self.item_image_sprite.image.get_rect(center = (self._x+self._size/2,self._y+self._size/2))
-        self.item_image_sprite._layer = LAYERS['inventory'] + 1 # type: ignore
+        self.item_image_sprite._layer = self._layer + 0.1 # type: ignore
 
     
     def update_case_sprite(self):

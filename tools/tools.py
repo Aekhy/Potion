@@ -2,41 +2,81 @@ from items.ingredients import Ingredient
 from items.settings import *
 from items.settings import BASE
 from items.potions import Base, Active, Potion
+from inventory.case import Case
+from inventory.slot import Slot
+from inventory.settings import CASE_SIZE_DEFAULT
+from utils.texts import TextOutlined
 from .settings import *
-from general_settings.private_settings import LAYERS
+from general_settings.private_settings import LAYERS, COLORS
 import pygame as pyg
 # we probably want this class to be a child of pygame.sprite.Sprite
 class Tool(pyg.sprite.Sprite):
-    def __init__(self, name: str, substance_type: Base | Active, effect:str, path: str = ""):
+    def __init__(self, game, name: str, substance_type: Base | Active, effect:str, x, y, color, size=50, path: str = "",):
+        # Engine
+        self._game = game
         self._name = name
-        self._path = path
-        # _substance_type is used to know which kind of
+        # _mixture_type is used to know which kind of
         # subtances it can work with
-        self._substance_type = substance_type
+        self._mixture_type = substance_type
         self._substance = None
-
         # effect should match the substance_type : 
         # Base should have HEATING, FREEZING or MIXING
         # Active should have DISTILLATION, SUBLIMATION or FERMENTATION
         self._effect = effect
 
+        # self._mixture_slot = Slot(self._game,True,True,None,0,self._x - size,self._y - size,self._layer+0.1)
+
+        # Graphism
+        self._x = x
+        self._y = y
+        self._path = path
+        self.group = self._game.game_sprites
+        self._layer = LAYERS["tools"]
+        if path == "":
+            self.image = pyg.Surface((size,size))
+            self.image.fill(color)
+        else:
+            self.image = pyg.image.load(path).convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x,y)
+
+        self.finish_button = TextOutlined(self._x , self._y + size, self._effect, self.layer+0.1,"topleft")
+        self.finish_button.add_to_group(self.group)
+
+        pyg.sprite.Sprite.__init__(self, self.group) 
     # ______ getter & setter _______
 
     def get_substance(self):
+        if isinstance(self._substance, Potion):
+            self._substance.update_info()
         return self._substance
     
     # ______ Methods _______
-    def add_substance(self, new_substance):
-        res = isinstance(new_substance, self._substance_type) and self._substance == None 
+    def add_substance(self, new_substance, quantity):
+        res = isinstance(new_substance, self._mixture_type) and self._substance == None 
         if res:
             self._substance = new_substance
-        return res
+            res_q = quantity - 1
+            res_s = self._substance
+            if res_q == 0:
+                res_s = None
+            end_res = (True, res_s, res_q)
+        else:
+            end_res = (False,res_s,quantity)
+        return end_res
 
     def apply_effect(self):
         res = self._substance.effect == None
         if res :
             self._substance.effect = self._effect
+            self._mixture_slot.add_item(self._substance)
         return res
+    
+    def reset(self):
+        self._substance = None
+        
+    def verify_slot(self, slot_to_verify):
+        return slot_to_verify == self._mixture_slot
 
 # Each tool have it's own class because we
 # probably want to add some specific kind of mini-game 
@@ -45,47 +85,50 @@ class Tool(pyg.sprite.Sprite):
 # Please change my class name and my name property
 # The heater will probably be one aspect of the cauldron
 class Heater(Tool):
-    def __init__(self):
-        super().__init__("outil de chauffe", Base, HEATING)
+    def __init__(self, game, x, y):
+        super().__init__(game,"outil de chauffe", Base, HEATING, x, y, "orange")
 
 # Please change my class name and my name property
 class Freezer(Tool):
-    def __init__(self):
-        super().__init__("outil de gèle", Base, FREEZING)
+    def __init__(self, game, x, y):
+        super().__init__(game, "outil de gèle", Base, FREEZING, x, y, "blue")
 
 class Mortar(Tool):
-    def __init__(self):
-        super().__init__("mortier", Base, MIXING)
+    def __init__(self, game, x, y):
+        super().__init__(game, "mortier", Base, MIXING, x, y, "brown")
 
 class Alembic(Tool):
-    def __init__(self):
-        super().__init__("alambic", Active, DISTILLATION)
+    def __init__(self, game, x, y):
+        super().__init__(game, "alambic", Active, DISTILLATION, x, y, "pink")
 
 # Please change my class name and my name property
 class Sublime(Tool):
-    def __init__(self):
-        super().__init__("outil de sublimation", Active, SUBLIMATION)
+    def __init__(self, game, x, y):
+        super().__init__(game, "outil de sublimation", Active, SUBLIMATION, x, y, "purple")
 
 # Please change my class name and my name property
 class Ferment(Tool):
-    def __init__(self):
-        super().__init__("outil de fermentation", Active, FERMENTATION)
+    def __init__(self, game, x, y):
+        super().__init__(game, "outil de fermentation", Active, FERMENTATION, x, y, "green")
 
 # We propably want this class to herit from Tool
 class Cauldron(pyg.sprite.Sprite):
     def __init__(self, game, x, y):
-        self._base = None
-        self._active = None
-        self._potion = None
-    
-        self.game = game
-        self.group = self.game.game_sprites
-        pyg.sprite.Sprite.__init__(self, self.group)
-
-        self._layer = LAYERS['cauldron']
+        self._game = game
         # The cauldron is always on the center of the screen
         self._x = x
         self._y = y
+        self._layer = LAYERS['cauldron']
+        self.group = self._game.game_sprites
+
+        self._base = None
+        self._active = None
+        self._potion = None
+        self._mixture_slot = Slot(self._game,True,False,None,0,self._x - 50,self._y - 50,self._layer+0.1)
+        self._finished = False
+        pyg.sprite.Sprite.__init__(self, self.group)
+
+        
         self._width = CAULDRON_SIZE
         self._height = CAULDRON_SIZE
 
@@ -96,9 +139,11 @@ class Cauldron(pyg.sprite.Sprite):
         self._rect.x = self._x # type: ignore
         self._rect.y = self._y # type: ignore
 
-    
 
-    
+        # finish button, better code needed for buttons
+        # self.finish_button = Case(self.group, self._x - 50,self._y - 50+CASE_SIZE_DEFAULT,self.layer+0.1,"",20,COLORS["darkred"])
+        self.finish_button = TextOutlined(self._x - 50,self._y - 50+CASE_SIZE_DEFAULT,"Finir",self.layer+0.1,"topleft")
+        self.finish_button.add_to_group(self.group)
     # ______ getter & setter _______
 
     @property
@@ -190,16 +235,50 @@ class Cauldron(pyg.sprite.Sprite):
             self._active = self._potion.active
         return res
 
-    def add_thing(self, something):
+    def add_thing(self, something, quantity):
         """
         If we can add something, return true.
         """
-        if isinstance(something, Ingredient):
-            res = self.add_ingredient(something)
-        elif isinstance(something, Base):
-            res = self.add_base(something)
-        elif isinstance(something, Active):
-            res = self.add_active(something)
-        elif isinstance(something, Potion):
-            res = self.add_potion(something)
-        return res
+        if not self._finished:
+            if isinstance(something, Ingredient):
+                res = self.add_ingredient(something)
+            elif isinstance(something, Base):
+                res = self.add_base(something)
+            elif isinstance(something, Active):
+                res = self.add_active(something)
+            elif isinstance(something, Potion):
+                res = self.add_potion(something)
+            else:
+                res = False
+            print(res)
+            if res:
+                res_q = quantity - 1
+                res_s = something
+                if res_q == 0:
+                    res_s = None
+                end_res = (True, res_s, res_q)
+            else:
+                end_res = (False,something,quantity)
+        else:
+            end_res = (False,something,quantity)
+        return end_res
+    
+
+    def finish(self):
+        if self._base != None or self._active != None:
+            print("potion finie")
+            self._finished = True
+            if self._mixture_slot.is_empty:
+                self._mixture_slot.add_item(self.mixture)
+        else:
+            print("click finish but potion as no ingerdient yet")
+
+    def reset(self):
+        self._finished = False
+        self._base = None
+        self._active = None
+        self._potion = None
+        
+    def verify_slot(self, slot_to_verify):
+        return slot_to_verify == self._mixture_slot
+        

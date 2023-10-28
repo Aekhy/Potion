@@ -259,6 +259,12 @@ class Base(Substance):
 
     name = property(get_name)
 
+    def __eq__(self, other):
+        result = False
+        if isinstance(other, Base):
+            result = self._ingredients == other.ingredients
+        return result
+
 
 class Active(Substance):
     def __init__(self):
@@ -280,6 +286,12 @@ class Active(Substance):
         return f"Mixture élémentaire {self._node.capitalize()}"
 
     name = property(get_name)
+
+    def __eq__(self, other):
+        result = False
+        if isinstance(other, Active):
+            result = self._ingredients == other.ingredients
+        return result
 
 
 # a finished potion either has a name or is called a "mixture raté"
@@ -399,3 +411,9 @@ class Potion(Item):
             potion_info = tmp
             self._name = potion_info["name"]
             self._description = potion_info["description"]
+
+    def __eq__(self, other):
+        result = False
+        if isinstance(other, Potion):
+            result = self._ingredients == other.ingredients
+        return result
