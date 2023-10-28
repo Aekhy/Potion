@@ -26,8 +26,8 @@ class Game:
         # Game objects
         self.cauldron = Cauldron(self, 100, 100)
         self.inventory = Inventory(self, (SCREEN_WIDTH-5*INVENTORY_SLOT_SIZE)/2,SCREEN_HEIGHT-2*INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT)
-        self.freezer = Freezer(self,0,0)
-        self.alembic = Alembic(self,200,0) 
+        self.freezer = Freezer(self,400,50)
+        self.alembic = Alembic(self,500,50) 
 
     def main(self):
         # Game loop
@@ -53,6 +53,10 @@ class Game:
                     if (event.button == 1 or event.button == 3) :
                         if self.cauldron.finish_button.rect.collidepoint(event.pos):
                             self.cauldron.finish()
+                        elif self.alembic.finish_button.rect.collidepoint(event.pos):
+                            self.alembic.apply_effect()
+                        elif self.freezer.finish_button.rect.collidepoint(event.pos):
+                            self.freezer.apply_effect()
                         if not self.holding_item['bool']:
                             self.drag(event)
                             
@@ -119,10 +123,23 @@ class Game:
             if self.cauldron.rect.collidepoint(event.pos):
                 drop_allowed, holding_item['item'], holding_item['quantity'] = self.cauldron.add_thing(holding_item['item'],holding_item['quantity'])
                 print(drop_allowed, holding_item['item'], holding_item['quantity'])
+            
+            if self.alembic.rect.collidepoint(event.pos):
+                drop_allowed, holding_item['item'], holding_item['quantity'] = self.alembic.add_mixture(holding_item['item'],holding_item['quantity'])
+                print(drop_allowed, holding_item['item'], holding_item['quantity'])
+
+            if self.freezer.rect.collidepoint(event.pos):
+                drop_allowed, holding_item['item'], holding_item['quantity'] = self.freezer.add_mixture(holding_item['item'],holding_item['quantity'])
+                print(drop_allowed, holding_item['item'], holding_item['quantity'])
+
             if holding_item['quantity'] == 0:
                 holding_item['bool'] = False
                 if self.cauldron.verify_slot(self.slot_source):
                     self.cauldron.reset()
+                elif self.alembic.verify_slot(self.slot_source):
+                    self.alembic.reset()
+                elif self.freezer.verify_slot(self.slot_source):
+                    self.freezer.reset()
 
             if drop_allowed and holding_item['bool']:
                 # update graphics quantity

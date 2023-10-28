@@ -11,15 +11,15 @@ from general_settings.private_settings import LAYERS, COLORS
 import pygame as pyg
 # we probably want this class to be a child of pygame.sprite.Sprite
 class Tool(pyg.sprite.Sprite):
-    def __init__(self, game, name: str, substance_type: Base | Active, effect:str, x, y, color, size=50, path: str = "",):
+    def __init__(self, game, name: str, mixture_type: Base | Active, effect:str, x, y, color, size=100, path: str = "",):
         # Engine
         self._game = game
         self._name = name
         # _mixture_type is used to know which kind of
         # subtances it can work with
-        self._mixture_type = substance_type
-        self._substance = None
-        # effect should match the substance_type : 
+        self._mixture_type = mixture_type
+        self._mixture = None
+        # effect should match the mixture_type : 
         # Base should have HEATING, FREEZING or MIXING
         # Active should have DISTILLATION, SUBLIMATION or FERMENTATION
         self._effect = effect
@@ -40,40 +40,48 @@ class Tool(pyg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
 
+        self._mixture_slot = Slot(self._game,True,False,None,0,self._x - 10 ,self._y - 10 ,self._layer+0.1, 50)
+        
         self.finish_button = TextOutlined(self._x , self._y + size, self._effect, self.layer+0.1,"topleft")
         self.finish_button.add_to_group(self.group)
-
         pyg.sprite.Sprite.__init__(self, self.group) 
     # ______ getter & setter _______
 
-    def get_substance(self):
-        if isinstance(self._substance, Potion):
-            self._substance.update_info()
-        return self._substance
+    def get_mixture(self):
+        if isinstance(self._mixture, Potion):
+            self._mixture.update_info()
+        return self._mixture
     
     # ______ Methods _______
-    def add_substance(self, new_substance, quantity):
-        res = isinstance(new_substance, self._mixture_type) and self._substance == None 
+    def add_mixture(self, new_mixture, quantity):
+        mix_none = self._mixture == None  
+        mix_substance_effect_none = isinstance(new_mixture, self._mixture_type) and new_mixture.effect == None
+        mix_potion_good_substance_effect_none = isinstance(new_mixture, Potion) and ((new_mixture.get_base().effect == None and self._mixture_type == Base) or new_mixture.get_active().effect == None and self._mixture_type == Active)
+        res = mix_none and (mix_substance_effect_none or mix_potion_good_substance_effect_none)
         if res:
-            self._substance = new_substance
+            self._mixture = new_mixture
             res_q = quantity - 1
-            res_s = self._substance
+            res_s = self._mixture
             if res_q == 0:
                 res_s = None
             end_res = (True, res_s, res_q)
         else:
-            end_res = (False,res_s,quantity)
+            end_res = (False,new_mixture,quantity)
         return end_res
 
     def apply_effect(self):
-        res = self._substance.effect == None
-        if res :
-            self._substance.effect = self._effect
-            self._mixture_slot.add_item(self._substance)
+        if self._mixture != None:
+            res = True
+            self._mixture.effect = self._effect
+            self._mixture_slot.add_item(self._mixture)
+            print("effet ajouté")
+        else:
+            res = False
+            print("effet appelé mais pas ajouté")
         return res
     
     def reset(self):
-        self._substance = None
+        self._mixture = None
         
     def verify_slot(self, slot_to_verify):
         return slot_to_verify == self._mixture_slot
