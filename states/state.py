@@ -4,7 +4,7 @@ class State():
     def __init__(self, game):
         self._game = game
         self._prev_state = None
-
+        
     def events(self):
         pass
 

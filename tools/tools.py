@@ -47,10 +47,6 @@ class Tool(pyg.sprite.Sprite):
         pyg.sprite.Sprite.__init__(self, self.group) 
     # ______ getter & setter _______
 
-    def get_mixture(self):
-        if isinstance(self._mixture, Potion):
-            self._mixture.update_info()
-        return self._mixture
     
     # ______ Methods _______
     def add_mixture(self, new_mixture, quantity):
@@ -72,7 +68,11 @@ class Tool(pyg.sprite.Sprite):
     def apply_effect(self):
         if self._mixture != None:
             res = True
-            self._mixture.effect = self._effect
+            if isinstance(self._mixture, Potion):
+                self._mixture.add_effect(self._effect)
+                self._mixture.update_info()
+            else:
+                self._mixture.effect = self._effect
             self._mixture_slot.add_item(self._mixture)
             print("effet ajouté")
         else:
