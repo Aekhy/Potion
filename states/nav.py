@@ -1,4 +1,4 @@
-from general_settings.private_settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from general_settings.private_settings import SCREEN_WIDTH
 from utils.texts import TextOutlined
 import pygame
 
@@ -68,3 +68,4 @@ class Nav():
     def hover_tab(self, index):
         self.reset_colors()
         self.color_tab(index, 20)
+
