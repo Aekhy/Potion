@@ -26,7 +26,7 @@ class Title(State):
         self.chose = False
         self.choices = {
             0:{"rect" :self.play_button.rect}, # TO DO ADD STATE
-            1:{"rect" :self.settings_button.rect,}, # TO DO ADD STATE
+            1:{"rect" :self.settings_button.rect, "state":self._game.states("IngredientMenu")}, # TO DO ADD STATE
             2:{"rect" :self.exit_button.rect} # TO DO ADD STATE
         }
 

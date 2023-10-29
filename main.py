@@ -4,7 +4,7 @@ import pygame as pyg
 
 
 from states.title import Title
-
+from states.ingredient_menu import IngredientMenu
 class Game:
     def __init__(self):
         pyg.init()
@@ -14,13 +14,21 @@ class Game:
         self.running = True
 
         self.state_stack = []
-        
+        self._all_states = {}
         self.start()
 
+    def states(self, state):
+        if not state in self._all_states.keys():
+            if state == "Title":
+                self._all_states[state] = Title(self)
+            elif state == "IngredientMenu":
+                self._all_states[state] = IngredientMenu(self)
+        return self._all_states[state]
+               
     def start(self):
         # When we start the game at the beginning or after a pause for example
-        self.title_screen = Title(self)
-        self.title_screen.enter_state()
+        new_state = self.states("Title")
+        new_state.enter_state()
         self.inGame = True
 
     def main(self):

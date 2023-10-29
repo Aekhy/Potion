@@ -17,10 +17,10 @@ class IngredientMenu(State):
         self.nav_ingredients = Nav(0, 1*50, 30, self.sprites, self.current_nav_ingredients_index, ["Astraux","Elementaires"])
         self.hover_nav_ingredient = [False, -1]
 
-        self.choices = {0:self._game.all_states["Ingredients"],# TO DO ADD STATE in all_states of Game 
-                        1:self._game.all_states["Potions"],# TO DO ADD STATE in all_states of Game  
-                        2:self._game.all_states["Recettes"],# TO DO ADD STATE in all_states of Game 
-                        3:self._game.all_states["Options"],# TO DO ADD STATE in all_states of Game 
+        self.choices = {0:self,# TO DO ADD STATE in all_states of Game 
+                        # 1:self._game.states("Potions"),# TO DO ADD STATE in all_states of Game  
+                        # 2:self._game.states("Recettes"),# TO DO ADD STATE in all_states of Game 
+                        # 3:self._game.states("Options"),# TO DO ADD STATE in all_states of Game 
                         }
         self.choice = None
         
