@@ -3,7 +3,7 @@ from utils.texts import TextOutlined
 from general_settings.private_settings import *
 import pygame
 
-class OptionsMenu(State):
+class Options(State):
     def __init__(self, game):
         super().__init__(game)
         self.sprites = pygame.sprite.LayeredUpdates()
@@ -25,13 +25,14 @@ class OptionsMenu(State):
         self.exit_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 5, "Quitter le jeux", 1)
         self.exit_button.add_to_group(self.sprites)
 
+
         self.preselected_choice = 0
         self.chose = False
         self.choices = {
-            0:{"rect" :self.play_button.rect}, # TO DO ADD STATE
-            1:{"rect" :self.settings_button.rect}, # TO DO ADD STATE
-            2:{"rect" :self.main_menu_button.rect}, # TO DO ADD STATE
-            3:{"rect" :self.exit_button.rect} # TO DO ADD STATE
+            0:{"rect" :self.play_button.rect}, # Go back to game
+            1:{"rect" :self.settings_button.rect}, # Settings
+            2:{"rect" :self.main_menu_button.rect},  # Go back to main menu
+            3:{"rect" :self.exit_button.rect} # Quit game
         }
 
         self.len_choice = 4
@@ -50,6 +51,12 @@ class OptionsMenu(State):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.exit_state()
+                elif event.key == pygame.K_RETURN:
+                    self.chose = True
+                elif event.key == pygame.K_UP:
+                    self.preselected_choice = (self.preselected_choice - 1) % self.len_choice
+                elif event.key == pygame.K_DOWN:
+                    self.preselected_choice = (self.preselected_choice + 1) % self.len_choice 
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -58,26 +65,27 @@ class OptionsMenu(State):
                             self.preselected_choice = key
                             self.chose = True
 
-            elif event.type == pygame.KEYDOWN:
-
-                if event.key == pygame.K_RETURN:
-                    self.chose = True
-                elif event.key == pygame.K_UP:
-                    self.preselected_choice = (self.preselected_choice - 1) % self.len_choice
-                elif event.key == pygame.K_DOWN:
-                    self.preselected_choice = (self.preselected_choice + 1) % self.len_choice 
+            elif event.type == pygame.MOUSEMOTION:
+                for key, value in self.choices.items():
+                    if value["rect"].collidepoint(event.pos):
+                        self.preselected_choice = key
 
     def update(self):
-        if self.chose:
-            if self.preselected_choice == self.len_choice - 1:
-                self._game.inGame = False
-            else:
-                new_state = self.choices[self.preselected_choice]["state"]
-                new_state.enter_state()
-            self.chose = False
-
         self.preselection_sprite.rect.center = (SCREEN_WIDTH/2 , SCREEN_HEIGHT/4+self.space_between_choice * (self.preselected_choice+2))
         
+        if self.chose:
+            self.chose = False
+            if self.preselected_choice == self.len_choice - 1:
+                self._game.inGame = False
+            elif self.preselected_choice == 0: # Go back to game
+                self.exit_state()
+            # elif self.preselected_choice == 1:
+            #     new_state = self._game.states("Settings")
+            #     new_state.enter_state()
+            elif self.preselected_choice == 2: # Go back to main menu
+                while len(self._game.state_stack) > 1: # Title screen is always 1 in stack
+                    self._game.state_stack.pop()
+            
         self.sprites.update()
 
     def draw(self,screen):

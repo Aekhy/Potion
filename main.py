@@ -4,7 +4,11 @@ import pygame as pyg
 
 
 from states.title import Title
-from states.ingredient_menu import IngredientMenu
+from states.ingredients_menu import IngredientsMenu
+from states.potions_menu import PotionsMenu
+from states.recipes_menu import RecipesMenu
+from states.options import Options
+
 class Game:
     def __init__(self):
         pyg.init()
@@ -18,11 +22,21 @@ class Game:
         self.start()
 
     def states(self, state):
-        if not state in self._all_states.keys():
+        if not (state in self._all_states.keys()):
+            self._all_states[state] = "initialised"
             if state == "Title":
                 self._all_states[state] = Title(self)
-            elif state == "IngredientMenu":
-                self._all_states[state] = IngredientMenu(self)
+            elif state == "IngredientsMenu":
+                self._all_states[state] = IngredientsMenu(self)
+            elif state == "PotionsMenu":
+                self._all_states[state] = PotionsMenu(self)
+            elif state == "RecipesMenu":
+                self._all_states[state] = RecipesMenu(self)
+            elif state == "Options":
+                self._all_states[state] = Options(self)
+            elif state == "GameScreen":
+                # self._all_states[state] = GameScreen(self)
+                pass
         return self._all_states[state]
                
     def start(self):

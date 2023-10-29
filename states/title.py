@@ -25,9 +25,9 @@ class Title(State):
         self.preselected_choice = 0
         self.chose = False
         self.choices = {
-            0:{"rect" :self.play_button.rect}, # TO DO ADD STATE
-            1:{"rect" :self.settings_button.rect, "state":self._game.states("IngredientMenu")}, # TO DO ADD STATE
-            2:{"rect" :self.exit_button.rect} # TO DO ADD STATE
+            0:{"rect" :self.play_button.rect}, # Go to game
+            1:{"rect" :self.settings_button.rect}, # Go to settings
+            2:{"rect" :self.exit_button.rect} # Leave game
         }
 
         self.len_choice = 3
@@ -67,14 +67,23 @@ class Title(State):
                     self.preselected_choice = (self.preselected_choice + 1) % self.len_choice
 
     def update(self):
-        if self.chose:
-            if self.preselected_choice == self.len_choice - 1:
-                self._game.inGame = False
-            else:
-                new_state = self.choices[self.preselected_choice]["state"]
-                new_state.enter_state()
-            self.chose = False
         self.preselection_sprite.rect.center = (SCREEN_WIDTH/2 , SCREEN_HEIGHT/4+self.space_between_choice * (self.preselected_choice+2))
+        
+        if self.chose:
+            self.chose = False
+            
+            if self.preselected_choice == self.len_choice - 1:
+                self.preselected_choice = 0
+                self._game.inGame = False
+            elif self.preselected_choice == 0:
+                self.preselected_choice = 0
+                new_state = self._game.states("GameScreen")
+                new_state.enter_state()
+            # elif self.preselected_choice == 1:
+            #     self.preselected_choice = 0
+            #     new_state = self._game.states("")
+            #     new_state.enter_state()
+
         self.sprites.update()
 
     def draw(self, surface):

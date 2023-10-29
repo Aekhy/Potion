@@ -7,8 +7,9 @@ from inventory.settings import *
 from general_settings.private_settings import LAYERS
 
 class Inventory:
-    def __init__(self, game, x, y, inventory_structure=INVENTORY_LAYOUT):
+    def __init__(self, game, group, x, y, inventory_structure=INVENTORY_LAYOUT):
         self.game = game
+        self.group = group
         self.x = x
         self.y = y
         self._inventory_structure = inventory_structure
@@ -41,7 +42,7 @@ class Inventory:
         else:
             item = None
             quantity = 0
-        return Slot(self.game, True, True, item, quantity, self.x+j*INVENTORY_SLOT_SIZE, self.y+i*INVENTORY_SLOT_SIZE, LAYERS["inventory"], INVENTORY_SLOT_SIZE)
+        return Slot(self.game, self.group, True, True, item, quantity, self.x+j*INVENTORY_SLOT_SIZE, self.y+i*INVENTORY_SLOT_SIZE, LAYERS["inventory"], INVENTORY_SLOT_SIZE)
         # ---------------------------------
 
     def make_unusable_slot(self, i, j):
