@@ -2,17 +2,18 @@ from general_settings.private_settings import SCREEN_WIDTH
 from utils.texts import TextOutlined
 import pygame
 
-
-
 class Nav():
-    def __init__(self, x, y, tab_height, group, current_tab_index: int, options: list):
+    def __init__(self, x, y, tab_height, group, current_tab_index: int, options: list, tab_width=None):
         self.current_tab_index = current_tab_index
         self.options = options
         self._tabs = []
         self.sprites = group
         self._x = x
         self._y = y
-        self.tab_width = SCREEN_WIDTH/len(self.options)
+        if tab_width == None:
+            self.tab_width = SCREEN_WIDTH/len(self.options)
+        else:
+            self.tab_width = tab_width
         self.tab_height = tab_height
         self.space_color = 200
         self.fill_tabs()

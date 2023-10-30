@@ -3,7 +3,7 @@ import pygame
 
 class PotionsMenu(TabMenu):
     def __init__(self, game):
-        super().__init__(game, 1)
+        super().__init__(game, 2)
 
     def reset(self):
         pass

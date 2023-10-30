@@ -10,25 +10,27 @@ class TabMenu(State):
         # Nav that is shared among all menu
         # Int that indicated which option of the nav we are in. ex : 0 -> Ingredients
         self.selected = True
+        self.change = True
         self.current_nav_menu_index = nav_menu_index
+        self.hover_nav_menu = [False, -1]
         self.set_nav_menu(self.current_nav_menu_index)
         
         self.choice = None
         
     def set_nav_menu(self, index):
-        self.nav_menu = Nav(0, 0*50, 50, self.sprites, index, ["Ingredients", "Potions", "Recettes"])
-        self.hover_nav_menu = [False, -1]
+        self.nav_menu = Nav(0, 0*50, 50, self.sprites, index, ["Inventaire", "Ingredients", "Potions", "Recettes"])
         
     def tab_menu_update(self, reset_function):
         # The events loop of Tab_menu childrens should update variables like self.choice and self.selected and self.hover_nav_menu
 
         if not self.selected:
-            self.set_nav_menu(self.current_nav_menu_index)
             self.selected = not self.selected
+            self.set_nav_menu(self.current_nav_menu_index)
 
         # Update the hovering of nav_menu
         self.nav_menu.reset_colors()
         if self.hover_nav_menu[0] and self.hover_nav_menu[1] != self.current_nav_menu_index:
+            self.nav_menu.reset_colors()
             self.nav_menu.hover_tab(self.hover_nav_menu[1])
 
         # Go to another state if we chosed one state of the nav_menu's states
@@ -36,10 +38,12 @@ class TabMenu(State):
         if self.choice != None and self.choice != self.current_nav_menu_index:
             self.selected = False
             if self.choice == 0:
+                new_state = self._game.states("InventoryMenu")
+            elif self.choice == 1:
                 new_state = self._game.states("IngredientsMenu")
-            elif self.choice == 1: 
+            elif self.choice == 2: 
                 new_state = self._game.states("PotionsMenu")
-            elif self.choice == 2:
+            elif self.choice == 3:
                 new_state = self._game.states("RecipesMenu")
             
             self.set_nav_menu(self.choice)
