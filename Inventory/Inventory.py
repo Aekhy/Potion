@@ -7,12 +7,13 @@ from inventory.settings import *
 from general_settings.private_settings import LAYERS
 
 class Inventory:
-    def __init__(self, game, group, x, y, inventory_structure=INVENTORY_LAYOUT):
+    def __init__(self, game, group, x, y, inventory_structure=INVENTORY_LAYOUT, authorized_classes:dict=None):
         self.game = game
         self.group = group
         self.x = x
         self.y = y
         self._inventory_structure = inventory_structure
+        self._authorized_classes = authorized_classes
         self._inventory, self._slot_list = self.make_inventory_and_slot_list(inventory_structure)
         self._rect = self.make_inventory_rect(self._slot_list)
     
@@ -42,7 +43,7 @@ class Inventory:
         else:
             item = None
             quantity = 0
-        return Slot(self.game, self.group, True, True, item, quantity, self.x+j*INVENTORY_SLOT_SIZE, self.y+i*INVENTORY_SLOT_SIZE, LAYERS["inventory"], INVENTORY_SLOT_SIZE)
+        return Slot(self.game, self.group, True, True, item, quantity, self.x+j*INVENTORY_SLOT_SIZE, self.y+i*INVENTORY_SLOT_SIZE, LAYERS["inventory"], INVENTORY_SLOT_SIZE , self._authorized_classes)
         # ---------------------------------
 
     def make_unusable_slot(self, i, j):

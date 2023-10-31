@@ -1,35 +1,56 @@
 import pygame
 from inventory.multiple_inventory import MultipleInventory
+from items.potions import Potion, Base, Active
 from states.nav import Nav
 
 
 class GameInventory:
-    def __init__(self, state, struct_json: dict, x, y, permanent=False) -> None:
+    def __init__(self, state, struct_json: dict, x, y, locked=False) -> None:
 
         self._state = state
+        self._slots = {"take":[],"add":[]}
         self._group = pygame.sprite.LayeredUpdates()
         self._struct = struct_json
         self._x = x
         self._y = y
-        self._permanent = permanent
+        self._locked = locked
 
         self._multiple_inventories = {
-            0: MultipleInventory(self._struct["ingredients"], self._state, 0, 50),
-            1: MultipleInventory(self._struct["mixtures"], self._state, 0, 50),
-            2: MultipleInventory(self._struct["potions"], self._state, 0, 50)
+            0: MultipleInventory(self._struct["ingredients"], self._state, self, 0, 50, {"black_list":[Potion, Base, Active],"white_list":None}),
+            1: MultipleInventory(self._struct["mixtures"], self._state, self, 0, 50, {"black_list":None,"white_list":[Base, Active]}),
+            2: MultipleInventory(self._struct["potions"], self._state, self, 0, 50, {"black_list":None,"white_list":[Potion]})
         }
 
         self._open = False
 
         self._nav_group = pygame.sprite.LayeredUpdates()
         self.reset()
-        
+
+    def set_state(self, new_state):
+        self._state = new_state
+        for key, value in self._multiple_inventories.items():
+            value.set_state(self._state)
+
+    def lock(self):
+        self._locked = True
+
+    def unlock(self):
+        self._locked = False
+
     def reset(self):
         self.change_nav_index = False
         self.nav_index = 0
         self.previous_index = None
         self.hover_nav = [False, -1]
         self.set_nav(self.nav_index)
+
+    def get_slot_list(self):
+        return self._multiple_inventories[self.nav_index].get_slot_list()
+    
+    def get_slots(self):
+        return self._slots
+    
+    slots = property(get_slots)
 
     def set_nav(self, index):
         for sprite in self._nav_group:
@@ -42,7 +63,7 @@ class GameInventory:
     
     def update(self, event, is_holding):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_i and not self._permanent:
+            if event.key == pygame.K_i and not self._locked and not is_holding:
                 self.toggle_open_close()
 
         if self._open:
@@ -85,6 +106,7 @@ class GameInventory:
         for sprite in self._group:
             sprite.add(self._state.sprites)
         self._multiple_inventories[self.nav_index].open()
+        self._open = True
 
     def close(self):
         for sprite in self._group:
@@ -92,16 +114,15 @@ class GameInventory:
         for sprite in self._nav_group:
             sprite.remove(self._state.sprites)
         self._multiple_inventories[self.nav_index].close()
+        self._open = False
 
-    def toggle_open_close(self):
-        if self._open:
-            self.close()
-        else:
-            self.open()
-        self._open = not self._open
+    def toggle_open_close(self, *is_holding):
+        if self._state != None:
+            if self._open and not is_holding:
+                self.close()
+            else:
+                self.open()
 
-    def get_slot_list(self):
-        return self._multiple_inventories[self.nav_index].get_slot_list()
     
     def update_slots(self):
         self._multiple_inventories[self.nav_index].update_slots()

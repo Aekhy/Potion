@@ -1,7 +1,7 @@
 from general_settings.private_settings import *
 import sys
 import pygame as pyg
-
+import json
 
 from states.title import Title
 from states.inventory_menu import InventoryMenu
@@ -9,6 +9,8 @@ from states.ingredients_menu import IngredientsMenu
 from states.potions_menu import PotionsMenu
 from states.recipes_menu import RecipesMenu
 from states.options import Options
+# this is not supposed to be created in game
+from inventory.game_inventory import GameInventory
 
 class Game:
     def __init__(self):
@@ -20,13 +22,34 @@ class Game:
 
         self.state_stack = []
         self._all_states = {}
+
+        # for now it's in game but it is supposed to be created 
+        # when we create a new game / new party
+        with open("inventory/game_inventory_layout.json") as file:
+            data = json.load(file)
+
+        self._game_inventory = GameInventory(None, data, 0, 50, False)
+
         self.start()
 
     def states(self, state):
         if not (state in self._all_states.keys()):
             self._all_states[state] = "initialised"
             if state == "Title":
+                # this line of code is supposed to clear 
+                # all of the states that we had since we went back
+                # to the title menu
+                # it allow to recreate each state when we want to play
+                # it is usefull because if we want to load a different game
+                # we need to create new_instances.
+                # each states should have in their init method a way
+                # to load the current "game"/ party
+
+                # we should also be saving all the previous state right now.
+
+                self._all_states = {state : "initialised"}
                 self._all_states[state] = Title(self)
+
             elif state == "InventoryMenu":
                 self._all_states[state] = InventoryMenu(self)
             elif state == "IngredientsMenu":

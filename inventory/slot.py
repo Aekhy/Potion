@@ -4,13 +4,14 @@ from .settings import *
 from general_settings.private_settings import LAYERS
 
 class Slot():
-    def __init__(self, state, group, can_take=True, can_add=True, item=None, quantity=0, x=0, y=0, layer=0, size=CASE_SIZE_DEFAULT, color=SLOT_COLOR_DEFAULT, item_name_font_size=ITEM_NAME_FONT_SIZE_DEFAULT, item_name_font_color=ITEM_NAME_FONT_COLOR_DEFAULT, quantity_font_size=QUANTITY_FONT_SIZE_DEFAULT, quantity_font_color = QUANTITY_FONT_COLOR_DEFAULT):
+    def __init__(self, state, group, can_take=True, can_add=True, item=None, quantity=0, x=0, y=0, layer=0, size=CASE_SIZE_DEFAULT, authorized_classes:dict=None, color=SLOT_COLOR_DEFAULT, item_name_font_size=ITEM_NAME_FONT_SIZE_DEFAULT, item_name_font_color=ITEM_NAME_FONT_COLOR_DEFAULT, quantity_font_size=QUANTITY_FONT_SIZE_DEFAULT, quantity_font_color = QUANTITY_FONT_COLOR_DEFAULT):
         self.state = state
         if can_take:
             self.state.slots["take"].append(self)
         if can_add:
             self.state.slots["add"].append(self)
 
+        self._authorized_classes = authorized_classes
         self.group = group
         self._item = item
         self._quantity = quantity
@@ -106,7 +107,7 @@ class Slot():
         quantity_left = quantity
         new_quantity = self._quantity + quantity
         max_stack = item.max_stack
-
+    
         if self.has_room(item):
             if self.is_empty:
                 self._item = item
@@ -141,10 +142,36 @@ class Slot():
                 self._item = None
         return item_taken, quantity_taken
 
+    # private
+    def add_class_authorized(self, item):
+        can_add = True
+        if self._authorized_classes != None:
+            # black list take over white list
+
+            # black list 
+            if self._authorized_classes["black_list"] != None:
+                for classes in self._authorized_classes["black_list"]:
+                    if isinstance(item, classes):
+                        can_add = False
+                        break
+            
+            # white list
+            if can_add:
+                if self._authorized_classes["white_list"] != None:
+                    can_add = False
+                    for classes in self._authorized_classes["white_list"]:
+                        if isinstance(item, classes):
+                            can_add = True
+                            break
+
+        return can_add
+
     def add_item(self, item, quantity=1):
-        item_left, quantity_left = self.add_calculation(item, quantity)
-        self.update_item_image_name_quantity_display()
-        return item_left,quantity_left
+        item_left, quantity_left = item, quantity
+        if self.add_class_authorized(item):
+            item_left, quantity_left = self.add_calculation(item, quantity)
+            self.update_item_image_name_quantity_display()
+        return item_left, quantity_left
     
     def take_item(self, quantity=1):
         item_taken, quantity_taken = self.take_calculation(quantity)

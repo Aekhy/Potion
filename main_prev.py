@@ -25,7 +25,7 @@ class Game:
         
         # Game objects
         self.cauldron = Cauldron(self, 100, 100)
-        self.inventory = Inventory(self, (SCREEN_WIDTH-5*INVENTORY_SLOT_SIZE)/2,SCREEN_HEIGHT-2*INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT)
+        self.inventory = Inventory(self, self.game_sprites, (SCREEN_WIDTH-5*INVENTORY_SLOT_SIZE)/2,SCREEN_HEIGHT-2*INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT)
         self.freezer = Freezer(self,400,50)
         self.alembic = Alembic(self,500,50) 
 

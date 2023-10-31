@@ -24,8 +24,6 @@ class Tool(pyg.sprite.Sprite):
         # Active should have DISTILLATION, SUBLIMATION or FERMENTATION
         self._effect = effect
 
-        # self._mixture_slot = Slot(self._game,True,True,None,0,self._x - size,self._y - size,self._layer+0.1)
-
         # Graphism
         self._x = x
         self._y = y
@@ -40,7 +38,7 @@ class Tool(pyg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
 
-        self._mixture_slot = Slot(self._game,True,False,None,0,self._x - 10 ,self._y - 10 ,self._layer+0.1, 50)
+        self._mixture_slot = Slot(self._game, self.group ,True,False,None,0,self._x - 10 ,self._y - 10 ,self._layer+0.1, 50)
         
         self.finish_button = TextOutlined(self._x , self._y + size, self._effect, self.layer+0.1,"topleft")
         self.finish_button.add_to_group(self.group)
@@ -132,7 +130,7 @@ class Cauldron(pyg.sprite.Sprite):
         self._base = None
         self._active = None
         self._potion = None
-        self._mixture_slot = Slot(self._game,True,False,None,0,self._x - 50,self._y - 50,self._layer+0.1)
+        self._mixture_slot = Slot(self._game, self.group, True,False,None,0,self._x - 50,self._y - 50,self._layer+0.1)
         self._finished = False
         pyg.sprite.Sprite.__init__(self, self.group)
 

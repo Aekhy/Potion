@@ -3,8 +3,8 @@
         "meta":{"number": 4},
         "0": [
             [
-                {"type":"Slot"},
-                {"type":"Slot"},
+                {"type":"Slot","item_name":"eau","quantity":5},
+                {"type":"Slot","item_name":"lavande","quantity":1},
                 {"type":"Slot"},
                 {"type":"Slot"},
                 {"type":"Slot"}
@@ -162,8 +162,9 @@
         "meta":{"number": 3},
         "0": [
             [
-                {"type":"Slot","item_name":"eau","quantity":5},
-                {"type":"Slot","item_name":"lavande","quantity":1},
+                {"type":"Slot"},
+                {"type":"Slot"},
+                {"type":"Slot"},
                 {"type":"Slot"},
                 {"type":"Slot"}
  

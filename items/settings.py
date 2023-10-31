@@ -375,7 +375,7 @@ HEALTH_POTION_TREE = {
         NEUTRAL: {"level": END, "name": "Potion de Guérison Standard",
                   "description": "Une potion qui soigne les écorchures"}
     },
-    NEUTRAL: {"level": END, "name": "Mixture raté",
+    NEUTRAL: {"level": END, "name": "Potion raté",
               "description": "Cette propriété alchimique ne semble pas convenir ici..."}
 }
 
@@ -383,6 +383,6 @@ HEALTH_POTION_TREE = {
 MAIN_POTION_TREE = {
     "level": TOP,
     EARTH: HEALTH_POTION_TREE,
-    NEUTRAL: {"level": END, "name": "Mixture raté",
+    NEUTRAL: {"level": END, "name": "Potion raté",
               "description": "Cette planète n'est pas appropriée..."}
 }
