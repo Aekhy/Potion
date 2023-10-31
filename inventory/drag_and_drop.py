@@ -18,7 +18,16 @@ class DragAndDrop:
     def is_holding(self):
         return self._holding
     
+    @property
+    def item(self):
+        return self._item
+    
+    @property
+    def quantity(self):
+        return self._quantity
+    
     def take(self, slots_take, slots_iterable, event):
+        taken = False
         if not self._holding:
             for slot in slots_iterable:
                 if slot.rect.collidepoint(event.pos) and (not slot.is_empty) and (slot in slots_take):
@@ -29,6 +38,8 @@ class DragAndDrop:
                     self._holding = True
                     self.update_function()
                     self.make_sprites()
+                    taken = True
+        return taken
 
     def move(self, event):
         if self._holding:
@@ -108,3 +119,7 @@ class DragAndDrop:
         self._item_sprite.kill()
         self._name_sprite.kill()
         self._quantity_sprite.kill()
+        
+    def reinit(self):
+        self.kill_sprites()
+        self = self.__init__(self._group, self.update_function)

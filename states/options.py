@@ -22,7 +22,7 @@ class Options(State):
         self.main_menu_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 4, "Retour au menu principal", 1)
         self.main_menu_button.add_to_group(self.sprites)
 
-        self.exit_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 5, "Quitter le jeux", 1)
+        self.exit_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 5, "Quitter le jeu", 1)
         self.exit_button.add_to_group(self.sprites)
 
 

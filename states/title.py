@@ -25,9 +25,9 @@ class Title(State):
         self.preselected_choice = 0
         self.chose = False
         self.choices = {
-            0:{"rect" :self.play_button.rect}, # Go to game
-            1:{"rect" :self.settings_button.rect}, # Go to settings
-            2:{"rect" :self.exit_button.rect} # Leave game
+            0:{"rect":self.play_button.rect},
+            1:{"rect":self.settings_button.rect}, # Go to settings
+            2:{"rect":self.exit_button.rect}
         }
 
         self.len_choice = 3
@@ -81,7 +81,7 @@ class Title(State):
                 # Loading the informations about the dirname
                 self._game.save_manager.LoadSave("saves/save_one")
 
-                new_state = self._game.states("InventoryMenu")
+                new_state = self._game.states("GameScreen")
                 new_state.enter_state()
             # elif self.preselected_choice == 1:
             #     self.preselected_choice = 0
@@ -92,6 +92,3 @@ class Title(State):
 
     def draw(self, surface):
         self.sprites.draw(surface)
-
-        
-

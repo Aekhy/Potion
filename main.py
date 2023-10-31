@@ -8,6 +8,8 @@ from states.ingredients_menu import IngredientsMenu
 from states.potions_menu import PotionsMenu
 from states.recipes_menu import RecipesMenu
 from states.options import Options
+from states.game import GameScreen
+from states.cauldron import CauldronScreen
 from utils.json_functions import Read
 from utils.SaveManager import SaveManager
 
@@ -16,9 +18,8 @@ class Game:
         pyg.init()
         self.screen = pyg.display.set_mode(( SCREEN_WIDTH,SCREEN_HEIGHT ))
         self.clock = pyg.time.Clock()
-        #self.font = pyg.font.Font(DEFAULT_FONT_PATH, DEFAULT_FONT_SIZE)
-        self.running = True
 
+        self.slots = {"take":[],"add":[]}
         self.state_stack = []
         self._all_states = {}
 
@@ -28,23 +29,27 @@ class Game:
 
     def states(self, state):
         if not (state in self._all_states.keys()):
-            self._all_states[state] = "initialised"
-            if state == "Title":
-                self._all_states[state] = Title(self)
-
-            elif state == "InventoryMenu":
-                self._all_states[state] = InventoryMenu(self)
-            elif state == "IngredientsMenu":
-                self._all_states[state] = IngredientsMenu(self)
-            elif state == "PotionsMenu":
-                self._all_states[state] = PotionsMenu(self)
-            elif state == "RecipesMenu":
-                self._all_states[state] = RecipesMenu(self)
-            elif state == "Options":
-                self._all_states[state] = Options(self)
-            elif state == "GameScreen":
-                # self._all_states[state] = GameScreen(self)
-                pass
+            self._all_states[state] = ''
+            match state:
+                case "Title":
+                    self._all_states[state] = Title(self)
+                case "InventoryMenu":
+                    self._all_states[state] = InventoryMenu(self)
+                case "IngredientsMenu":
+                    self._all_states[state] = IngredientsMenu(self)
+                case "PotionsMenu":
+                    self._all_states[state] = PotionsMenu(self)
+                case "RecipesMenu":
+                    self._all_states[state] = RecipesMenu(self)
+                case "Options":
+                    self._all_states[state] = Options(self)
+                case "GameScreen":
+                    self._all_states[state] = GameScreen(self)
+                case "CauldronScreen":
+                    self._all_states[state] = CauldronScreen(self)
+                case _:
+                    pass
+                    
         else:
             if state == "Title":
                 # this line of code is supposed to clear 
@@ -59,7 +64,7 @@ class Game:
 
                 self._all_states = {}
                 self.states("Title")
-
+                
         return self._all_states[state]
                
     def start(self):
@@ -77,7 +82,6 @@ class Game:
             self.draw()
             self.clock.tick(FRAMERATE)
         self.save_manager.Save()
-        self.running = False
 
     # ////////// PRIVATE \\\\\\\\\\
     def reset_keys(self):
@@ -105,8 +109,7 @@ class Game:
 if __name__ == "__main__":
     # MakeAllDefaultKnowledge()
     g = Game()
-    while g.running:
-        g.main()
+    g.main()
 
 pyg.quit()
 sys.exit()

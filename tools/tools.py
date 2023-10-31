@@ -119,18 +119,18 @@ class Ferment(Tool):
 
 # We propably want this class to herit from Tool
 class Cauldron(pyg.sprite.Sprite):
-    def __init__(self, game, x, y):
-        self._game = game
+    def __init__(self, game, spritesGroup, x, y):
+
         # The cauldron is always on the center of the screen
         self._x = x
         self._y = y
         self._layer = LAYERS['cauldron']
-        self.group = self._game.game_sprites
+        self.group = spritesGroup
 
         self._base = None
         self._active = None
         self._potion = None
-        self._mixture_slot = Slot(self._game, self.group, True,False,None,0,self._x - 50,self._y - 50,self._layer+0.1)
+        self._mixture_slot = Slot(game, self.group,True,False,None,0,self._x - 50,self._y - 50,self._layer+0.1)
         self._finished = False
         pyg.sprite.Sprite.__init__(self, self.group)
 
@@ -142,8 +142,8 @@ class Cauldron(pyg.sprite.Sprite):
         self._image.fill(CAULDRON_COLOR)
 
         self._rect = self._image.get_rect()
-        self._rect.x = self._x # type: ignore
-        self._rect.y = self._y # type: ignore
+        self._rect.x = self._x
+        self._rect.y = self._y
 
 
         # finish button, better code needed for buttons
@@ -159,6 +159,10 @@ class Cauldron(pyg.sprite.Sprite):
     @property
     def rect(self):
         return self._rect
+    
+    @property
+    def mixture_slot(self):
+        return self._mixture_slot
     
     def get_mixture(self):
         # return the base

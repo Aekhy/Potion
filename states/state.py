@@ -21,3 +21,7 @@ class State():
 
     def exit_state(self):
         self._game.state_stack.pop()
+        
+    @property
+    def game(self):
+        return self._game

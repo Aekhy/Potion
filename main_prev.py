@@ -24,7 +24,7 @@ class Game:
         self.holding_item = {'bool':False}
         
         # Game objects
-        self.cauldron = Cauldron(self, 100, 100)
+        self.cauldron = Cauldron(self, self.game_sprites, 100, 100)
         self.inventory = Inventory(self, self.game_sprites, (SCREEN_WIDTH-5*INVENTORY_SLOT_SIZE)/2,SCREEN_HEIGHT-2*INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT)
         self.freezer = Freezer(self,400,50)
         self.alembic = Alembic(self,500,50) 
@@ -62,9 +62,9 @@ class Game:
                             
                 case pyg.MOUSEMOTION:
                     if self.holding_item['bool']:
-                        self.holding_item['image'].rect.move_ip(event.rel) # type: ignore
-                        self.holding_item['name'].move_ip(event.rel) # type: ignore
-                        self.holding_item['quantity_sprite'].move_ip(event.rel) # type: ignore
+                        self.holding_item['image'].rect.move_ip(event.rel)
+                        self.holding_item['name'].move_ip(event.rel)
+                        self.holding_item['quantity_sprite'].move_ip(event.rel)
                         
                 case pyg.MOUSEBUTTONUP:
                     if self.holding_item['bool']:
@@ -76,17 +76,17 @@ class Game:
                 # DEBUG : A decomposer
                 self.slot_source = slot
                 self.holding_item['item'] = slot.item
-                self.holding_item['quantity'] = slot.quantity if event.button == 3 else 1 # type: ignore
+                self.holding_item['quantity'] = slot.quantity if event.button == 3 else 1
                 slot.take_item(self.holding_item['quantity'])
                 self.holding_item['bool'] = True
                 #Graphisme
 
-                self.holding_item['image'] = pyg.sprite.Sprite() # type: ignore
+                self.holding_item['image'] = pyg.sprite.Sprite()
                 self.holding_item['image'].image = slot.item_image_sprite.image.copy()
                 self.holding_item['image'].rect = slot.item_image_sprite.rect.copy()
-                self.holding_item['image']._layer = LAYERS['inventory'] + 1 # type: ignore
+                self.holding_item['image']._layer = LAYERS['inventory'] + 1
                 
-                self.holding_item['name'] = TextOutlined(slot.x+slot.size/2, # type: ignore
+                self.holding_item['name'] = TextOutlined(slot.x+slot.size/2,
                                                         slot.y+slot.size/2,
                                                         self.holding_item['item'].name,
                                                         LAYERS['inventory'] + 2,
@@ -94,7 +94,7 @@ class Game:
                                                         slot.item_name_font_size,
                                                         slot.item_name_font_color)
 
-                self.holding_item['quantity_sprite'] = TextOutlined(slot.x+slot.size, # type: ignore
+                self.holding_item['quantity_sprite'] = TextOutlined(slot.x+slot.size,
                                                             slot.y+slot.size,
                                                             str(self.holding_item['quantity']),
                                                             LAYERS['inventory'] + 2,
@@ -146,13 +146,13 @@ class Game:
                 # we want the quantity sprite rightly positionned in term of 
                 # distance from the center of the image
                 # important to get the right place to place the quantity
-                dx = holding_item['image'].rect.x - self.slot_source.item_image_sprite.rect.x # type: ignore
-                dy = holding_item['image'].rect.y - self.slot_source.item_image_sprite.rect.y # type: ignore
+                dx = holding_item['image'].rect.x - self.slot_source.item_image_sprite.rect.x
+                dy = holding_item['image'].rect.y - self.slot_source.item_image_sprite.rect.y
                 x = self.slot_source.rect.x + self.slot_source.size + dx
                 y = self.slot_source.rect.y + self.slot_source.size + dy
 
-                holding_item['quantity_sprite'].kill() # type: ignore
-                holding_item['quantity_sprite'] = TextOutlined(x, y, # type: ignore
+                holding_item['quantity_sprite'].kill()
+                holding_item['quantity_sprite'] = TextOutlined(x, y,
                                                             str(holding_item['quantity']),
                                                             LAYERS['inventory'] + 2,
                                                             "bottomright",
@@ -164,10 +164,10 @@ class Game:
                     self.slot_source.add_item(holding_item['item'], holding_item['quantity'])
                     holding_item['bool'] = False
                 
-                if not holding_item['bool']: # type: ignore
-                    holding_item['image'].kill() # type: ignore
-                    holding_item['name'].kill() # type: ignore
-                    holding_item['quantity_sprite'].kill() # type: ignore
+                if not holding_item['bool']:
+                    holding_item['image'].kill()
+                    holding_item['name'].kill()
+                    holding_item['quantity_sprite'].kill()
 
             
 

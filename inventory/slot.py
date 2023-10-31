@@ -4,12 +4,12 @@ from .settings import *
 from general_settings.private_settings import LAYERS
 
 class Slot():
-    def __init__(self, state, group, can_take=True, can_add=True, item=None, quantity=0, x=0, y=0, layer=0, size=CASE_SIZE_DEFAULT, authorized_classes:dict=None, color=SLOT_COLOR_DEFAULT, item_name_font_size=ITEM_NAME_FONT_SIZE_DEFAULT, item_name_font_color=ITEM_NAME_FONT_COLOR_DEFAULT, quantity_font_size=QUANTITY_FONT_SIZE_DEFAULT, quantity_font_color = QUANTITY_FONT_COLOR_DEFAULT):
-        self.state = state
+    def __init__(self, origin, group, can_take=True, can_add=True, item=None, quantity=0, x=0, y=0, layer=0, size=CASE_SIZE_DEFAULT, authorized_classes:dict=None, color=SLOT_COLOR_DEFAULT, item_name_font_size=ITEM_NAME_FONT_SIZE_DEFAULT, item_name_font_color=ITEM_NAME_FONT_COLOR_DEFAULT, quantity_font_size=QUANTITY_FONT_SIZE_DEFAULT, quantity_font_color = QUANTITY_FONT_COLOR_DEFAULT):
+        self.origin = origin
         if can_take:
-            self.state.slots["take"].append(self)
+            self.origin.slots["take"].append(self)
         if can_add:
-            self.state.slots["add"].append(self)
+            self.origin.slots["add"].append(self)
 
         self._authorized_classes = authorized_classes
         self.group = group

@@ -2,7 +2,7 @@ import pygame
 # import json
 from states.tab_menu import TabMenu
 from inventory.game_inventory import GameInventory
-from utils.drag_and_drop import DragAndDrop
+from inventory.drag_and_drop import DragAndDrop
 
 
 class InventoryMenu(TabMenu):
