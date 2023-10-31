@@ -52,6 +52,7 @@ class DragAndDrop:
                 if not drop_allowed:
                     self._holding = False
                     self._slot_source.add_item(self._item, self._quantity)
+                    self.update_function()
                 if not self._holding:
                     self.kill_sprites()
     

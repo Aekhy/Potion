@@ -2,12 +2,13 @@ import pygame
 from inventory.multiple_inventory import MultipleInventory
 from items.potions import Potion, Base, Active
 from states.nav import Nav
-
+from utils.json_functions import Read, Write
 
 class GameInventory:
-    def __init__(self, state, struct_json: dict, x, y, locked=False) -> None:
+    def __init__(self, struct_json, x, y, locked=False) -> None:
+        
 
-        self._state = state
+        self._state = None
         self._slots = {"take":[],"add":[]}
         self._group = pygame.sprite.LayeredUpdates()
         self._struct = struct_json
@@ -126,3 +127,6 @@ class GameInventory:
     
     def update_slots(self):
         self._multiple_inventories[self.nav_index].update_slots()
+
+
+    

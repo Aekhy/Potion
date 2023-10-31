@@ -72,12 +72,16 @@ class Title(State):
         if self.chose:
             self.chose = False
             
-            if self.preselected_choice == self.len_choice - 1:
+            if self.preselected_choice == self.len_choice - 1: # quit
                 self.preselected_choice = 0
                 self._game.inGame = False
-            elif self.preselected_choice == 0:
+            elif self.preselected_choice == 0: # play
                 self.preselected_choice = 0
-                new_state = self._game.states("GameScreen")
+
+                # Loading the informations about the dirname
+                self._game.save_manager.LoadSave("saves/save_one")
+
+                new_state = self._game.states("InventoryMenu")
                 new_state.enter_state()
             # elif self.preselected_choice == 1:
             #     self.preselected_choice = 0

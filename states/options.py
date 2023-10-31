@@ -83,8 +83,9 @@ class Options(State):
             #     new_state = self._game.states("Settings")
             #     new_state.enter_state()
             elif self.preselected_choice == 2: # Go back to main menu
-                while len(self._game.state_stack) > 1: # Title screen is always 1 in stack
-                    self._game.state_stack.pop()
+                self._game.state_stack = []
+                new_state = self._game.states("Title")
+                new_state.enter_state()
             
         self.sprites.update()
 

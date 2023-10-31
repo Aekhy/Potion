@@ -9,8 +9,7 @@ from states.potions_menu import PotionsMenu
 from states.recipes_menu import RecipesMenu
 from states.options import Options
 from utils.json_functions import Read
-# this is not supposed to be created in game
-from inventory.game_inventory import GameInventory
+from utils.SaveManager import SaveManager
 
 class Game:
     def __init__(self):
@@ -23,10 +22,7 @@ class Game:
         self.state_stack = []
         self._all_states = {}
 
-        # for now it's in game but it is supposed to be created 
-        # when we create a new game / new party
-        data = Read("inventory/game_inventory_layout.json")
-        self._game_inventory = GameInventory(None, data, 0, 50, False)
+        self.save_manager = SaveManager(self)
 
         self.start()
 
@@ -34,18 +30,6 @@ class Game:
         if not (state in self._all_states.keys()):
             self._all_states[state] = "initialised"
             if state == "Title":
-                # this line of code is supposed to clear 
-                # all of the states that we had since we went back
-                # to the title menu
-                # it allow to recreate each state when we want to play
-                # it is usefull because if we want to load a different game
-                # we need to create new_instances.
-                # each states should have in their init method a way
-                # to load the current "game"/ party
-
-                # we should also be saving all the previous state right now.
-
-                self._all_states = {state : "initialised"}
                 self._all_states[state] = Title(self)
 
             elif state == "InventoryMenu":
@@ -61,11 +45,27 @@ class Game:
             elif state == "GameScreen":
                 # self._all_states[state] = GameScreen(self)
                 pass
+        else:
+            if state == "Title":
+                # this line of code is supposed to clear 
+                # all of the states that we had since we went back
+                # to the title menu
+                # it allow to recreate each state when we want to play
+                # it is usefull because if we want to load a different game
+                # we need to create new_instances.
+
+                if self.inGame:
+                    self.save_manager.Save()
+
+                self._all_states = {}
+                self.states("Title")
+
         return self._all_states[state]
                
     def start(self):
         # When we start the game at the beginning or after a pause for example
-        new_state = self.states("IngredientsMenu")
+        self.inGame = False
+        new_state = self.states("Title")
         new_state.enter_state()
         self.inGame = True
 
@@ -76,6 +76,7 @@ class Game:
             self.update()
             self.draw()
             self.clock.tick(FRAMERATE)
+        self.save_manager.Save()
         self.running = False
 
     # ////////// PRIVATE \\\\\\\\\\
@@ -102,7 +103,7 @@ class Game:
         pyg.display.update()
 
 if __name__ == "__main__":
-
+    # MakeAllDefaultKnowledge()
     g = Game()
     while g.running:
         g.main()
