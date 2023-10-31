@@ -1,0 +1,66 @@
+{
+    "neutre": {
+        "neighbours": [
+            {
+                "name": "soleil",
+                "weight": [
+                    [
+                        "majeur",
+                        "gaz"
+                    ],
+                    [
+                        "gaz",
+                        "majeur"
+                    ]
+                ]
+            },
+            {
+                "name": "terre",
+                "weight": [
+                    [
+                        "liquide",
+                        "lumineux"
+                    ],
+                    [
+                        "lumineux",
+                        "liquide"
+                    ]
+                ]
+            }
+        ]
+    },
+    "soleil": {
+        "neighbours": [
+            {
+                "name": "soleil",
+                "weight": [
+                    [
+                        "majeur",
+                        "gaz"
+                    ],
+                    [
+                        "gaz",
+                        "majeur"
+                    ]
+                ]
+            }
+        ]
+    },
+    "terre": {
+        "neighbours": [
+            {
+                "name": "terre",
+                "weight": [
+                    [
+                        "liquide",
+                        "lumineux"
+                    ],
+                    [
+                        "lumineux",
+                        "liquide"
+                    ]
+                ]
+            }
+        ]
+    }
+}

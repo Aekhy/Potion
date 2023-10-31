@@ -1,0 +1,126 @@
+{
+    "neutre": {
+        "neighbours": [
+            {
+                "name": "feu",
+                "weight": [
+                    [
+                        "sec",
+                        "chaud"
+                    ],
+                    [
+                        "chaud",
+                        "sec"
+                    ]
+                ]
+            },
+            {
+                "name": "eau",
+                "weight": [
+                    [
+                        "humide",
+                        "froid"
+                    ],
+                    [
+                        "froid",
+                        "humide"
+                    ]
+                ]
+            },
+            {
+                "name": "terre",
+                "weight": [
+                    [
+                        "sec",
+                        "froid"
+                    ],
+                    [
+                        "froid",
+                        "sec"
+                    ]
+                ]
+            },
+            {
+                "name": "air",
+                "weight": [
+                    [
+                        "chaud",
+                        "humide"
+                    ],
+                    [
+                        "humide",
+                        "chaud"
+                    ]
+                ]
+            }
+        ]
+    },
+    "feu": {
+        "neighbours": [
+            {
+                "name": "feu",
+                "weight": [
+                    [
+                        "sec",
+                        "chaud"
+                    ],
+                    [
+                        "chaud",
+                        "sec"
+                    ]
+                ]
+            }
+        ]
+    },
+    "eau": {
+        "neighbours": [
+            {
+                "name": "eau",
+                "weight": [
+                    [
+                        "humide",
+                        "froid"
+                    ],
+                    [
+                        "froid",
+                        "humide"
+                    ]
+                ]
+            }
+        ]
+    },
+    "terre": {
+        "neighbours": [
+            {
+                "name": "terre",
+                "weight": [
+                    [
+                        "sec",
+                        "froid"
+                    ],
+                    [
+                        "froid",
+                        "sec"
+                    ]
+                ]
+            }
+        ]
+    },
+    "air": {
+        "neighbours": [
+            {
+                "name": "air",
+                "weight": [
+                    [
+                        "chaud",
+                        "humide"
+                    ],
+                    [
+                        "humide",
+                        "chaud"
+                    ]
+                ]
+            }
+        ]
+    }
+}

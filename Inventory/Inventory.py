@@ -1,7 +1,5 @@
-from items.item import Item
 from items.ingredients import Ingredient
 from inventory.slot import Slot
-from utils.group import draw_grp
 from inventory.case import Case
 from inventory.settings import *
 from general_settings.private_settings import LAYERS

@@ -1,12 +1,12 @@
 from items.item import Item
-from items.settings import DEFAULT_INGREDIENT_MAX_STACK, INGREDIENT_DATA_PATH
+from items.settings import DEFAULT_INGREDIENT_MAX_STACK, INGREDIENT_DATA
+from utils.json_functions import Read
 import json
 
 class Ingredient(Item):
     def __init__(self, name: str) -> None:
-        with open(INGREDIENT_DATA_PATH) as file:
-            data =  json.load(file)
-            ingredient = data[name]
+
+        ingredient = INGREDIENT_DATA[name]
         
         ms = ingredient["max_stack"]
         if ms <= 0:

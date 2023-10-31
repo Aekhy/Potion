@@ -7,7 +7,7 @@ USE_V1 = False
 
 
 class Substance(Item):
-    def __init__(self, name: str, type: str, comp_matrix, graph, max_stack: int = DEFAULT_MAX_STACK, path: str = ""):
+    def __init__(self, name: str, type: str, max_stack: int = DEFAULT_MAX_STACK, path: str = ""):
         super().__init__(name, max_stack, path)
 
         self._ingredients = []
@@ -25,11 +25,11 @@ class Substance(Item):
         # Characteristics are COLD, HOT, HUMID ...
         self._characteristics = []
 
-        # This matrix is used to add a new characteristic
-        self._compatibility_matrix = comp_matrix
+        # # This matrix is used to add a new characteristic
+        # self._compatibility_matrix = comp_matrix
 
         # This graphs tells how to access nodes
-        self._graph = graph
+        # self._graph = graph
 
     # _______ GETTER & SETTERS _______
 
@@ -70,7 +70,7 @@ class Substance(Item):
             if len(self._characteristics) == 0:
                 self._characteristics.append(characteristic)
             else:
-                compatibility = self._compatibility_matrix[self._characteristics[-1]
+                compatibility = BASE_ACTIVE_COMPATIBILITY_MATRIX[self._characteristics[-1]
                                                            ][characteristic]
                 if compatibility == 0:
                     self._characteristics.pop()
@@ -91,7 +91,13 @@ class Substance(Item):
                 done = False
                 while not done and i < l:
                     found_node = False
-                    for node in self._graph[self._node]["neighbours"]:
+
+                    if self._type == BASE:
+                        graph = BASE_GRAPH
+                    elif self._type == ACTIVE:
+                        graph = ACTIVE_GRAPH
+
+                    for node in graph[self._node]["neighbours"]:
                         if found_node:
                             break
                         else:
@@ -150,8 +156,12 @@ class Substance(Item):
             self._node = NEUTRAL
 
         if self._characteristics != []:
+            if self._type == BASE:
+                graph = BASE_GRAPH
+            elif self._type == ACTIVE:
+                graph = ACTIVE_GRAPH
 
-            for node in self._graph[self._node]["neighbours"]:
+            for node in graph[self._node]["neighbours"]:
                 for w in node["weight"]:
                     if w == self._characteristics:
                         # If we found a valid weight, it means that we are
@@ -240,7 +250,7 @@ class Substance(Item):
 
 class Base(Substance):
     def __init__(self):
-        super().__init__(NEUTRAL, BASE, BASE_ACTIVE_COMPATIBILITY_MATRIX, BASE_GRAPH)
+        super().__init__(NEUTRAL, BASE)
 
         # Effect from the tools
         self._effect = None
@@ -268,7 +278,7 @@ class Base(Substance):
 
 class Active(Substance):
     def __init__(self):
-        super().__init__(NEUTRAL, ACTIVE, BASE_ACTIVE_COMPATIBILITY_MATRIX, ACTIVE_GRAPH)
+        super().__init__(NEUTRAL, ACTIVE)
 
         # Effect from the tools
         self._effect = None

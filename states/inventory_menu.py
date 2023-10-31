@@ -21,7 +21,7 @@ class InventoryMenu(TabMenu):
         # this open the inventory 
         self._game._game_inventory.open()
         # We don't want to be able to close the _game_inventory when we are in here
-        # self._game._game_inventory.lock()
+        self._game._game_inventory.lock()
         self._drag_and_drop = DragAndDrop(self.sprites, self._game._game_inventory.update_slots)
     
     def reset(self):

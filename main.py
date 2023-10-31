@@ -1,7 +1,6 @@
 from general_settings.private_settings import *
 import sys
 import pygame as pyg
-import json
 
 from states.title import Title
 from states.inventory_menu import InventoryMenu
@@ -9,6 +8,7 @@ from states.ingredients_menu import IngredientsMenu
 from states.potions_menu import PotionsMenu
 from states.recipes_menu import RecipesMenu
 from states.options import Options
+from utils.json_functions import Read
 # this is not supposed to be created in game
 from inventory.game_inventory import GameInventory
 
@@ -25,9 +25,7 @@ class Game:
 
         # for now it's in game but it is supposed to be created 
         # when we create a new game / new party
-        with open("inventory/game_inventory_layout.json") as file:
-            data = json.load(file)
-
+        data = Read("inventory/game_inventory_layout.json")
         self._game_inventory = GameInventory(None, data, 0, 50, False)
 
         self.start()
@@ -104,6 +102,7 @@ class Game:
         pyg.display.update()
 
 if __name__ == "__main__":
+
     g = Game()
     while g.running:
         g.main()
