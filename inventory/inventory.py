@@ -1,4 +1,5 @@
 from items.ingredients import Ingredient
+from items.potions import Potion, Base, Active
 from inventory.slot import Slot
 from inventory.case import Case
 from inventory.settings import *

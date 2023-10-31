@@ -119,7 +119,7 @@ class Ferment(Tool):
 
 # We propably want this class to herit from Tool
 class Cauldron(pyg.sprite.Sprite):
-    def __init__(self, game, spritesGroup, x, y):
+    def __init__(self, origin, spritesGroup, x, y):
 
         # The cauldron is always on the center of the screen
         self._x = x
@@ -130,7 +130,7 @@ class Cauldron(pyg.sprite.Sprite):
         self._base = None
         self._active = None
         self._potion = None
-        self._mixture_slot = Slot(game, self.group,True,False,None,0,self._x - 50,self._y - 50,self._layer+0.1)
+        self._mixture_slot = Slot(origin, self.group,True,False,None,0,self._x - 50,self._y - 50,self._layer+0.1)
         self._finished = False
         pyg.sprite.Sprite.__init__(self, self.group)
 

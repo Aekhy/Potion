@@ -14,6 +14,7 @@ class DragAndDrop:
         self._name = None
         self._quantity = None
         self._slot_source = None
+        self._drop_allowed = False
 
     def is_holding(self):
         return self._holding
@@ -45,22 +46,29 @@ class DragAndDrop:
         if self._holding:
             self.move_sprites(event)
 
-    def drop(self, slots_add, slots_iterable, event):
+    def drop(self, slots_add, slots_iterable, event, cauldron_reset=None):
         if self._holding:
 
-            drop_allowed = False
+            self._drop_allowed = False
             for slot in slots_iterable:
                 if slot.rect.collidepoint(event.pos) and (slot.has_room(self._item)) and (slot in slots_add):
-                    drop_allowed = True
-                    self._item, self._quantity = slot.add_item(self._item, self._quantity)
+                    self._drop_allowed = True
+                    item, quantity = slot.add_item(self._item, self._quantity)
+                    if quantity == self._quantity:
+                        self._drop_allowed = False
+                    self._item, self._quantity = item, quantity
                     self.update_function()
+                    break
+
             if self._quantity == 0:
                 self._holding = False
+                if cauldron_reset is not None:
+                    cauldron_reset()
 
-            if drop_allowed and self._holding:
+            if self._drop_allowed and self._holding:
                 self.update_sprites()
             else:
-                if not drop_allowed:
+                if not self._drop_allowed:
                     self._holding = False
                     self._slot_source.add_item(self._item, self._quantity)
                     self.update_function()

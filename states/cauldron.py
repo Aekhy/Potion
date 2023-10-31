@@ -10,9 +10,10 @@ class CauldronScreen(State):
     def __init__(self,game):
         super().__init__(game)
         self.sprites = pyg.sprite.LayeredUpdates()
-        self.cauldron = Cauldron(game, self.sprites, SCREEN_WIDTH - 300, 100)
+        self.slots = {"take":[],"add":[]}
+
+        self.cauldron = Cauldron(self, self.sprites, SCREEN_WIDTH - 300, 100)
         
-        self._slots = {"take":[],"add":[]}
         # Very important to do that in each state that use
         # game_inventory. It crashes if not done
         self.game.game_inventory.set_state(self)
@@ -38,7 +39,7 @@ class CauldronScreen(State):
                         break
 
             elif event.type == pyg.MOUSEBUTTONDOWN:
-                self._drag_and_drop.take(self.game.game_inventory.slots["take"], self.game.game_inventory.get_slot_list(), event)
+                self._drag_and_drop.take(self.game.game_inventory.slots["take"]+self.slots["take"], self.game.game_inventory.get_slot_list()+[self.cauldron.mixture_slot], event)
                 #If we pressed the finish button, we call the cauldron's finish function
                 if self.cauldron.finish_button.rect.collidepoint(event.pos):
                     self.cauldron.finish()
@@ -51,13 +52,13 @@ class CauldronScreen(State):
                                 self.choice = i
                                 break
                     
-            elif event.type == pyg.MOUSEBUTTONUP:
+            elif event.type == pyg.MOUSEBUTTONUP:       
                 if self.cauldron.rect.collidepoint(event.pos):
                     itemAdded = self.cauldron.add_thing(self._drag_and_drop.item, self._drag_and_drop._quantity)[0]
                     if itemAdded:
                         self._drag_and_drop.reinit()
                 else:
-                    self._drag_and_drop.drop(self._game.game_inventory.slots["add"], self._game.game_inventory.get_slot_list(), event)
+                    self._drag_and_drop.drop(self._game.game_inventory.slots["add"]+self.slots["add"], self._game.game_inventory.get_slot_list(), event, self.cauldron.reset)
 
             elif event.type == pyg.KEYDOWN:
                 match event.key:
