@@ -418,9 +418,10 @@ class Potion(Item):
                 if tmp["level"] == END:
                     break
 
-            potion_info = tmp
-            self._name = potion_info["name"]
-            self._description = potion_info["description"]
+            potion = tmp
+            # potion["name"] is like an id
+            self._name = POTION_DATA[potion["name"]]["name"]
+            self._description = POTION_DATA[potion["name"]]["description"]
 
     def __eq__(self, other):
         result = False

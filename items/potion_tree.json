@@ -8,18 +8,15 @@
             "name": "r\u00e9g\u00e9n\u00e9ration",
             "eau": {
                 "level": 0,
-                "name": "AquaVivacit\u00e9",
-                "description": "Effet lent mais fort."
+                "name": "AquaVivacite"
             },
             "feu": {
                 "level": 0,
-                "name": "PyroRenouveau",
-                "description": "Effet rapide mais faible."
+                "name": "PyroRenouveau"
             },
             "neutre": {
                 "level": 0,
-                "name": "Potion de Gu\u00e9rison Standard",
-                "description": "Une potion qui soigne les \u00e9corchures"
+                "name": "GuerisonStandard"
             }
         },
         "transfiguration": {
@@ -27,19 +24,16 @@
             "name": "taille",
             "neutre": {
                 "level": 0,
-                "name": "Potion de Gu\u00e9rison Standard",
-                "description": "Une potion qui soigne les \u00e9corchures"
+                "name": "GuerisonStandard"
             }
         },
         "neutre": {
             "level": 0,
-            "name": "Potion rat\u00e9",
-            "description": "Cette propri\u00e9t\u00e9 alchimique ne semble pas convenir ici..."
+            "name": "PotionRateBase"
         }
     },
     "neutre": {
         "level": 0,
-        "name": "Potion rat\u00e9",
-        "description": "Cette plan\u00e8te n'est pas appropri\u00e9e..."
+        "name": "PotionRateAlchemicalProperty"
     }
 }

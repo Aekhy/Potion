@@ -110,9 +110,7 @@ END = 0
 
 
 MAIN_POTION_TREE = Read("items/potion_tree.json")
-
-
-
+POTION_DATA = Read("items/potions.json")
 
 
 

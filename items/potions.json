@@ -1,0 +1,22 @@
+{
+    "AquaVivacité" : {
+        "name":"AquaVivacite",
+        "description": "Effet lent mais fort."
+    },
+    "PyroRenouveau" : {
+        "name":"PyroRenouveau",
+        "description": "Effet rapide mais faible."
+    },
+    "GuerisonStandard" : {
+        "name":"GuérisonStandard",
+        "description": "Une potion qui soigne les écorchures"
+    },
+    "PotionRateBase" : {
+        "name" : "Potion raté",
+        "description": "Cette planète n'est pas appropriée..."
+    },
+    "PotionRateAlchemicalProperty" : {
+        "name" : "Potion raté",
+        "description": "Cette propriété alchimique ne semble pas convenir ici..."
+    }
+}
