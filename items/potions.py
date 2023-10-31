@@ -1,7 +1,7 @@
 from items.item import Item
+from items.ingredients import Ingredient
 from items.settings import *
 from general_settings.private_settings import DEBUG
-
 # False to use V2
 USE_V1 = False
 
@@ -17,10 +17,6 @@ class Substance(Item):
 
         # Result of the characteristics
         self._node = None
-
-        # this variable tells if the substance is failed or not
-        # not used yet
-        self._failed = False
 
         # Characteristics are COLD, HOT, HUMID ...
         self._characteristics = []
@@ -249,11 +245,20 @@ class Substance(Item):
 
 
 class Base(Substance):
-    def __init__(self):
+    def __init__(self, make:dict=None):
         super().__init__(NEUTRAL, BASE)
 
         # Effect from the tools
         self._effect = None
+
+        if make is not None:
+            self._ingredients = []
+            for ingredient_name in make["ingredients"]:
+                self._ingredients.append(Ingredient(ingredient_name))
+            self._type = make["type"]
+            self._node = make["node"]
+            self._characteristics = make["characteristics"]
+            self._effect = make["effect"]
 
     def get_effect(self):
         return self._effect
@@ -269,6 +274,19 @@ class Base(Substance):
 
     name = property(get_name)
 
+    def get_info_save(self):
+        res = {
+            "ingredients" : [],
+            "type" : self._type,
+            "node" : self._node,
+            "characteristics" : self._characteristics,
+            "effect" : self._effect
+        }
+        for ingredient in self._ingredients:
+            res["ingredients"].append(ingredient.name)
+
+        return res
+
     def __eq__(self, other):
         result = False
         if isinstance(other, Base):
@@ -277,11 +295,20 @@ class Base(Substance):
 
 
 class Active(Substance):
-    def __init__(self):
+    def __init__(self, make:dict=None):
         super().__init__(NEUTRAL, ACTIVE)
 
         # Effect from the tools
         self._effect = None
+
+        if make is not None:
+            self._ingredients = []
+            for ingredient_name in make["ingredients"]:
+                self._ingredients.append(Ingredient(ingredient_name))
+            self._type = make["type"]
+            self._node = make["node"]
+            self._characteristics = make["characteristics"]
+            self._effect = make["effect"]
 
     def get_effect(self):
         return self._effect
@@ -297,6 +324,19 @@ class Active(Substance):
 
     name = property(get_name)
 
+    def get_info_save(self):
+        res = {
+            "ingredients" : [],
+            "type" : self._type,
+            "node" : self._node,
+            "characteristics" : self._characteristics,
+            "effect" : self._effect
+        }
+        for ingredient in self._ingredients:
+            res["ingredients"].append(ingredient.name)
+
+        return res
+
     def __eq__(self, other):
         result = False
         if isinstance(other, Active):
@@ -308,7 +348,7 @@ class Active(Substance):
 # a potion that isn't finished is called a "mixture étrange"
 
 class Potion(Item):
-    def __init__(self, name: str, base: Base, active: Active, max_stack: int = DEFAULT_POTION_MAX_STACK, path: str = ""):
+    def __init__(self, name: str, base: Base, active: Active, make:dict=None,max_stack: int = DEFAULT_POTION_MAX_STACK, path: str = ""):
         super().__init__(name, max_stack, path)
         self._ingredients = []
         self._base = base
@@ -316,6 +356,15 @@ class Potion(Item):
         # Do not access this value except in get_alchemical_property
         # you should be accessing self.alchemical_property
         self._alchemical_property = None
+
+        if make is not None:
+            for ingredient_name in make["ingredients"]:
+                self._ingredients.append(Ingredient(ingredient_name))
+            self._base = Base(make["base"])
+            self._active = Active(make["active"])
+            self._alchemical_property = make["alchemical_property"]
+
+            self.update_info()
 
     # _______ GETTER & SETTERS _______
     def get_ingredients(self):
@@ -370,6 +419,16 @@ class Potion(Item):
 
     description = property(get_description)
     # _______ METHODS _______
+
+    def get_info_save(self):
+        res = {}
+        res["ingredients"] = []
+        for ingredient in self._ingredients:
+            res["ingredients"].append(ingredient.name)
+        res["base"] = self._base.get_info_save()
+        res["active"] = self._active.get_info_save()
+        res["alchemical_property"] = self._alchemical_property
+        return res
 
     def add_ingredient(self, *ingredients):
         """

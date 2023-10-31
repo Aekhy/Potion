@@ -2,6 +2,7 @@ from items.settings import *
 from utils.json_functions import Read, Write
 from knowledge.knowledge import Knowledge
 from inventory.game_inventory import GameInventory
+from items.potions import Base, Active, Potion
 
 INGREDIENTS = "ingredient"
 CHARACTERISITC_COMPATIBILITY = "characteristic_compatibility"
@@ -168,7 +169,7 @@ class SaveManager:
                     d_row = []
                     for k in range(0, value["meta"]["nb_col"]):
                         if i==0 and j==0 and k == 0 and key == "ingredients":
-                            tmp = {"type":"Slot","item_name":"eau","quantity":5}
+                            tmp = {"type":"Slot","item_type": "ingredient","item_data":"eau","quantity":5}
                         else:
                             tmp = {"type":"Slot"}
                         d_row.append(tmp)
@@ -207,7 +208,21 @@ class SaveManager:
                     for k in range(0, value["meta"]["nb_col"]):
                         slot = s_l[k + j*value["meta"]["nb_col"]]
                         if not slot.is_empty:
-                            tmp = {"type":"Slot", "item_name":slot.item.name, "quantity":slot.quantity}
+                            item = slot.item
+                            tmp = {"type":"Slot"}
+                            if isinstance(item, Base):
+                                tmp["item_type"] = "base"
+                                tmp["item_data"] = item.get_info_save()
+                            elif isinstance(item, Active):
+                                tmp["item_type"] = "base"
+                                tmp["item_data"] = item.get_info_save()
+                            elif isinstance(item, Potion):
+                                tmp["item_type"] = "potion"
+                                tmp["item_data"] = slot.item.get_info_save()
+                            else:
+                                tmp["item_type"] = "ingredient"
+                                tmp["item_data"] = item.name
+                            tmp["quantity"] = slot.quantity
                         else:
                             tmp = {"type":"Slot"}
                         d_row.append(tmp)

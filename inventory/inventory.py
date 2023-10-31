@@ -36,8 +36,32 @@ class Inventory:
 
     def make_usable_slot(self, element, i, j):
         # TEMPORAIRE POUR LE DEBUG ----------
-        if 'item_name' in element.keys():
-            item = Ingredient(element["item_name"])
+        # if isinstance(item, Base):
+        #     tmp["item_type"] = "base"
+        #     tmp["item_data"] = item.get_info_save()
+        #     tmp["quantity"] = slot.quantity
+        # elif isinstance(item, Active):
+        #     tmp["item_type"] = "base"
+        #     tmp["item_data"] = item.get_info_save()
+        #     tmp["quantity"] = slot.quantity
+        # elif isinstance(item, Potion):
+        #     tmp["item_type"] = "potion"
+        #     tmp["item_data"] = slot.item.get_info_save()
+        #     tmp["quantity"] = slot.quantity
+        # else:
+        #     tmp["item_type"] = "ingredient"
+        #     tmp["item_name"] = item.name
+        #     tmp["quantity"] = slot.quantity
+
+        if 'item_type' in element.keys():
+            if element["item_type"] == "base":
+                item = Base(element["item_data"])
+            elif element["item_type"] == "active":
+                item = Active(element["item_data"])
+            elif element["item_type"] == "potion":
+                item = Potion(element["item_data"])
+            else:
+                item = Ingredient(element["item_data"])
             quantity = element["quantity"]
         else:
             item = None
