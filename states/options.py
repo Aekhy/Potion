@@ -49,7 +49,7 @@ class Options(State):
                 self._game.inGame = False
 
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+                if event.key == pygame.K_o:
                     self.exit_state()
                 elif event.key == pygame.K_RETURN:
                     self.chose = True
@@ -71,6 +71,11 @@ class Options(State):
                         self.preselected_choice = key
 
     def update(self):
+        # DEV
+        # go see comments in states.py
+        if not self._in_state:
+            self._in_state = True
+            
         self.preselection_sprite.rect.center = (SCREEN_WIDTH/2 , SCREEN_HEIGHT/4+self.space_between_choice * (self.preselected_choice+2))
         
         if self.chose:

@@ -23,7 +23,7 @@ class CauldronScreen(State):
         self._drag_and_drop = DragAndDrop(self.sprites, self.game.game_inventory.update_slots)
 
         self.nav_menu = Nav(0, 0*50, 50, self.sprites, 0, ["Chaudron en cours d'utilisation"])
-
+        
         
     def events(self):
         for event in pyg.event.get():
@@ -63,14 +63,29 @@ class CauldronScreen(State):
             elif event.type == pyg.KEYDOWN:
                 match event.key:
                     case pyg.K_ESCAPE:
-                        #DEBUG: Cela arrive aussi quand on fait n'importe quelle autre touche, ce bug doit etre du a un probleme de gestion des events avec les autres states
+                        self.game.game_inventory.close()
                         self.exit_state()
+                    case pyg.K_TAB:
+                        self.game.game_inventory.close()
+                        self.game.states("InventoryMenu").enter_state()
+                    case pyg.K_i:
+                        pass # it's okay, the inventory toogle itself
+                    case pyg.K_o:
+                        self.game.states("Options").enter_state()
                     case _:
                         print("Oulala cette touche va pas")
                         
             self.game.game_inventory.update(event, self._drag_and_drop.is_holding())
                 
     def update(self):
+        # DEV
+        # go see comments in states.py
+        if not self._in_state:
+            self._in_state = True
+            self.game.game_inventory.set_state(self)
+            self._game.game_inventory.open()
+
+
         self.sprites.update()
 
     def draw(self,surface):

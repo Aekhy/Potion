@@ -16,7 +16,7 @@ class RecipesMenu(TabMenu):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_TAB:
                     self.exit_state()
-                elif event.key == pygame.K_ESCAPE:
+                elif event.key == pygame.K_o:
                     new_event = self._game.states("Options")
                     new_event.enter_state()
            
@@ -36,6 +36,10 @@ class RecipesMenu(TabMenu):
                         break
     
     def update(self):
+        # DEV
+        # go see comments in states.py
+        if not self._in_state:
+            self._in_state = True
         self.tab_menu_update(self.reset)
         self.sprites.update()
 

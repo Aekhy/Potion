@@ -16,7 +16,7 @@ class GameScreen(State):
 
         self.choice = None
         self.onclick_redirect = {
-            0:{"rect": self.cauldron_title.rect, "state": self.game.states("CauldronScreen")}
+            0:{"rect": self.cauldron_title.rect}
         }
 
     
@@ -29,19 +29,26 @@ class GameScreen(State):
                 if event.button == 1:
                     for key, value in self.onclick_redirect.items():
                         if value['rect'].collidepoint(event.pos):
-                            self.choice = value['state']
+                            self.choice = key
 
             elif event.type == pyg.KEYDOWN:
                 match event.key:
-                    case pyg.K_ESCAPE:
+                    case pyg.K_o:
                         self.game.states("Options").enter_state()
                     case pyg.K_TAB:
-                        self.game.states("PotionsMenu").enter_state()
+                        self.game.states("InventoryMenu").enter_state()
             
     def update(self):
+        if not self._in_state:
+            self._in_state = True
+
         if self.choice is not None:
-            self.choice.enter_state()
+            if self.choice == 0:
+                self.choice = None
+                self.game.states("CauldronScreen").enter_state()
+                
             self.choice = None
+                
         self.sprites.update()
 
     def draw(self, surface):
