@@ -1,0 +1,50 @@
+{
+  "AquaVivacite": {
+    "name": "AquaVivacité",
+    "description": "Effet lent mais fort.",
+    "img": "",
+    "base": "terre",
+    "active": "eau",
+    "alchemical_property": "charme"
+  },
+  "PyroRenouveau": {
+    "name": "PyroRenouveau",
+    "description": "Effet rapide mais faible.",
+    "img": "terre",
+    "base": "",
+    "active": "feu",
+    "alchemical_property": "charme"
+  },
+  "GuerisonStandard": {
+    "name": "GuérisonStandard",
+    "description": "Une potion qui soigne les écorchures",
+    "img": "",
+    "base": "terre",
+    "active": "neutre",
+    "alchemical_property": "charme"
+  },
+  "PotionRateBase": {
+    "name": "Potion raté",
+    "description": "Cette planète n'est pas appropriée...",
+    "img": "",
+    "base": "",
+    "active": "",
+    "alchemical_property": ""
+  },
+  "PotionRateActive": {
+    "name": "Potion raté",
+    "description": "Cet élément n'est pas approprié...",
+    "img": "",
+    "base": "",
+    "active": "",
+    "alchemical_property": ""
+  },
+  "PotionRateAlchemicalProperty": {
+    "name": "Potion raté",
+    "description": "Cette propriété alchimique ne semble pas convenir ici...",
+    "img": "",
+    "base": "",
+    "active": "",
+    "alchemical_property": ""
+  }
+}

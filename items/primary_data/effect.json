@@ -1,0 +1,32 @@
+{
+  "chauffer": {
+    "name": "chauffer",
+    "img": "",
+    "type": "base"
+  },
+  "geler": {
+    "name": "geler",
+    "img": "",
+    "type": "base"
+  },
+  "mixer": {
+    "name": "mixer",
+    "img": "",
+    "type": "base"
+  },
+  "distillation": {
+    "name": "distillation",
+    "img": "",
+    "type": "base"
+  },
+  "sublimation": {
+    "name": "sublimation",
+    "img": "",
+    "type": "base"
+  },
+  "fermentation": {
+    "name": "fermentation",
+    "img": "",
+    "type": "base"
+  }
+}

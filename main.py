@@ -1,17 +1,20 @@
-from general_settings.private_settings import *
 import sys
 import pygame as pyg
+
+from general_settings.private_settings import *
 
 from states.title import Title
 from states.inventory_menu import InventoryMenu
 from states.ingredients_menu import IngredientsMenu
+from states.mixtures_menu import MixturesMenu
 from states.potions_menu import PotionsMenu
 from states.recipes_menu import RecipesMenu
 from states.options import Options
 from states.game import GameScreen
 from states.cauldron import CauldronScreen
-from utils.json_functions import Read
+
 from utils.SaveManager import SaveManager
+from utils.json_functions import Read
 
 class Game:
     def __init__(self):
@@ -37,6 +40,8 @@ class Game:
                     self._all_states[state] = InventoryMenu(self)
                 case "IngredientsMenu":
                     self._all_states[state] = IngredientsMenu(self)
+                case "MixturesMenu":
+                    self._all_states[state] = MixturesMenu(self)
                 case "PotionsMenu":
                     self._all_states[state] = PotionsMenu(self)
                 case "RecipesMenu":

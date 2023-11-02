@@ -8,11 +8,19 @@ def Read(path:str):
 def Write(path:str, data:dict, indent_number:int=4):
     
     black_list = [
-        "items/base_active_compatibility_matrix.json",
-        "items/base_graph.json",
-        "items/active_graph.json",
-        "items/alchemical_property_matrix.json",
-        "items/potion_tree.json"
+        "items/primary_data/characteristic.json",
+        "items/primary_data/effect",
+        "items/primary_data/alchemical_property.json",
+        "items/primary_data/active.json",
+        "items/primary_data/base.json",
+        "items/primary_data/ingredient.json",
+        "items/primary_data/potions.json",
+        "items/primary_data/id.json",
+        "items/secondary_data/base_active_compatibility_matrix.json",
+        "items/secondary_data/base_graph.json",
+        "items/secondary_data/active_graph.json",
+        "items/secondary_data/alchemical_property_matrix.json",
+        "items/secondary_data/potion_tree.json"
     ]
     lucky_to_be_alive = None
     safe = True

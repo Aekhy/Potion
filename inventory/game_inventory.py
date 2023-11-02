@@ -2,7 +2,6 @@ import pygame
 from inventory.multiple_inventory import MultipleInventory
 from items.potions import Potion, Base, Active
 from states.nav import Nav
-from utils.json_functions import Read, Write
 
 class GameInventory:
     def __init__(self, struct_json, x, y, locked=False) -> None:

@@ -5,7 +5,7 @@ from inventory.game_inventory import GameInventory
 from items.potions import Base, Active, Potion
 
 INGREDIENTS = "ingredient"
-CHARACTERISITC_COMPATIBILITY = "characteristic_compatibility"
+CHARACTERISITC = "characteristic"
 EFFECT = "effect"
 BASE = "base"
 ACTIVE = "active"
@@ -71,15 +71,19 @@ class SaveManager:
         return ingredient_knowledge
 
     # Private
-    def MakeIngredientCharacterisicCompatibilityDefaultKnowledge(self):
-        IngredientCompatibility_data = BASE_ACTIVE_COMPATIBILITY_MATRIX
-        IngredientCompatibilityCharacterisic_knowledge = {}
+    def MakeCharacterisicDefaultKnowledge(self):
+        IngredientCompatibility_data = CHARACTERISTIC_DATA
+        IngredientCompatibility_knowledge = {}
         for cara, value in IngredientCompatibility_data.items():
             tmp = {}
             for k in value.keys():
                 tmp[k] = False
-            IngredientCompatibilityCharacterisic_knowledge[cara] = tmp
-        return IngredientCompatibilityCharacterisic_knowledge
+                if k == "opposites":
+                    tmp[k] = {}
+                    for opp in value[k]:
+                        tmp[k][opp] = False
+            IngredientCompatibility_knowledge[cara] = tmp
+        return IngredientCompatibility_knowledge
 
     # Private
     def ListToKnowledge(self, l:list, d:dict):
@@ -102,26 +106,62 @@ class SaveManager:
 
     # Private
     def MakeEffectDefaultKnowledge(self):
-        l = [HEATING, FREEZING, MIXING, DISTILLATION, SUBLIMATION, FERMENTATION]
-        d = {"name": False, "type": False}
-        return self.ListToKnowledge(l, d)
+        effect_data = EFFECT_DATA
+
+        effect_knowledge = {}
+        for ingredient, value in effect_data.items():
+            key_knowledge = {}
+            for key in value.keys():
+                key_knowledge[key] = False
+            effect_knowledge[ingredient] = key_knowledge
+        return effect_knowledge
     
     # Private
     def MakeAlchemicalPropertyDefaultKnowledge(self):
-        l = [SPELL, CHARM, TRANSFIGURATION, HEX, BEWITCHMENT, CURSE, COUNTER_SPELL, ENCHANTMENT, BLESSING]
-        d = {"name": False, "base_effect": False, "active_effect": False}
-        return self.ListToKnowledge(l, d)
+        a_p_data = ALCHEMICAL_PROPERTY_DATA
+        a_p_knowledge = {}
+        for key, value in a_p_data.items():
+            tmp = {}
+            for k in value.keys():
+                tmp[k] = False
+            a_p_knowledge[key] = tmp
+        return a_p_knowledge
 
     # Private
     def MakeBaseDefaultKnowledge(self):
-        return self.GraphToKnowledge(BASE_GRAPH)
+        base_data = BASE_DATA
+        base_knowledge = {}
+        for key, value in base_data.items():
+            tmp = {}
+            for k in value.keys():
+                if k == "neighbours":
+                    tmp[k] = []
+                    for neighbour in value[k]:
+                        tmp[k].append({"id_name": False, "weight": False})
+                else:
+                    tmp[k] = False
+            base_knowledge[key] = tmp
+        return base_knowledge
 
     # Private
     def MakeActiveDefaultKnowledge(self):
-        return self.GraphToKnowledge(ACTIVE_GRAPH)
+        active_data = ACTIVE_DATA
+        active_knowledge = {}
+        for key, value in active_data.items():
+            tmp = {}
+            for k in value.keys():
+                if k == "neighbours":
+                    tmp[k] = []
+                    for neighbour in value[k]:
+                        tmp[k].append({"id_name": False, "weight": False})
+                else:
+                    tmp[k] = False
+            active_knowledge[key] = tmp
+        return active_knowledge
 
     # Private
     def MakePotionDefaultKnowledge(self):
+        
         p_data = POTION_DATA
         p_knowledge = {}
         for key, value in p_data.items():
@@ -129,13 +169,14 @@ class SaveManager:
             for k in value.keys():
                 tmp[k] = False
             p_knowledge[key] = tmp
+
         return p_knowledge
 
     # Public ~ kinda
     def MakeAllDefaultKnowledge(self, knowledge_path):
         knowledge = {}
         knowledge[INGREDIENTS] = self.MakeIngredientDefaultKnowledge()
-        knowledge[CHARACTERISITC_COMPATIBILITY] = self.MakeIngredientCharacterisicCompatibilityDefaultKnowledge()
+        knowledge[CHARACTERISITC] = self.MakeCharacterisicDefaultKnowledge()
         knowledge[EFFECT] = self.MakeEffectDefaultKnowledge()
         knowledge[BASE] = self.MakeBaseDefaultKnowledge()
         knowledge[ACTIVE] = self.MakeActiveDefaultKnowledge()

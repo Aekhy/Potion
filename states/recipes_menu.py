@@ -3,7 +3,7 @@ import pygame
 
 class RecipesMenu(TabMenu):
     def __init__(self, game):
-        super().__init__(game, 3)
+        super().__init__(game, 4)
 
     def reset(self):
         pass

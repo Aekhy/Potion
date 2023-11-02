@@ -1,0 +1,56 @@
+{
+  "sortilege": {
+    "name": "sortilège",
+    "img": "",
+    "base_effect": "chauffer",
+    "active_effect": "distillation"
+  },
+  "charme": {
+    "img": "",
+    "name": "charme",
+    "base_effect": "geler",
+    "active_effect": "distillation"
+  },
+  "transfiguration": {
+    "name": "transfiguration",
+    "img": "",
+    "base_effect": "mixer",
+    "active_effect": "distillation"
+  },
+  "malefice": {
+    "name": "maléfice",
+    "img": "",
+    "base_effect": "chauffer",
+    "active_effect": "fermentation"
+  },
+  "ensorcellement": {
+    "name": "ensorcellement",
+    "img": "",
+    "base_effect": "geler",
+    "active_effect": "fermentation"
+  },
+  "malediction": {
+    "name": "malédiction",
+    "img": "",
+    "base_effect": "mixer",
+    "active_effect": "fermentation"
+  },
+  "contre-sort": {
+    "name": "contre-sort",
+    "img": "",
+    "base_effect": "chauffer",
+    "active_effect": "sublimation"
+  },
+  "enchantement": {
+    "name": "enchantement",
+    "img": "",
+    "base_effect": "geler",
+    "active_effect": "sublimation"
+  },
+  "benediction": {
+    "name": "bénédiction",
+    "img": "",
+    "base_effect": "mixer",
+    "active_effect": "sublimation"
+  }
+}

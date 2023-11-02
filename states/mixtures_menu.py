@@ -1,19 +1,16 @@
-import pygame
 from states.tab_menu import TabMenu
-from states.nav import Nav
 from states.grid_display import GridDisplay
-from items.settings import INGREDIENT_DATA, CHARACTERISTIC_DATA
+from states.nav import Nav
+import pygame
 
-
-
-class IngredientsMenu(TabMenu):
+class MixturesMenu(TabMenu):
     def __init__(self, game):
-        super().__init__(game, 1)
-
-    #     self.hover_nav_ingredient = [False, -1]
-    #     self.reset()
+        super().__init__(game, 2)
         self._group = pygame.sprite.LayeredUpdates()
-        self._grids = [GridDisplay(self._game.knowledge.grids["ingredient"],self,0,80), GridDisplay(self._game.knowledge.grids["characteristic"],self,0,80)]
+        self._grids = [GridDisplay(self._game.knowledge.grids["base"],self,0,80),
+                    GridDisplay(self._game.knowledge.grids["active"],self,0,80),
+                    GridDisplay(self._game.knowledge.grids["effect"],self,0,80),
+                    ]
         
         self.reset_nav_body()
         
@@ -31,7 +28,7 @@ class IngredientsMenu(TabMenu):
             sprite.kill()
 
         # nav
-        self.nav = Nav(0, 50, 30, self._group, index, ["Ingredients","Caractéristiques"])
+        self.nav = Nav(0, 50, 30, self._group, index, ["Planètes","Eléments", "effets"])
         # body
         self._grids[self.nav_index].open()
 
@@ -90,7 +87,6 @@ class IngredientsMenu(TabMenu):
         # go see comments in states.py
         if not self._in_state:
             self._in_state = True
-            self.reset_nav_body()
 
         if self.change_nav_index:
             if self.previous_index is not None:
@@ -110,4 +106,3 @@ class IngredientsMenu(TabMenu):
 
     def draw(self,screen):
         self.sprites.draw(screen)
-

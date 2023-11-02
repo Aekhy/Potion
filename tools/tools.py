@@ -1,13 +1,11 @@
 from items.ingredients import Ingredient
 from items.settings import *
-from items.settings import BASE
 from items.potions import Base, Active, Potion
-from inventory.case import Case
 from inventory.slot import Slot
 from inventory.settings import CASE_SIZE_DEFAULT
 from utils.texts import TextOutlined
-from .settings import *
-from general_settings.private_settings import LAYERS, COLORS
+from tools.settings import *
+from general_settings.private_settings import LAYERS
 import pygame as pyg
 # we probably want this class to be a child of pygame.sprite.Sprite
 class Tool(pyg.sprite.Sprite):
@@ -92,30 +90,30 @@ class Tool(pyg.sprite.Sprite):
 # The heater will probably be one aspect of the cauldron
 class Heater(Tool):
     def __init__(self, game, x, y):
-        super().__init__(game,"outil de chauffe", Base, HEATING, x, y, "orange")
+        super().__init__(game,"outil de chauffe", Base, ID["chauffer"], x, y, "orange")
 
 # Please change my class name and my name property
 class Freezer(Tool):
     def __init__(self, game, x, y):
-        super().__init__(game, "outil de gèle", Base, FREEZING, x, y, "blue")
+        super().__init__(game, "outil de gèle", Base, ID["geler"], x, y, "blue")
 
 class Mortar(Tool):
     def __init__(self, game, x, y):
-        super().__init__(game, "mortier", Base, MIXING, x, y, "brown")
+        super().__init__(game, "mortier", Base, ID["mixer"], x, y, "brown")
 
 class Alembic(Tool):
     def __init__(self, game, x, y):
-        super().__init__(game, "alambic", Active, DISTILLATION, x, y, "pink")
+        super().__init__(game, "alambic", Active, ID["distillation"], x, y, "pink")
 
 # Please change my class name and my name property
 class Sublime(Tool):
     def __init__(self, game, x, y):
-        super().__init__(game, "outil de sublimation", Active, SUBLIMATION, x, y, "purple")
+        super().__init__(game, "outil de sublimation", Active, ID["sublimation"], x, y, "purple")
 
 # Please change my class name and my name property
 class Ferment(Tool):
     def __init__(self, game, x, y):
-        super().__init__(game, "outil de fermentation", Active, FERMENTATION, x, y, "green")
+        super().__init__(game, "outil de fermentation", Active, ID["fermentation"], x, y, "green")
 
 # We propably want this class to herit from Tool
 class Cauldron(pyg.sprite.Sprite):
@@ -196,7 +194,7 @@ class Cauldron(pyg.sprite.Sprite):
             self._potion.add_ingredient(new_ingredient)
         else:
             # Add to self._base
-            if new_ingredient.type == BASE:
+            if new_ingredient.type == ID["base"]:
                 if self._base == None:
                     self._base = Base()
                 res = self._base.add_ingredient(new_ingredient)
@@ -260,7 +258,6 @@ class Cauldron(pyg.sprite.Sprite):
                 res = self.add_potion(something)
             else:
                 res = False
-            print(res)
             if res:
                 res_q = quantity - 1
                 res_s = something
@@ -281,7 +278,7 @@ class Cauldron(pyg.sprite.Sprite):
             if self._mixture_slot.is_empty:
                 self._mixture_slot.add_item(self.mixture)
         else:
-            print("click finish but potion as no ingerdient yet")
+            print("click finish but potion as no ingredient yet")
 
     def reset(self):
         self._finished = False

@@ -74,6 +74,7 @@ class InventoryMenu(TabMenu):
             self.game.game_inventory.set_state(self)
             self._game.game_inventory.open()
             self._game.game_inventory.lock()
+            self.nav_menu
 
         self.tab_menu_update(self.reset)
 

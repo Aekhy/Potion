@@ -1,0 +1,26 @@
+{
+  "rien": {
+    "rien": "rien",
+    "fermentation": "rien",
+    "distillation": "rien",
+    "sublimation": "rien"
+  },
+  "chauffer": {
+    "rien": "rien",
+    "fermentation": "malefice",
+    "distillation": "sortilege",
+    "sublimation": "contre-sort"
+  },
+  "geler": {
+    "rien": "rien",
+    "fermentation": "ensorcellement",
+    "distillation": "charme",
+    "sublimation": "enchantement"
+  },
+  "mixer": {
+    "rien": "rien",
+    "fermentation": "malediction",
+    "distillation": "transfiguration",
+    "sublimation": "benediction"
+  }
+}

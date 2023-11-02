@@ -1,4 +1,3 @@
-import pygame
 from items.settings import DEFAULT_MAX_STACK
 
 

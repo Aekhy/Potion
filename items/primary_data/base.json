@@ -1,0 +1,60 @@
+{
+  "neutre": {
+    "name": "neutre",
+    "img": "",
+    "neighbours": [
+      { "id_name": "soleil", "weight": ["majeur", "gaz"] },
+      { "id_name": "terre", "weight": ["liquide", "lumineux"] }
+    ]
+  },
+  "soleil": {
+    "name": "soleil",
+    "img": "",
+    "neighbours": [{ "id_name": "soleil", "weight": ["majeur", "gaz"] }]
+  },
+  "mercure": {
+    "name": "mercure",
+    "img": "",
+    "neighbours": [{ "id_name": "", "weight": "" }]
+  },
+  "venus": {
+    "name": "venus",
+    "img": "",
+    "neighbours": [{ "id_name": "", "weight": "" }]
+  },
+  "terre": {
+    "name": "terre",
+    "img": "",
+    "neighbours": [{ "id_name": "terre", "weight": ["liquide", "lumineux"] }]
+  },
+  "lune": {
+    "name": "lune",
+    "img": "",
+    "neighbours": [{ "id_name": "", "weight": "" }]
+  },
+  "mars": {
+    "name": "mars",
+    "img": "",
+    "neighbours": [{ "id_name": "", "weight": "" }]
+  },
+  "jupiter": {
+    "name": "jupiter",
+    "img": "",
+    "neighbours": [{ "id_name": "", "weight": "" }]
+  },
+  "saturne": {
+    "name": "saturne",
+    "img": "",
+    "neighbours": [{ "id_name": "", "weight": "" }]
+  },
+  "uranus": {
+    "name": "uranus",
+    "img": "",
+    "neighbours": [{ "id_name": "", "weight": "" }]
+  },
+  "neptune": {
+    "name": "neptune",
+    "img": "",
+    "neighbours": [{ "id_name": "", "weight": "" }]
+  }
+}

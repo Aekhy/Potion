@@ -86,9 +86,7 @@ class MultipleInventory():
             for sprite in self._inventories[self._nav_index]["group"]:
                 sprite.add(self._state.sprites)
 
-        self.nav.reset_colors()
         if self.hover_nav[0] and self.hover_nav[1] != self._nav_index:
-            self.nav.reset_colors()
             self.nav.hover_tab(self.hover_nav[1])
 
     def open(self):

@@ -1,0 +1,13 @@
+{
+  "chaud": { "name": "chaud", "img": "", "opposites": ["froid"] },
+  "froid": { "name": "froid", "img": "", "opposites": ["chaud"] },
+  "sec": { "name": "sec", "img": "", "opposites": ["humide"] },
+  "humide": { "name": "humide", "img": "", "opposites": ["sec"] },
+  "sombre": { "name": "sombre", "img": "", "oppposites": ["lumineux"] },
+  "lumineux": { "name": "lumineux", "img": "", "opposites": ["sombre"] },
+  "mineur": { "name": "mineur", "img": "", "opposites": ["majeur"] },
+  "majeur": { "name": "majeur", "img": "", "opposites": ["mineur"] },
+  "gaz": { "name": "gaz", "img": "", "opposites": ["liquide", "solide"] },
+  "liquide": { "name": "liquide", "img": "", "opposites": ["gaz", "solide"] },
+  "solide": { "name": "solide", "img": "", "opposites": ["gaz", "liquide"] }
+}

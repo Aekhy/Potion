@@ -1,0 +1,32 @@
+{
+  "neutre": {
+    "name": "neutre",
+    "img": "",
+    "neighbours": [
+      { "id_name": "feu", "weight": ["sec", "chaud"] },
+      { "id_name": "eau", "weight": ["humide", "froid"] },
+      { "id_name": "terre", "weight": ["sec", "froid"] },
+      { "id_name": "air", "weight": ["chaud", "humide"] }
+    ]
+  },
+  "feu": {
+    "name": "feu",
+    "img": "",
+    "neighbours": [{ "id_name": "feu", "weight": ["sec", "chaud"] }]
+  },
+  "eau": {
+    "name": "eau",
+    "img": "",
+    "neighbours": [{ "id_name": "eau", "weight": ["humide", "froid"] }]
+  },
+  "terre": {
+    "name": "terre",
+    "img": "",
+    "neighbours": [{ "id_name": "terre", "weight": ["froid", "sec"] }]
+  },
+  "air": {
+    "name": "air",
+    "img": "",
+    "neighbours": [{ "id_name": "terre", "weight": ["chaud", "humide"] }]
+  }
+}

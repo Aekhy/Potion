@@ -12,13 +12,13 @@ class Substance(Item):
 
         self._ingredients = []
 
-        # Base or Active
+        # ID["base"] or ID["active"]
         self._type = type
 
         # Result of the characteristics
         self._node = None
 
-        # Characteristics are COLD, HOT, HUMID ...
+        # Characteristics are ID["froid"], ID["chaud"], ID["humide"] ...
         self._characteristics = []
 
         # # This matrix is used to add a new characteristic
@@ -66,8 +66,7 @@ class Substance(Item):
             if len(self._characteristics) == 0:
                 self._characteristics.append(characteristic)
             else:
-                compatibility = BASE_ACTIVE_COMPATIBILITY_MATRIX[self._characteristics[-1]
-                                                           ][characteristic]
+                compatibility = BASE_ACTIVE_COMPATIBILITY_MATRIX[self._characteristics[-1]][characteristic]
                 if compatibility == 0:
                     self._characteristics.pop()
                 else:
@@ -78,7 +77,7 @@ class Substance(Item):
         The `find_node_from_characteristics_V1` method is supposed to find what the characteristics
         are corresponding to and store it in self._node
         """
-        self._node = NEUTRAL
+        self._node = ID["neutre"]
         if self._characteristics != []:
             l = len(self._characteristics)
             # We know that we have nodes with only even number of characteristics
@@ -88,9 +87,9 @@ class Substance(Item):
                 while not done and i < l:
                     found_node = False
 
-                    if self._type == BASE:
+                    if self._type == ID["base"]:
                         graph = BASE_GRAPH
-                    elif self._type == ACTIVE:
+                    elif self._type == ID["active"]:
                         graph = ACTIVE_GRAPH
 
                     for node in graph[self._node]["neighbours"]:
@@ -102,7 +101,7 @@ class Substance(Item):
                                     self._node = node["name"]
                                     found_node = True
                     if not found_node:
-                        self._node = NEUTRAL
+                        self._node = ID["neutre"]
                         done = True
                     i += 2
 
@@ -149,12 +148,12 @@ class Substance(Item):
         """
 
         if self._node == None:
-            self._node = NEUTRAL
+            self._node = ID["neutre"]
 
         if self._characteristics != []:
-            if self._type == BASE:
+            if self._type == ID["base"]:
                 graph = BASE_GRAPH
-            elif self._type == ACTIVE:
+            elif self._type == ID["active"]:
                 graph = ACTIVE_GRAPH
 
             for node in graph[self._node]["neighbours"]:
@@ -179,19 +178,19 @@ class Substance(Item):
         associated with the ingredient
         """
 
-        opposites = {HOT: COLD, COLD: HOT, DRY: HUMID, HUMID: DRY,
-                     LIGHT: DARK, DARK: LIGHT, MAJOR: MINOR, MINOR: MAJOR}
+        opposites = {ID["chaud"]: ID["froid"], ID["froid"]: ID["chaud"], ID["sec"]: ID["humide"], ID["humide"]: ID["sec"],
+                     ID["lumineux"]: ID["sombre"], ID["sombre"]: ID["lumineux"], ID["majeur"]: ID["mineur"], ID["mineur"]: ID["majeur"]}
 
         for characterisitc in new_ingredient.characteristics:
             if DEBUG:
                 print(f" Je vais voir si {characterisitc} à un opposé")
             had_opposite = False
-            if characterisitc == SOLID:
-                had_opposite = self.remove_characteristic_V2(LIQUID, GAS)
-            elif characterisitc == LIQUID:
-                had_opposite = self.remove_characteristic_V2(SOLID, GAS)
-            elif characterisitc == GAS:
-                had_opposite = self.remove_characteristic_V2(SOLID, LIQUID)
+            if characterisitc == ID["solide"]:
+                had_opposite = self.remove_characteristic_V2(ID["liquide"], ID["gaz"])
+            elif characterisitc == ID["liquide"]:
+                had_opposite = self.remove_characteristic_V2(ID["solide"], ID["gaz"])
+            elif characterisitc == ID["gaz"]:
+                had_opposite = self.remove_characteristic_V2(ID["solide"], ID["liquide"])
             elif characterisitc in opposites.keys():
                 had_opposite = self.remove_characteristic_V2(
                     opposites[characterisitc])
@@ -246,8 +245,7 @@ class Substance(Item):
 
 class Base(Substance):
     def __init__(self, make:dict=None):
-        super().__init__(NEUTRAL, BASE)
-
+        super().__init__(ID["neutre"], ID["base"])
         # Effect from the tools
         self._effect = None
 
@@ -264,7 +262,7 @@ class Base(Substance):
         return self._effect
 
     def set_effect(self, new_effect):
-        if self._effect == None and new_effect in [HEATING, FREEZING, MIXING]:
+        if self._effect == None and new_effect in [ID["chauffer"], ID["geler"], ID["mixer"]]:
             self._effect = new_effect
 
     effect = property(get_effect, set_effect)
@@ -296,7 +294,7 @@ class Base(Substance):
 
 class Active(Substance):
     def __init__(self, make:dict=None):
-        super().__init__(NEUTRAL, ACTIVE)
+        super().__init__(ID["neutre"], ID["active"])
 
         # Effect from the tools
         self._effect = None
@@ -314,7 +312,7 @@ class Active(Substance):
         return self._effect
 
     def set_effect(self, new_effect):
-        if self._effect == None and new_effect in [FERMENTATION, DISTILLATION, SUBLIMATION]:
+        if self._effect == None and new_effect in [ID["fermentation"], ID["distillation"], ID["sublimation"]]:
             self._effect = new_effect
 
     effect = property(get_effect, set_effect)
@@ -441,19 +439,19 @@ class Potion(Item):
 
     def add_effect(self, *effects):
         """
-        The function adds effect(s) to the base and active if they don't have one
+        The function adds effect(s) to the ID["base"] and ID["active"] if they don't have one
         """
         for new_effect in effects:
             if self.alchemical_property == None:
-                if self._base.effect == None and new_effect in [HEATING, FREEZING, MIXING]:
+                if self._base.effect == None and new_effect in [ID["chauffer"], ID["geler"], ID["mixer"]]:
                     self._base.effect = new_effect
-                elif self._active.effect == None and new_effect in [FERMENTATION, DISTILLATION, SUBLIMATION]:
+                elif self._active.effect == None and new_effect in [ID["fermentation"], ID["distillation"], ID["sublimation"]]:
                     self._active.effect = new_effect
 
     # for now, this code is in potion but it will be else where in the end (in the cauldron for example)
     def update_info(self):
         """
-        The function updates the name and description of a potion based on its
+        The function updates the name and description of a potion ID["base"]d on its
         planet, element and alchemical property.
         """
         if not self.finished:
@@ -472,7 +470,7 @@ class Potion(Item):
                 if key in tmp.keys():
                     tmp = tmp[key]
                 else:
-                    tmp = tmp[NEUTRAL]
+                    tmp = tmp[ID["neutre"]]
                     break
                 if tmp["level"] == END:
                     break

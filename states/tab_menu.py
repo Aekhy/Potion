@@ -11,6 +11,7 @@ class TabMenu(State):
         # Int that indicated which option of the nav we are in. ex : 0 -> Ingredients
         self.selected = True
         self.change = True
+        self.change_nav_menu_index = False
         self.current_nav_menu_index = nav_menu_index
         self.hover_nav_menu = [False, -1]
         self.set_nav_menu(self.current_nav_menu_index)
@@ -18,10 +19,12 @@ class TabMenu(State):
         self.choice = None
         
     def set_nav_menu(self, index):
-        self.nav_menu = Nav(0, 0*50, 50, self.sprites, index, ["Inventaire", "Ingredients", "Potions", "Recettes"])
+        self.nav_menu = Nav(0, 0*50, 50, self.sprites, index, ["Inventaire", "Ingredients", "Mixtures", "Potions", "Recettes"])
         
     def tab_menu_update(self, reset_function):
         # The events loop of Tab_menu childrens should update variables like self.choice and self.selected and self.hover_nav_menu
+
+        
 
         if not self.selected:
             self.selected = not self.selected
@@ -38,12 +41,19 @@ class TabMenu(State):
         if self.choice != None and self.choice != self.current_nav_menu_index:
             self.selected = False
             if self.choice == 0:
+                self.selected = False
                 new_state = self._game.states("InventoryMenu")
             elif self.choice == 1:
+                self.selected = False
                 new_state = self._game.states("IngredientsMenu")
-            elif self.choice == 2: 
-                new_state = self._game.states("PotionsMenu")
+            elif self.choice == 2:
+                self.selected = False
+                new_state = self._game.states("MixturesMenu")
             elif self.choice == 3:
+                self.selected = False
+                new_state = self._game.states("PotionsMenu")
+            elif self.choice == 4:
+                self.selected = False
                 new_state = self._game.states("RecipesMenu")
             
             self.set_nav_menu(self.choice)

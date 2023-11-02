@@ -1,7 +1,5 @@
 from items.item import Item
 from items.settings import DEFAULT_INGREDIENT_MAX_STACK, INGREDIENT_DATA
-from utils.json_functions import Read
-import json
 
 class Ingredient(Item):
     def __init__(self, name: str) -> None:
@@ -12,7 +10,7 @@ class Ingredient(Item):
         if ms <= 0:
             ms = DEFAULT_INGREDIENT_MAX_STACK
 
-        super().__init__(name, ms, ingredient["path"])
+        super().__init__(name, ms, ingredient["img"])
         self._type = ingredient["type"]
         self._characteristics = ingredient["characteristics"]
 
