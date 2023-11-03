@@ -3,7 +3,7 @@
   "froid": { "name": "froid", "img": "", "opposites": ["chaud"] },
   "sec": { "name": "sec", "img": "", "opposites": ["humide"] },
   "humide": { "name": "humide", "img": "", "opposites": ["sec"] },
-  "sombre": { "name": "sombre", "img": "", "oppposites": ["lumineux"] },
+  "sombre": { "name": "sombre", "img": "", "opposites": ["lumineux"] },
   "lumineux": { "name": "lumineux", "img": "", "opposites": ["sombre"] },
   "mineur": { "name": "mineur", "img": "", "opposites": ["majeur"] },
   "majeur": { "name": "majeur", "img": "", "opposites": ["mineur"] },

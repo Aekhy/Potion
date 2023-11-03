@@ -5,8 +5,6 @@ class RecipesMenu(TabMenu):
     def __init__(self, game):
         super().__init__(game, 4)
 
-    def reset(self):
-        pass
 
     def events(self):
         for event in pygame.event.get():
@@ -40,7 +38,7 @@ class RecipesMenu(TabMenu):
         # go see comments in states.py
         if not self._in_state:
             self._in_state = True
-        self.tab_menu_update(self.reset)
+        self.tab_menu_update()
         self.sprites.update()
 
     def draw(self,screen):

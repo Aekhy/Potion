@@ -4,6 +4,8 @@ from math import ceil
 from utils.texts import TextOutlined
 from utils.my_sprite import MySprite
 from items.settings import *
+
+
 class KnowledgeElement():
     def __init__(self, knowledge, data, key, group, x, y, size) -> None:
         self.knowledge = knowledge
@@ -69,10 +71,6 @@ class KnowledgeElement():
         self.name = TextOutlined(n_x, n_y, new_name, 3)
         self.name.add_to_group(self._group)
 
-
-
-    def set_ready_to_update(self):
-        self._ready_to_update = True
     
 
 
@@ -81,8 +79,8 @@ class Knowledge():
     def __init__(self, struct:dict) -> None:
         self._knowledge = struct
 
-        self.grids = {}
         size = 64
+        self.grids = {}
         self.grids["ingredient"] = self.MakeGrid(self._knowledge["ingredient"], INGREDIENT_DATA, 0, 110/64, size, 6, 5) 
         self.grids["characteristic"] = self.MakeGrid(self._knowledge["characteristic"], CHARACTERISTIC_DATA, 0, 110/64, size, 6, 5) 
         self.grids["effect"] = self.MakeGrid(self._knowledge["effect"], EFFECT_DATA, 0, 110/64, size, 6, 5) 
@@ -93,6 +91,13 @@ class Knowledge():
         self.grids["alchemical_property"] = self.MakeGrid(self._knowledge["alchemical_property"], ALCHEMICAL_PROPERTY_DATA, 0, 110/64, size, 6, 5) 
         self.grids["potion"] = self.MakeGrid(self._knowledge["potion"], POTION_DATA, 0, 110/64, size, 6, 5) 
 
+
+    # __________ Get & Set __________
+    def get_struct(self):
+            return self._knowledge
+
+
+    # __________ Creation __________
 
     def MakeGrid(self, knowledge, data, x, y, size, nb_rows, nb_cols):
         # dico into array
@@ -132,6 +137,233 @@ class Knowledge():
         return res
 
 
-         
-    def get_struct(self):
-        return self._knowledge
+    # __________ Updates __________
+    # ingredient, characteristic, effect, base, active, alchemical_property, potion
+
+    def SearchPage(self, grid_id, id):
+        right_page = None
+        for page in self.grids[grid_id].keys():
+            if id in self.grids[grid_id][page]["id"].keys():
+                right_page = page
+                break
+        return right_page
+
+    def UpdateIngredientKnowledge(self, ingredient_id, *parameters):
+        """
+        *parameters should be any of : "name", "img", "type", "characteristics", "img", "max_stack"
+        "max_stack" is special because it's currently arleady something known
+        """
+        # the res of the operation
+        res = True
+
+        # search for the right page
+        right_page = self.SearchPage("ingredient", ingredient_id)
+
+        if right_page is None:
+            res = False
+
+        if res:
+
+            # update the knowledge
+            for param in parameters:
+                self._knowledge["ingredient"][ingredient_id][param] = True
+
+            # update the knowledge element to fit the new knowledge
+            self.grids["ingredient"][right_page]["id"][ingredient_id].Update(self._knowledge["ingredient"], INGREDIENT_DATA)
+
+        # DEBUG
+        else:
+            print("This ingredient was not found in our knowledge grid")
+
+        return res
+
+    def UpdateCharacteristicKnowledge(self, characteristic_id, *parameters, **opposites):
+        """
+        *parameters shoud be everything but opposites
+        *parameters should be any of : "name", "img"
+        **opposites should only be opposite as whatever="opposite_name"
+        Be careful with the opposites, this function doesn't check if it's the right one(s).
+        example : UpdateCharacteristicKnowledge("solide", "name", "img", one="liquide", two="gaz")
+        """
+        res = True
+
+        # search for the right page
+        right_page = self.SearchPage("characteristic", characteristic_id)
+        if right_page is None:
+            res = False
+
+        if res:
+            # update the knowledge
+            for param in parameters:
+                self._knowledge["characteristic"][characteristic_id][param] = True
+            
+            for opposite in opposites.keys():
+                self._knowledge["characteristic"][characteristic_id]["opposites"][opposites[opposite]] = True
+
+            # update the knowledge element to fit the new knowledge
+            self.grids["characteristic"][right_page]["id"][characteristic_id].Update(self._knowledge["characteristic"], CHARACTERISTIC_DATA)
+
+        else:
+            print("This characteristic was not found in our knowledge grid")
+
+        return False
+    
+    def UpdateEffectKnowledge(self, effect_id, *parameters):
+        """
+        *parameters should be any of : "name", "img", "type"
+        """
+        # the res of the operation
+        res = True
+
+        # search for the right page
+        right_page = self.SearchPage("effect", effect_id)
+
+        if right_page is None:
+            res = False
+
+        if res:
+
+            # update the knowledge
+            for param in parameters:
+                self._knowledge["effect"][effect_id][param] = True
+
+            # update the knowledge element to fit the new knowledge
+            self.grids["effect"][right_page]["id"][effect_id].Update(self._knowledge["effect"], EFFECT_DATA)
+
+        # DEBUG
+        else:
+            print("This effect was not found in our knowledge grid")
+
+        return res
+
+    def UpdateBaseKnowledge(self, base_id, *parameters, **neighbours):
+        """
+        *parameters shoud be everything but neighbours
+        *parameters should be any of : "name", "img"
+        **neighbours should only be opposite as whatever="neighbours_name"
+        Be careful with the neighbours, this function doesn't check if it's the right one(s).
+        example : UpdateActiveKnowledge("neutre", "name", "img", one="feu", two="terre")
+        """
+
+        # the res of the operation
+        res = True
+
+        # search for the right page
+        right_page = self.SearchPage("base", base_id)
+
+        if right_page is None:
+            res = False
+
+        if res:
+
+            # update the knowledge
+            for param in parameters:
+                self._knowledge["base"][base_id][param] = True
+
+            for neighbour in neighbours.keys():
+                self._knowledge["base"][base_id]["neighbours"][neighbours[neighbour]] = True
+
+            # update the knowledge element to fit the new knowledge
+            self.grids["base"][right_page]["id"][base_id].Update(self._knowledge["base"], BASE_DATA)
+
+        # DEBUG
+        else:
+            print("This base was not found in our knowledge grid")
+
+        return res
+    
+
+    def UpdateActiveKnowledge(self, active_id, *parameters, **neighbours):
+        """
+        *parameters shoud be everything but neighbours
+        *parameters should be any of : "name", "img"
+        **neighbours should only be opposite as whatever="neighbours_name"
+        Be careful with the neighbours, this function doesn't check if it's the right one(s).
+        example : UpdateActiveKnowledge("neutre", "name", "img", one="feu", two="air")
+        """
+
+        # the res of the operation
+        res = True
+
+        # search for the right page
+        right_page = self.SearchPage("active", active_id)
+
+        if right_page is None:
+            res = False
+
+        if res:
+
+            # update the knowledge
+            for param in parameters:
+                self._knowledge["active"][active_id][param] = True
+
+            for neighbour in neighbours.keys():
+                self._knowledge["active"][active_id]["neighbours"][neighbours[neighbour]] = True
+
+            # update the knowledge element to fit the new knowledge
+            self.grids["active"][right_page]["id"][active_id].Update(self._knowledge["active"], ACTIVE_DATA)
+
+        # DEBUG
+        else:
+            print("This active was not found in our knowledge grid")
+
+        return res
+
+    def UpdateAlchemiclPropertyKnowledge(self, alchemical_property_id, *parameters):
+        """
+        *parameters should be any of : "name", "img", "base_effect", "active_effect"
+        """
+        # the res of the operation
+        res = True
+
+        # search for the right page
+        right_page = self.SearchPage("alchemical_property", alchemical_property_id)
+
+        if right_page is None:
+            res = False
+
+        if res:
+
+            # update the knowledge
+            for param in parameters:
+                self._knowledge["alchemical_property"][alchemical_property_id][param] = True
+
+            # update the knowledge element to fit the new knowledge
+            self.grids["alchemical_property"][right_page]["id"][alchemical_property_id].Update(self._knowledge["alchemical_property"], ALCHEMICAL_PROPERTY_DATA)
+
+        # DEBUG
+        else:
+            print("This alchemical_property was not found in our knowledge grid")
+
+        return res
+
+    def UpdatePotionKnowledge(self, potion_id, *parameters):
+        """
+        *parameters shoud be everything but neighbours
+        *parameters should be any of : "name", "img", "description", "base", "active", "alchemical_property"
+        example : UpdatePotionKnowledge("GuerisonStandard", "name", "description", "img", "base", "active", "alchemical_property")
+        currently this example is broken because of the accent on the name.
+        """
+         # the res of the operation
+        res = True
+
+        # search for the right page
+        right_page = self.SearchPage("potion", potion_id)
+
+        if right_page is None:
+            res = False
+
+        if res:
+
+            # update the knowledge
+            for param in parameters:
+                self._knowledge["potion"][potion_id][param] = True
+
+            # update the knowledge element to fit the new knowledge
+            self.grids["potion"][right_page]["id"][potion_id].Update(self._knowledge["potion"], POTION_DATA)
+
+        # DEBUG
+        else:
+            print("This potion was not found in our knowledge grid")
+
+        return res

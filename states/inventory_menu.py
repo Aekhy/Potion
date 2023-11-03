@@ -20,9 +20,6 @@ class InventoryMenu(TabMenu):
         self._drag_and_drop = DragAndDrop(self.sprites, self._game.game_inventory.update_slots)
 
 
-    
-    def reset(self):
-        pass
 
     def events(self):
        for event in pygame.event.get():
@@ -74,9 +71,8 @@ class InventoryMenu(TabMenu):
             self.game.game_inventory.set_state(self)
             self._game.game_inventory.open()
             self._game.game_inventory.lock()
-            self.nav_menu
 
-        self.tab_menu_update(self.reset)
+        self.tab_menu_update()
 
         self.sprites.update()
 

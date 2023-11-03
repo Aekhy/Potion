@@ -35,9 +35,6 @@ class MixturesMenu(TabMenu):
         for sprite in self._group:
             sprite.add(self.sprites)
 
-    def reset(self):
-        pass
-        
 
     def events(self):
        for event in pygame.event.get():
@@ -101,7 +98,7 @@ class MixturesMenu(TabMenu):
             self.nav.reset_colors()
             self.nav.hover_tab(self.hover_nav[1])
 
-        self.tab_menu_update(self.reset_nav_body)
+        self.tab_menu_update()
         self.sprites.update()
 
     def draw(self,screen):

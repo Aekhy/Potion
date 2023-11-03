@@ -25,18 +25,17 @@ class SaveManager:
             res = MakeFunction(path)
         return res
 
-    def MakeClasses(self):
-        self._game.knowledge = Knowledge(self._knowledge_strut)
-        self._game.game_inventory = GameInventory(self._game_inventory_struct, 0, 50)
 
     def LoadSave(self, dirname):
         self._dirname = dirname
         path_knowledge = self._dirname + "/" + "current_knowledge.json"
         self._knowledge_strut = self.Load(path_knowledge, self.MakeAllDefaultKnowledge)
+        self._game.knowledge = Knowledge(self._knowledge_strut)
+
         path_game_inv = self._dirname + "/" + "game_inventory.json"
         self._game_inventory_struct = self.Load(path_game_inv, self.MakeDefaultGameInventoryLayout)
+        self._game.game_inventory = GameInventory(self._game_inventory_struct, 0, 50)
 
-        self.MakeClasses()
         self._saved = False
 
     def Save(self):
@@ -86,23 +85,23 @@ class SaveManager:
         return IngredientCompatibility_knowledge
 
     # Private
-    def ListToKnowledge(self, l:list, d:dict):
-        lst = l
-        lst_knowledge = {}
-        for el in lst:
-            lst_knowledge[el] = d
-        return lst_knowledge
+    # def ListToKnowledge(self, l:list, d:dict):
+    #     lst = l
+    #     lst_knowledge = {}
+    #     for el in lst:
+    #         lst_knowledge[el] = d
+    #     return lst_knowledge
 
-    # Private
-    def GraphToKnowledge(self, graph):
-        g_data = graph
-        g_knowledge = {}
-        for g_key, value in g_data.items():
-            g_key_knowledge = {}
-            for neighbour in value["neighbours"]:
-                g_key_knowledge[neighbour["name"]] = {"name" : False, "weight": False}
-            g_knowledge[g_key] = g_key_knowledge
-        return g_knowledge
+    # # Private
+    # def GraphToKnowledge(self, graph):
+    #     g_data = graph
+    #     g_knowledge = {}
+    #     for g_key, value in g_data.items():
+    #         g_key_knowledge = {}
+    #         for neighbour in value["neighbours"]:
+    #             g_key_knowledge[neighbour["name"]] = {"name" : False, "weight": False}
+    #         g_knowledge[g_key] = g_key_knowledge
+    #     return g_knowledge
 
     # Private
     def MakeEffectDefaultKnowledge(self):
@@ -135,9 +134,9 @@ class SaveManager:
             tmp = {}
             for k in value.keys():
                 if k == "neighbours":
-                    tmp[k] = []
+                    tmp[k] = {}
                     for neighbour in value[k]:
-                        tmp[k].append({"id_name": False, "weight": False})
+                        tmp[k][neighbour["id_name"]] = False
                 else:
                     tmp[k] = False
             base_knowledge[key] = tmp
@@ -151,9 +150,9 @@ class SaveManager:
             tmp = {}
             for k in value.keys():
                 if k == "neighbours":
-                    tmp[k] = []
+                    tmp[k] = {}
                     for neighbour in value[k]:
-                        tmp[k].append({"id_name": False, "weight": False})
+                        tmp[k][neighbour["id_name"]] = False
                 else:
                     tmp[k] = False
             active_knowledge[key] = tmp

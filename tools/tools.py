@@ -118,7 +118,7 @@ class Ferment(Tool):
 # We propably want this class to herit from Tool
 class Cauldron(pyg.sprite.Sprite):
     def __init__(self, origin, spritesGroup, x, y):
-
+        self._origin = origin
         # The cauldron is always on the center of the screen
         self._x = x
         self._y = y
@@ -207,6 +207,7 @@ class Cauldron(pyg.sprite.Sprite):
             if self._base != None and self._active != None:
                 self._potion = Potion("Mixture", self._base, self._active)
                 res = self._potion.add_ingredient(new_ingredient)
+
         return res
 
     # I use methods and not setters
