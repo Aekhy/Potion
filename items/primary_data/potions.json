@@ -10,8 +10,8 @@
   "PyroRenouveau": {
     "name": "PyroRenouveau",
     "description": "Effet rapide mais faible.",
-    "img": "terre",
-    "base": "",
+    "img": "",
+    "base": "terre",
     "active": "feu",
     "alchemical_property": "charme"
   },

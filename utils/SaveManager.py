@@ -4,6 +4,8 @@ from knowledge.knowledge import Knowledge
 from inventory.game_inventory import GameInventory
 from items.potions import Base, Active, Potion
 
+KNOW_ALL = True
+
 INGREDIENTS = "ingredient"
 CHARACTERISITC = "characteristic"
 EFFECT = "effect"
@@ -34,7 +36,7 @@ class SaveManager:
 
         path_game_inv = self._dirname + "/" + "game_inventory.json"
         self._game_inventory_struct = self.Load(path_game_inv, self.MakeDefaultGameInventoryLayout)
-        self._game.game_inventory = GameInventory(self._game_inventory_struct, 0, 50)
+        self._game.game_inventory = GameInventory(self._game_inventory_struct, 0, 64)
 
         self._saved = False
 
@@ -62,7 +64,7 @@ class SaveManager:
         for ingredient, value in ingredient_data.items():
             key_knowledge = {}
             for key in value.keys():
-                tmp = False
+                tmp = KNOW_ALL
                 if key == "max_stack":
                     tmp = True
                 key_knowledge[key] = tmp
@@ -76,11 +78,11 @@ class SaveManager:
         for cara, value in IngredientCompatibility_data.items():
             tmp = {}
             for k in value.keys():
-                tmp[k] = False
+                tmp[k] = KNOW_ALL
                 if k == "opposites":
                     tmp[k] = {}
                     for opp in value[k]:
-                        tmp[k][opp] = False
+                        tmp[k][opp] = KNOW_ALL
             IngredientCompatibility_knowledge[cara] = tmp
         return IngredientCompatibility_knowledge
 
@@ -111,7 +113,7 @@ class SaveManager:
         for ingredient, value in effect_data.items():
             key_knowledge = {}
             for key in value.keys():
-                key_knowledge[key] = False
+                key_knowledge[key] = KNOW_ALL
             effect_knowledge[ingredient] = key_knowledge
         return effect_knowledge
     
@@ -122,7 +124,7 @@ class SaveManager:
         for key, value in a_p_data.items():
             tmp = {}
             for k in value.keys():
-                tmp[k] = False
+                tmp[k] = KNOW_ALL
             a_p_knowledge[key] = tmp
         return a_p_knowledge
 
@@ -136,9 +138,9 @@ class SaveManager:
                 if k == "neighbours":
                     tmp[k] = {}
                     for neighbour in value[k]:
-                        tmp[k][neighbour["id_name"]] = False
+                        tmp[k][neighbour["id_name"]] = KNOW_ALL
                 else:
-                    tmp[k] = False
+                    tmp[k] = KNOW_ALL
             base_knowledge[key] = tmp
         return base_knowledge
 
@@ -152,9 +154,9 @@ class SaveManager:
                 if k == "neighbours":
                     tmp[k] = {}
                     for neighbour in value[k]:
-                        tmp[k][neighbour["id_name"]] = False
+                        tmp[k][neighbour["id_name"]] = KNOW_ALL
                 else:
-                    tmp[k] = False
+                    tmp[k] = KNOW_ALL
             active_knowledge[key] = tmp
         return active_knowledge
 
@@ -166,7 +168,7 @@ class SaveManager:
         for key, value in p_data.items():
             tmp = {}
             for k in value.keys():
-                tmp[k] = False
+                tmp[k] = KNOW_ALL
             p_knowledge[key] = tmp
 
         return p_knowledge

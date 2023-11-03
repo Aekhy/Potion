@@ -3,7 +3,7 @@ from states.tab_menu import TabMenu
 from states.nav import Nav
 from states.grid_display import GridDisplay
 from items.settings import INGREDIENT_DATA, CHARACTERISTIC_DATA
-
+from states.data_display import IngredientDisplay, CharacteristicDisplay
 
 
 class IngredientsMenu(TabMenu):
@@ -13,8 +13,12 @@ class IngredientsMenu(TabMenu):
     #     self.hover_nav_ingredient = [False, -1]
     #     self.reset()
         self._group = pygame.sprite.LayeredUpdates()
-        self._grids = [GridDisplay(self._game.knowledge.grids["ingredient"],self,0,80), GridDisplay(self._game.knowledge.grids["characteristic"],self,0,80)]
+        self._grids = [GridDisplay(self._game.knowledge.grids["ingredient"],self,0,96), GridDisplay(self._game.knowledge.grids["characteristic"],self,0,96)]
         
+        self.data_display = None
+        self.data_display_changed = True
+        self.display = None
+
         self.reset_nav_body()
         
     def reset_nav_body(self):
@@ -25,13 +29,12 @@ class IngredientsMenu(TabMenu):
 
         self.set_nav_body(self.nav_index)
 
-
     def set_nav_body(self, index):
         for sprite in self._group:
             sprite.kill()
 
         # nav
-        self.nav = Nav(0, 50, 30, self._group, index, ["Ingredients","Caractéristiques"])
+        self.nav = Nav(0, 64, 32, self._group, index, ["Ingredients","Caractéristiques"])
         # body
         self._grids[self.nav_index].open()
 
@@ -48,6 +51,11 @@ class IngredientsMenu(TabMenu):
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_TAB:
                         self._grids[self.nav_index].close()
+                        if self.display is not None:
+                            self.display.kill()
+                            self.data_display = None
+                            self.data_display_changed = True
+                            self.display = None
                         self.exit_state()
                     elif event.key == pygame.K_o:
                         new_event = self._game.states("Options")
@@ -90,7 +98,34 @@ class IngredientsMenu(TabMenu):
         if not self._in_state:
             self._in_state = True
             self._grids[self.nav_index].close()
+            if self.display is not None:
+                self.display.kill()
+                self.data_display = None
+                self.data_display_changed = True
+                self.display = None
             self.reset_nav_body()
+
+        if self.data_display is not None and self.data_display_changed:
+            self.data_display_changed = False
+
+            if self.display is not None:
+                self.display.kill()
+
+            id = self.data_display["id"]
+            x = 12 * 64
+            y = 128
+            ts = 64
+
+            if self.nav_index == 0:
+                knowledge = self._game.knowledge.get_struct()["ingredient"][id]
+                data = INGREDIENT_DATA[id]
+                self.display = IngredientDisplay(knowledge, data, self.sprites, x, y, ts)
+            elif self.nav_index == 1:
+                knowledge = self._game.knowledge.get_struct()["characteristic"][id]
+                data = CHARACTERISTIC_DATA[id]
+                self.display = CharacteristicDisplay(knowledge, data, self.sprites, x, y, ts)
+           
+
 
         if self.change_nav_index:
             if self.previous_index is not None:
@@ -106,6 +141,7 @@ class IngredientsMenu(TabMenu):
             self.nav.hover_tab(self.hover_nav[1])
 
         self.tab_menu_update()
+
         self.sprites.update()
 
     def draw(self,screen):

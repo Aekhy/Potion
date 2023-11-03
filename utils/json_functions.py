@@ -1,7 +1,7 @@
 import json
 
 def Read(path:str):
-    with open(path) as file :
+    with open(path, encoding="utf-8") as file :
         data = json.load(file) 
     return data
 
@@ -32,7 +32,7 @@ def Write(path:str, data:dict, indent_number:int=4):
 
     if safe:
         j = json.dumps(data, indent=indent_number)
-        with open(path, 'w') as file:
+        with open(path, 'w', encoding="utf-8") as file:
             file.write(j)
     else:
         print(f"You tried to overwrite an important json file {lucky_to_be_alive}")

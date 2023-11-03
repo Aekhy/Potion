@@ -16,9 +16,9 @@ class GameInventory:
         self._locked = locked
 
         self._multiple_inventories = {
-            0: MultipleInventory(self._struct["ingredients"], self._state, self, 0, 50, {"black_list":[Potion, Base, Active],"white_list":None}),
-            1: MultipleInventory(self._struct["mixtures"], self._state, self, 0, 50, {"black_list":None,"white_list":[Base, Active]}),
-            2: MultipleInventory(self._struct["potions"], self._state, self, 0, 50, {"black_list":None,"white_list":[Potion]})
+            0: MultipleInventory(self._struct["ingredients"], self._state, self, 0, self._y, {"black_list":[Potion, Base, Active],"white_list":None}),
+            1: MultipleInventory(self._struct["mixtures"], self._state, self, 0, self._y, {"black_list":None,"white_list":[Base, Active]}),
+            2: MultipleInventory(self._struct["potions"], self._state, self, 0, self._y, {"black_list":None,"white_list":[Potion]})
         }
 
         self._open = False
@@ -56,7 +56,7 @@ class GameInventory:
         for sprite in self._nav_group:
             sprite.kill()
 
-        self.nav = Nav(0, self._y, 30, self._nav_group, index, ["Ingredients","Mixtures","Potions"], 500/3)
+        self.nav = Nav(0, self._y, 32, self._nav_group, index, ["Ingredients","Mixtures","Potions"], 500/3)
 
         for sprite in self._nav_group:
             sprite.add(self._group)

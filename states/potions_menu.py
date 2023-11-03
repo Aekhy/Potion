@@ -1,6 +1,8 @@
 from states.tab_menu import TabMenu
 from states.grid_display import GridDisplay
 from states.nav import Nav
+from items.settings import POTION_DATA, ALCHEMICAL_PROPERTY_DATA
+from states.data_display import PotionDisplay, AlchemicalPropertyDisplay
 import pygame
 
 class PotionsMenu(TabMenu):
@@ -8,8 +10,12 @@ class PotionsMenu(TabMenu):
         super().__init__(game, 3)
 
         self._group = pygame.sprite.LayeredUpdates()
-        self._grids = [GridDisplay(self._game.knowledge.grids["potion"],self,0,80), GridDisplay(self._game.knowledge.grids["alchemical_property"],self,0,80)]
+        self._grids = [GridDisplay(self._game.knowledge.grids["potion"],self,0,96), GridDisplay(self._game.knowledge.grids["alchemical_property"],self,0,96)]
         
+        self.data_display = None
+        self.data_display_changed = True
+        self.display = None
+
         self.reset_nav_body()
         
     def reset_nav_body(self):
@@ -26,7 +32,7 @@ class PotionsMenu(TabMenu):
             sprite.kill()
 
         # nav
-        self.nav = Nav(0, 50, 30, self._group, index, ["Potions","Propriétés Alchimique"])
+        self.nav = Nav(0, 64, 32, self._group, index, ["Potions","Propriétés Alchimique"])
         # body
         self._grids[self.nav_index].open()
 
@@ -41,6 +47,11 @@ class PotionsMenu(TabMenu):
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_TAB:
+                    if self.display is not None:
+                            self.display.kill()
+                            self.data_display = None
+                            self.data_display_changed = True
+                            self.display = None
                     self.exit_state()
                 elif event.key == pygame.K_o:
                     new_event = self._game.states("Options")
@@ -81,7 +92,33 @@ class PotionsMenu(TabMenu):
         # DEV
         # go see comments in states.py
         if not self._in_state:
+            if self.display is not None:
+                self.display.kill()
+                self.data_display = None
+                self.data_display_changed = True
+                self.display = None
             self._in_state = True
+
+        if self.data_display is not None and self.data_display_changed:
+            self.data_display_changed = False
+
+            if self.display is not None:
+                self.display.kill()
+
+            id = self.data_display["id"]
+            x = 12 * 64
+            y = 128
+            ts = 64
+
+            if self.nav_index == 0:
+                knowledge = self._game.knowledge.get_struct()["potion"][id]
+                data = POTION_DATA[id]
+                self.display = PotionDisplay(knowledge, data, self.sprites, x, y, ts)
+            elif self.nav_index == 1:
+                knowledge = self._game.knowledge.get_struct()["alchemical_property"][id]
+                data = ALCHEMICAL_PROPERTY_DATA[id]
+                self.display = AlchemicalPropertyDisplay(knowledge, data, self.sprites, x, y, ts)
+
 
         if self.change_nav_index:
             if self.previous_index is not None:

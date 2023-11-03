@@ -1,112 +1,112 @@
 {
     "ingredient": {
         "eau": {
-            "name": false,
-            "type": false,
-            "characteristics": false,
+            "name": true,
+            "type": true,
+            "characteristics": true,
             "max_stack": true,
-            "img": false
+            "img": true
         },
         "lavande": {
-            "name": false,
-            "type": false,
-            "characteristics": false,
+            "name": true,
+            "type": true,
+            "characteristics": true,
             "max_stack": true,
-            "img": false
+            "img": true
         },
         "sel": {
-            "name": false,
-            "type": false,
-            "characteristics": false,
+            "name": true,
+            "type": true,
+            "characteristics": true,
             "max_stack": true,
-            "img": false
+            "img": true
         },
         "braises": {
-            "name": false,
-            "type": false,
-            "characteristics": false,
+            "name": true,
+            "type": true,
+            "characteristics": true,
             "max_stack": true,
-            "img": false
+            "img": true
         },
         "crapaud": {
-            "name": false,
-            "type": false,
-            "characteristics": false,
+            "name": true,
+            "type": true,
+            "characteristics": true,
             "max_stack": true,
-            "img": false
+            "img": true
         }
     },
     "characteristic": {
         "chaud": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "froid": false
+                "froid": true
             }
         },
         "froid": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "chaud": false
+                "chaud": true
             }
         },
         "sec": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "humide": false
+                "humide": true
             }
         },
         "humide": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "sec": false
+                "sec": true
             }
         },
         "sombre": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "lumineux": false
+                "lumineux": true
             }
         },
         "lumineux": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "sombre": false
+                "sombre": true
             }
         },
         "mineur": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "majeur": false
+                "majeur": true
             }
         },
         "majeur": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "mineur": false
+                "mineur": true
             }
         },
         "gaz": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "liquide": false,
-                "solide": false
+                "liquide": true,
+                "solide": true
             }
         },
         "liquide": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "opposites": {
-                "gaz": false,
-                "solide": false
+                "gaz": true,
+                "solide": true
             }
         },
         "solide": {
@@ -120,9 +120,9 @@
     },
     "effect": {
         "chauffer": {
-            "name": false,
-            "img": false,
-            "type": false
+            "name": true,
+            "img": true,
+            "type": true
         },
         "geler": {
             "name": true,
@@ -130,33 +130,33 @@
             "type": true
         },
         "mixer": {
-            "name": false,
-            "img": false,
-            "type": false
+            "name": true,
+            "img": true,
+            "type": true
         },
         "distillation": {
-            "name": false,
-            "img": false,
-            "type": false
+            "name": true,
+            "img": true,
+            "type": true
         },
         "sublimation": {
-            "name": false,
-            "img": false,
-            "type": false
+            "name": true,
+            "img": true,
+            "type": true
         },
         "fermentation": {
-            "name": false,
-            "img": false,
-            "type": false
+            "name": true,
+            "img": true,
+            "type": true
         }
     },
     "base": {
         "neutre": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "soleil": false,
-                "terre": false
+                "soleil": true,
+                "terre": true
             }
         },
         "soleil": {
@@ -167,66 +167,66 @@
             }
         },
         "mercure": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "": false
+                "": true
             }
         },
         "venus": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "": false
+                "": true
             }
         },
         "terre": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "terre": false
+                "terre": true
             }
         },
         "lune": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "": false
+                "": true
             }
         },
         "mars": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "": false
+                "": true
             }
         },
         "jupiter": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "": false
+                "": true
             }
         },
         "saturne": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "": false
+                "": true
             }
         },
         "uranus": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "": false
+                "": true
             }
         },
         "neptune": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "": false
+                "": true
             }
         }
     },
@@ -236,46 +236,46 @@
             "img": true,
             "neighbours": {
                 "feu": true,
-                "eau": false,
+                "eau": true,
                 "terre": true,
-                "air": false
+                "air": true
             }
         },
         "feu": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "feu": false
+                "feu": true
             }
         },
         "eau": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "eau": false
+                "eau": true
             }
         },
         "terre": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "terre": false
+                "terre": true
             }
         },
         "air": {
-            "name": false,
-            "img": false,
+            "name": true,
+            "img": true,
             "neighbours": {
-                "terre": false
+                "terre": true
             }
         }
     },
     "alchemical_property": {
         "sortilege": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "charme": {
             "img": true,
@@ -284,64 +284,64 @@
             "active_effect": true
         },
         "transfiguration": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "malefice": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "ensorcellement": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "malediction": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "contre-sort": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "enchantement": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "benediction": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         }
     },
     "potion": {
         "AquaVivacite": {
-            "name": false,
-            "description": false,
-            "img": false,
-            "base": false,
-            "active": false,
-            "alchemical_property": false
+            "name": true,
+            "description": true,
+            "img": true,
+            "base": true,
+            "active": true,
+            "alchemical_property": true
         },
         "PyroRenouveau": {
-            "name": false,
-            "description": false,
-            "img": false,
-            "base": false,
-            "active": false,
-            "alchemical_property": false
+            "name": true,
+            "description": true,
+            "img": true,
+            "base": true,
+            "active": true,
+            "alchemical_property": true
         },
         "GuerisonStandard": {
             "name": true,
@@ -352,28 +352,28 @@
             "alchemical_property": true
         },
         "PotionRateBase": {
-            "name": false,
-            "description": false,
-            "img": false,
-            "base": false,
-            "active": false,
-            "alchemical_property": false
+            "name": true,
+            "description": true,
+            "img": true,
+            "base": true,
+            "active": true,
+            "alchemical_property": true
         },
         "PotionRateActive": {
-            "name": false,
-            "description": false,
-            "img": false,
-            "base": false,
-            "active": false,
-            "alchemical_property": false
+            "name": true,
+            "description": true,
+            "img": true,
+            "base": true,
+            "active": true,
+            "alchemical_property": true
         },
         "PotionRateAlchemicalProperty": {
-            "name": false,
-            "description": false,
-            "img": false,
-            "base": false,
-            "active": false,
-            "alchemical_property": false
+            "name": true,
+            "description": true,
+            "img": true,
+            "base": true,
+            "active": true,
+            "alchemical_property": true
         }
     }
 }

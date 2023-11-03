@@ -21,6 +21,9 @@ class KnowledgeElement():
         self.MakeCase()
         self.Update(knowledge, data)
 
+    def get_id(self):
+        return self._id
+
     def Update(self, knowledge, data):
         
         if knowledge[self._id]["name"]:
@@ -51,7 +54,8 @@ class KnowledgeElement():
         image.fill("blue")
         x,y = self._x*self._size , self._y *self._size
         layer = 1
-        self.case = MySprite(image,x,y,layer,self._group)
+        data = {"type": "case", "id": self._id}
+        self.case = MySprite(image,x,y,layer,data,self._group)
   
     def MakeImg(self, new_image):
         if self.img is not None:
@@ -60,8 +64,8 @@ class KnowledgeElement():
         image = new_image
         x,y = self._x *self._size + 16 , self._y *self._size + 16
         layer = 2
-
-        self.img = MySprite(image,x,y,layer,self._group)
+        data = None
+        self.img = MySprite(image,x,y,layer,data,self._group)
 
     def MakeName(self, new_name):
         if self.name is not None:
@@ -81,15 +85,15 @@ class Knowledge():
 
         size = 64
         self.grids = {}
-        self.grids["ingredient"] = self.MakeGrid(self._knowledge["ingredient"], INGREDIENT_DATA, 0, 110/64, size, 6, 5) 
-        self.grids["characteristic"] = self.MakeGrid(self._knowledge["characteristic"], CHARACTERISTIC_DATA, 0, 110/64, size, 6, 5) 
-        self.grids["effect"] = self.MakeGrid(self._knowledge["effect"], EFFECT_DATA, 0, 110/64, size, 6, 5) 
+        self.grids["ingredient"] = self.MakeGrid(self._knowledge["ingredient"], INGREDIENT_DATA, 0, 128/64, size, 6, 5) 
+        self.grids["characteristic"] = self.MakeGrid(self._knowledge["characteristic"], CHARACTERISTIC_DATA, 0, 128/64, size, 6, 5) 
+        self.grids["effect"] = self.MakeGrid(self._knowledge["effect"], EFFECT_DATA, 0, 128/64, size, 6, 5) 
 
-        self.grids["base"] = self.MakeGrid(self._knowledge["base"], BASE_DATA, 0, 110/64, size, 6, 5) 
-        self.grids["active"] = self.MakeGrid(self._knowledge["active"], ACTIVE_DATA, 0, 110/64, size, 6, 5) 
+        self.grids["base"] = self.MakeGrid(self._knowledge["base"], BASE_DATA, 0, 128/64, size, 6, 5) 
+        self.grids["active"] = self.MakeGrid(self._knowledge["active"], ACTIVE_DATA, 0, 128/64, size, 6, 5) 
 
-        self.grids["alchemical_property"] = self.MakeGrid(self._knowledge["alchemical_property"], ALCHEMICAL_PROPERTY_DATA, 0, 110/64, size, 6, 5) 
-        self.grids["potion"] = self.MakeGrid(self._knowledge["potion"], POTION_DATA, 0, 110/64, size, 6, 5) 
+        self.grids["alchemical_property"] = self.MakeGrid(self._knowledge["alchemical_property"], ALCHEMICAL_PROPERTY_DATA, 0, 128/64, size, 6, 5) 
+        self.grids["potion"] = self.MakeGrid(self._knowledge["potion"], POTION_DATA, 0, 128/64, size, 6, 5) 
 
 
     # __________ Get & Set __________
@@ -342,7 +346,6 @@ class Knowledge():
         *parameters shoud be everything but neighbours
         *parameters should be any of : "name", "img", "description", "base", "active", "alchemical_property"
         example : UpdatePotionKnowledge("GuerisonStandard", "name", "description", "img", "base", "active", "alchemical_property")
-        currently this example is broken because of the accent on the name.
         """
          # the res of the operation
         res = True

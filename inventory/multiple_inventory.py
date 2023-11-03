@@ -48,7 +48,7 @@ class MultipleInventory():
         for sprite in self._nav_group:
             sprite.kill()
 
-        self.nav = Nav(self._x, self._y+30, 30, self._nav_group, index, self._nav_text, 500/5)
+        self.nav = Nav(self._x, self._y+32, 32, self._nav_group, index, self._nav_text, 500/5)
 
         for sprite in self._nav_group:
             sprite.add(self._state.sprites)

@@ -8,7 +8,10 @@
         "0": [
             [
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "eau",
+                    "quantity": 4
                 },
                 {
                     "type": "Slot"
@@ -437,27 +440,24 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
-                },
-                {
                     "type": "Slot",
                     "item_type": "base",
                     "item_data": {
                         "ingredients": [
-                            "eau",
                             "eau"
                         ],
                         "type": "base",
                         "node": "neutre",
                         "characteristics": [
                             "liquide",
-                            "humide",
-                            "liquide",
                             "humide"
                         ],
                         "effect": null
                     },
                     "quantity": 1
+                },
+                {
+                    "type": "Slot"
                 },
                 {
                     "type": "Slot"
@@ -471,21 +471,7 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot",
-                    "item_type": "base",
-                    "item_data": {
-                        "ingredients": [
-                            "eau"
-                        ],
-                        "type": "base",
-                        "node": "neutre",
-                        "characteristics": [
-                            "liquide",
-                            "humide"
-                        ],
-                        "effect": null
-                    },
-                    "quantity": 1
+                    "type": "Slot"
                 },
                 {
                     "type": "Slot"

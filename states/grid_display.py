@@ -1,7 +1,7 @@
 import pygame
 from math import ceil
 from states.nav import Nav
-
+from utils.my_sprite import MySprite
 class GridDisplay():
     def __init__(self, knowledge_grid:dict, state, x, y) -> None:
         self._grid = knowledge_grid
@@ -23,6 +23,7 @@ class GridDisplay():
     def set_state(self, new_state):
         self._state = new_state
 
+
     def reset(self):
         self.previous_index = None
         self._nav_index = 0
@@ -35,7 +36,7 @@ class GridDisplay():
         for sprite in self._nav_group:
             sprite.kill()
 
-        self.nav = Nav(self._x, self._y, 30, self._nav_group, index, self._pages)
+        self.nav = Nav(self._x, self._y, 32, self._nav_group, index, self._pages)
 
         for sprite in self._nav_group:
             sprite.add(self._state.sprites)
@@ -49,6 +50,16 @@ class GridDisplay():
                     self.previous_index = self._nav_index
                     self._nav_index = i
                     break
+
+            # clicking on grid cells
+            for sprite in self._grid[self._nav_index]["group"]:
+                if sprite.rect.collidepoint(event.pos):
+                    if isinstance(sprite, MySprite):
+                        data = sprite.get_data()
+                        if data is not None and data["type"] == "case":
+                            if self._state.data_display is not None and data["id"] != self._state.data_display["id"]:
+                                self._state.data_display_changed = True
+                            self._state.data_display = data
 
         elif event.type == pygame.MOUSEMOTION:
             self.hover_nav = [False, -1]
