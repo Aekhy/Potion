@@ -151,7 +151,7 @@
         }
     },
     "base": {
-        "neutre": {
+        "origine": {
             "name": true,
             "img": true,
             "neighbours": {
@@ -169,16 +169,12 @@
         "mercure": {
             "name": true,
             "img": true,
-            "neighbours": {
-                "": true
-            }
+            "neighbours": {}
         },
         "venus": {
             "name": true,
             "img": true,
-            "neighbours": {
-                "": true
-            }
+            "neighbours": {}
         },
         "terre": {
             "name": true,
@@ -190,44 +186,32 @@
         "lune": {
             "name": true,
             "img": true,
-            "neighbours": {
-                "": true
-            }
+            "neighbours": {}
         },
         "mars": {
             "name": true,
             "img": true,
-            "neighbours": {
-                "": true
-            }
+            "neighbours": {}
         },
         "jupiter": {
             "name": true,
             "img": true,
-            "neighbours": {
-                "": true
-            }
+            "neighbours": {}
         },
         "saturne": {
             "name": true,
             "img": true,
-            "neighbours": {
-                "": true
-            }
+            "neighbours": {}
         },
         "uranus": {
             "name": true,
             "img": true,
-            "neighbours": {
-                "": true
-            }
+            "neighbours": {}
         },
         "neptune": {
             "name": true,
             "img": true,
-            "neighbours": {
-                "": true
-            }
+            "neighbours": {}
         }
     },
     "active": {
@@ -237,7 +221,7 @@
             "neighbours": {
                 "feu": true,
                 "eau": true,
-                "terre": true,
+                "sol": true,
                 "air": true
             }
         },
@@ -255,18 +239,18 @@
                 "eau": true
             }
         },
-        "terre": {
+        "sol": {
             "name": true,
             "img": true,
             "neighbours": {
-                "terre": true
+                "sol": true
             }
         },
         "air": {
             "name": true,
             "img": true,
             "neighbours": {
-                "terre": true
+                "air": true
             }
         }
     },

@@ -77,7 +77,12 @@ class Substance(Item):
         The `find_node_from_characteristics_V1` method is supposed to find what the characteristics
         are corresponding to and store it in self._node
         """
-        self._node = ID["neutre"]
+        if self._type == ID["base"]:
+            neutre = ID["origine"]
+        elif self._type == ID["active"]:
+            neutre = ID["neutre"]
+
+        self._node = neutre
         if self._characteristics != []:
             l = len(self._characteristics)
             # We know that we have nodes with only even number of characteristics
@@ -101,7 +106,7 @@ class Substance(Item):
                                     self._node = node["name"]
                                     found_node = True
                     if not found_node:
-                        self._node = ID["neutre"]
+                        self._node = neutre
                         done = True
                     i += 2
 
@@ -146,9 +151,14 @@ class Substance(Item):
         accordingly.
         :return: nothing (None). DO NOT USE THE RETURNED VALUE AS THE NODE FOUND BECAUSE IT'S NOT
         """
-
+        print("NOOOOODE", self._node)
         if self._node == None:
-            self._node = ID["neutre"]
+            if self._type == ID["base"]:
+                neutre = ID["origine"]
+            elif self._type == ID["active"]:
+                neutre = ID["neutre"]
+
+            self._node = neutre
 
         if self._characteristics != []:
             if self._type == ID["base"]:
@@ -180,7 +190,7 @@ class Substance(Item):
 
         opposites = {ID["chaud"]: ID["froid"], ID["froid"]: ID["chaud"], ID["sec"]: ID["humide"], ID["humide"]: ID["sec"],
                      ID["lumineux"]: ID["sombre"], ID["sombre"]: ID["lumineux"], ID["majeur"]: ID["mineur"], ID["mineur"]: ID["majeur"]}
-
+        print("pas v2")
         for characterisitc in new_ingredient.characteristics:
             if DEBUG:
                 print(f" Je vais voir si {characterisitc} à un opposé")
@@ -228,6 +238,8 @@ class Substance(Item):
         """
 
         res = new_ingredient.type == self._type
+        print(new_ingredient.type, self._type)
+        print("add_iv2",res)
         if res:
             self._ingredients.append(new_ingredient)
             self.add_characteristics_V2(new_ingredient)
@@ -245,7 +257,7 @@ class Substance(Item):
 
 class Base(Substance):
     def __init__(self, make:dict=None):
-        super().__init__(ID["neutre"], ID["base"])
+        super().__init__(ID["origine"], ID["base"])
         # Effect from the tools
         self._effect = None
 
@@ -467,10 +479,12 @@ class Potion(Item):
                 else:
                     key = self._active.node
 
+                print("--------- tmp : ",tmp)
                 if key in tmp.keys():
                     tmp = tmp[key]
                 else:
-                    tmp = tmp[ID["neutre"]]
+                    print("Je plante, regarde le code (c'est peut etre a voir avec les neutres et origines)")
+                    # tmp = tmp[ID["neutre"]]
                     break
                 if tmp["level"] == END:
                     break

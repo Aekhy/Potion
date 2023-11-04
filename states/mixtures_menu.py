@@ -93,6 +93,7 @@ class MixturesMenu(TabMenu):
         # go see comments in states.py
         if not self._in_state:
             self._in_state = True
+            
             if self.display is not None:
                 self.display.kill()
                 self.data_display = None
@@ -127,6 +128,11 @@ class MixturesMenu(TabMenu):
         if self.change_nav_index:
             if self.previous_index is not None:
                 self._grids[self.previous_index].close()
+            # if self.display is not None:
+            #     self.display.kill()
+            #     self.data_display = None
+            #     self.data_display_changed = True
+            #     self.display = None
             self.change_nav_index = False
             self._grids[self.nav_index].open()
             self.set_nav_body(self.nav_index)

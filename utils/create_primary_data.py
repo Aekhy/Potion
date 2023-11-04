@@ -6,6 +6,7 @@ def MakeId():
         "base":"base",
         "active":"active",
         "neutre":"neutre",
+        "origine":"origine",
         "rien":"rien",
     }
 

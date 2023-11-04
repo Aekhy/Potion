@@ -5,7 +5,7 @@
     "neighbours": [
       { "id_name": "feu", "weight": ["sec", "chaud"] },
       { "id_name": "eau", "weight": ["humide", "froid"] },
-      { "id_name": "terre", "weight": ["sec", "froid"] },
+      { "id_name": "sol", "weight": ["sec", "froid"] },
       { "id_name": "air", "weight": ["chaud", "humide"] }
     ]
   },
@@ -19,14 +19,14 @@
     "img": "",
     "neighbours": [{ "id_name": "eau", "weight": ["humide", "froid"] }]
   },
-  "terre": {
-    "name": "terre",
+  "sol": {
+    "name": "sol",
     "img": "",
-    "neighbours": [{ "id_name": "terre", "weight": ["froid", "sec"] }]
+    "neighbours": [{ "id_name": "sol", "weight": ["froid", "sec"] }]
   },
   "air": {
     "name": "air",
     "img": "",
-    "neighbours": [{ "id_name": "terre", "weight": ["chaud", "humide"] }]
+    "neighbours": [{ "id_name": "air", "weight": ["chaud", "humide"] }]
   }
 }

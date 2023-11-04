@@ -50,7 +50,7 @@ class IngredientsMenu(TabMenu):
 
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_TAB:
-                        self._grids[self.nav_index].close()
+                        # self._grids[self.nav_index].close()
                         if self.display is not None:
                             self.display.kill()
                             self.data_display = None
@@ -97,13 +97,13 @@ class IngredientsMenu(TabMenu):
         # go see comments in states.py
         if not self._in_state:
             self._in_state = True
-            self._grids[self.nav_index].close()
+            # self._grids[self.nav_index].close()
             if self.display is not None:
                 self.display.kill()
                 self.data_display = None
                 self.data_display_changed = True
                 self.display = None
-            self.reset_nav_body()
+            # self.reset_nav_body()
 
         if self.data_display is not None and self.data_display_changed:
             self.data_display_changed = False

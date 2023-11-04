@@ -1,6 +1,6 @@
 {
-  "neutre": {
-    "name": "neutre",
+  "origine": {
+    "name": "origine",
     "img": "",
     "neighbours": [
       { "id_name": "soleil", "weight": ["majeur", "gaz"] },
@@ -15,12 +15,12 @@
   "mercure": {
     "name": "mercure",
     "img": "",
-    "neighbours": [{ "id_name": "", "weight": "" }]
+    "neighbours": []
   },
   "venus": {
     "name": "venus",
     "img": "",
-    "neighbours": [{ "id_name": "", "weight": "" }]
+    "neighbours": []
   },
   "terre": {
     "name": "terre",
@@ -30,31 +30,31 @@
   "lune": {
     "name": "lune",
     "img": "",
-    "neighbours": [{ "id_name": "", "weight": "" }]
+    "neighbours": []
   },
   "mars": {
     "name": "mars",
     "img": "",
-    "neighbours": [{ "id_name": "", "weight": "" }]
+    "neighbours": []
   },
   "jupiter": {
     "name": "jupiter",
     "img": "",
-    "neighbours": [{ "id_name": "", "weight": "" }]
+    "neighbours": []
   },
   "saturne": {
     "name": "saturne",
     "img": "",
-    "neighbours": [{ "id_name": "", "weight": "" }]
+    "neighbours": []
   },
   "uranus": {
     "name": "uranus",
     "img": "",
-    "neighbours": [{ "id_name": "", "weight": "" }]
+    "neighbours": []
   },
   "neptune": {
     "name": "neptune",
     "img": "",
-    "neighbours": [{ "id_name": "", "weight": "" }]
+    "neighbours": []
   }
 }

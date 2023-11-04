@@ -15,21 +15,21 @@
   },
   "sel": {
     "name": "sel",
-    "type": "actif",
+    "type": "active",
     "characteristics": ["sec", "mineur"],
     "max_stack": 5,
     "img": ""
   },
   "braises": {
     "name": "braises",
-    "type": "actif",
+    "type": "active",
     "characteristics": ["sec", "chaud"],
     "max_stack": 5,
     "img": ""
   },
   "crapaud": {
     "name": "crapaud",
-    "type": "actif",
+    "type": "active",
     "characteristics": ["humide", "froid"],
     "max_stack": 5,
     "img": ""

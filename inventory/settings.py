@@ -14,11 +14,11 @@ from general_settings.private_settings import COLORS
 # Inventory
 INVENTORY_SLOT_NUMBER = 8
 INVENTORY_LAYOUT = [
-    [{"type":"Slot","item_name":"eau","quantity":5},
-     {"type":"Slot","item_name":"lavande","quantity":1},
-     {"type":"Slot","item_name":"eau","quantity":5},
-     {"type":"Slot","item_name":"crapaud","quantity":2},
-     {"type":"Slot","item_name":"braises","quantity":2}],
+    [{"type":"Slot","item_type":"ingredient","item_data":"eau","quantity":5},
+     {"type":"Slot","item_type":"ingredient","item_data":"lavande","quantity":1},
+     {"type":"Slot","item_type":"ingredient","item_data":"eau","quantity":5},
+     {"type":"Slot","item_type":"ingredient","item_data":"crapaud","quantity":2},
+     {"type":"Slot","item_type":"ingredient","item_data":"braises","quantity":2}],
      [{"type":"Slot"},
       {"type":"Slot"},
       {"type":"Slot"}]

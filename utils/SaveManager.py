@@ -138,6 +138,10 @@ class SaveManager:
                 if k == "neighbours":
                     tmp[k] = {}
                     for neighbour in value[k]:
+                        # if neighbour["id_name"] == "":
+                        #     tmp[k][neighbour["id_name"]] = False
+                        # else:
+                        #     tmp[k][neighbour["id_name"]] = KNOW_ALL
                         tmp[k][neighbour["id_name"]] = KNOW_ALL
                 else:
                     tmp[k] = KNOW_ALL
@@ -260,7 +264,7 @@ class SaveManager:
                                 tmp["item_data"] = item.get_info_save()
                             elif isinstance(item, Potion):
                                 tmp["item_type"] = "potion"
-                                tmp["item_data"] = slot.item.get_info_save()
+                                tmp["item_data"] = item.get_info_save()
                             else:
                                 tmp["item_type"] = "ingredient"
                                 tmp["item_data"] = item.name

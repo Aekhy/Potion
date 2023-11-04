@@ -17,16 +17,16 @@
   "distillation": {
     "name": "distillation",
     "img": "",
-    "type": "base"
+    "type": "active"
   },
   "sublimation": {
     "name": "sublimation",
     "img": "",
-    "type": "base"
+    "type": "active"
   },
   "fermentation": {
     "name": "fermentation",
     "img": "",
-    "type": "base"
+    "type": "active"
   }
 }

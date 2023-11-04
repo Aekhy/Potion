@@ -246,7 +246,7 @@ class Knowledge():
         *parameters should be any of : "name", "img"
         **neighbours should only be opposite as whatever="neighbours_name"
         Be careful with the neighbours, this function doesn't check if it's the right one(s).
-        example : UpdateActiveKnowledge("neutre", "name", "img", one="feu", two="terre")
+        example : UpdateActiveKnowledge("origine", "name", "img", one="feu", two="terre")
         """
 
         # the res of the operation
