@@ -247,12 +247,12 @@ class SaveManager:
                 inv_dict = multiple_inv._inventories[i]
 
                 inv = inv_dict["inventory"]
-                s_l = inv.slot_list
+                slotList = inv.slot_list
                 res[key][str(i)] = []
                 for j in range(0, value["meta"]["nb_row"]):
                     d_row = []
                     for k in range(0, value["meta"]["nb_col"]):
-                        slot = s_l[k + j*value["meta"]["nb_col"]]
+                        slot = slotList[k + j*value["meta"]["nb_col"]]
                         if not slot.is_empty:
                             item = slot.item
                             tmp = {"type":"Slot"}

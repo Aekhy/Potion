@@ -10,8 +10,8 @@ from states.mixtures_menu import MixturesMenu
 from states.potions_menu import PotionsMenu
 from states.recipes_menu import RecipesMenu
 from states.options import Options
-from states.game import GameScreen
-from states.cauldron import CauldronScreen
+from states.gameScreen import GameScreen
+from states.tools.cauldronScreen import CauldronScreen
 
 from utils.SaveManager import SaveManager
 from utils.json_functions import Read

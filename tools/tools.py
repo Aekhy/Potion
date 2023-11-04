@@ -278,8 +278,9 @@ class Cauldron(pyg.sprite.Sprite):
             self._finished = True
             if self._mixture_slot.is_empty:
                 self._mixture_slot.add_item(self.mixture)
+                self.reset()
         else:
-            print("click finish but potion as no ingredient yet")
+            print("finish clicked but potion has no ingredient yet")
 
     def reset(self):
         self._finished = False

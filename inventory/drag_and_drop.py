@@ -27,6 +27,14 @@ class DragAndDrop:
     def quantity(self):
         return self._quantity
     
+    @quantity.setter
+    def quantity(self, qtt):
+        self._quantity = qtt
+        if self.quantity == 0:
+            self.reinit()
+        else:
+            self.update_sprites()
+    
     def take(self, slots_take, slots_iterable, event):
         taken = False
         if not self._holding:
@@ -89,7 +97,7 @@ class DragAndDrop:
                                         self._slot_source.item_name_font_size,
                                         self._slot_source.item_name_font_color)
         
-        self._quantity_sprite = TextOutlined(self._slot_source.x+self._slot_source.size, # type: ignore
+        self._quantity_sprite = TextOutlined(self._slot_source.x+self._slot_source.size,
                                             self._slot_source.y+self._slot_source.size,
                                             str(self._quantity),
                                             LAYERS['inventory'] + 2,
@@ -108,13 +116,13 @@ class DragAndDrop:
             self._quantity_sprite.move_ip(event.rel)
 
     def update_sprites(self):
-        dx = self._item_sprite.rect.x - self._slot_source.item_image_sprite.rect.x # type: ignore
-        dy = self._item_sprite.rect.y - self._slot_source.item_image_sprite.rect.y # type: ignore
+        dx = self._item_sprite.rect.x - self._slot_source.item_image_sprite.rect.x
+        dy = self._item_sprite.rect.y - self._slot_source.item_image_sprite.rect.y
         x = self._slot_source.rect.x + self._slot_source.size + dx
         y = self._slot_source.rect.y + self._slot_source.size + dy
 
-        self._quantity_sprite.kill() # type: ignore
-        self._quantity_sprite = TextOutlined(x, y, # type: ignore
+        self._quantity_sprite.kill()
+        self._quantity_sprite = TextOutlined(x, y,
                                             str(self._quantity),
                                             LAYERS['inventory'] + 2,
                                             "bottomright",

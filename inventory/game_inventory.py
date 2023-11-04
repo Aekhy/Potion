@@ -38,7 +38,7 @@ class GameInventory:
         self._locked = False
 
     def reset(self):
-        self.change_nav_index = False
+        self.nav_index_tochange = False
         self.nav_index = 0
         self.previous_index = None
         self.hover_nav = [False, -1]
@@ -70,9 +70,7 @@ class GameInventory:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for i in range(0, len(self.nav.tabs)):
                     if self.nav.tabs[i]["space"].rect.collidepoint(event.pos):
-                        self.change_nav_index = self.nav_index != i
-                        self.previous_index = self.nav_index
-                        self.nav_index = i
+                        self.change_nav_index(i)
                         break
 
             elif event.type == pygame.MOUSEMOTION:
@@ -84,8 +82,8 @@ class GameInventory:
             else:
                 pass
 
-            if self.change_nav_index:
-                self.change_nav_index = False
+            if self.nav_index_tochange:
+                self.nav_index_tochange = False
                 if self.previous_index != None:
                     self._multiple_inventories[self.previous_index].close()
                 self.set_nav(self.nav_index)
@@ -122,6 +120,11 @@ class GameInventory:
                 self.close()
             else:
                 self.open()
+
+    def change_nav_index(self, index):
+        self.nav_index_tochange = self.nav_index != index
+        self.previous_index = self.nav_index
+        self.nav_index = index
 
     
     def update_slots(self):

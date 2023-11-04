@@ -24,6 +24,7 @@ class CauldronScreen(State):
 
         self.nav_menu = Nav(0, 0*50, 50, self.sprites, 0, ["Chaudron en cours d'utilisation"])
         
+        self._dragged_from_tool = False
         
     def events(self):
         for event in pyg.event.get():
@@ -37,7 +38,7 @@ class CauldronScreen(State):
                     if self.nav_menu.tabs[i]["space"].rect.collidepoint(event.pos):
                         self.hover_nav_menu = [True, i]
                         break
-
+                    
             elif event.type == pyg.MOUSEBUTTONDOWN:
                 self._drag_and_drop.take(self.game.game_inventory.slots["take"]+self.slots["take"], self.game.game_inventory.get_slot_list()+[self.cauldron.mixture_slot], event)
                 #If we pressed the finish button, we call the cauldron's finish function
@@ -46,19 +47,21 @@ class CauldronScreen(State):
                 else:
                     #If we didnt drag the item from the cauldron output
                     if not self._drag_and_drop.take([self.cauldron.mixture_slot], [self.cauldron.mixture_slot], event):
-                        #We look for if we're dragging an item from the inventory
-                        for i in range(0,len(self.nav_menu.tabs)):
-                            if self.nav_menu.tabs[i]["space"].rect.collidepoint(event.pos):
-                                self.choice = i
-                                break
+                        pass
                     
-            elif event.type == pyg.MOUSEBUTTONUP:       
+            elif event.type == pyg.MOUSEBUTTONUP:  
+                itemAdded = [False]
+                # if we dropped in the cauldron sprite   
                 if self.cauldron.rect.collidepoint(event.pos):
-                    itemAdded = self.cauldron.add_thing(self._drag_and_drop.item, self._drag_and_drop._quantity)[0]
-                    if itemAdded:
-                        self._drag_and_drop.reinit()
-                else:
-                    self._drag_and_drop.drop(self._game.game_inventory.slots["add"]+self.slots["add"], self._game.game_inventory.get_slot_list(), event, self.cauldron.reset)
+                    self._dragged_from_tool = True
+                    # we add the item into the cauldron's attributes
+                    itemAdded = self.cauldron.add_thing(self._drag_and_drop.item, self._drag_and_drop._quantity)
+                    # if the item was added, we update to the new quantity
+                    if itemAdded[0]:
+                        self._drag_and_drop.quantity = itemAdded[2]
+                if not itemAdded[0]:
+                    fct = None if self._dragged_from_tool else self.cauldron.reset
+                    self._drag_and_drop.drop(self._game.game_inventory.slots["add"]+self.slots["add"], self._game.game_inventory.get_slot_list(), event, fct)
 
             elif event.type == pyg.KEYDOWN:
                 match event.key:
