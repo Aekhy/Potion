@@ -49,6 +49,10 @@ class Substance(Item):
 
     node = property(get_node)
 
+    @property
+    def isPotion(self):
+        return False
+
     # _______ METHODS _______
 
     # _____________V1_______________
@@ -428,6 +432,11 @@ class Potion(Item):
         return self._description
 
     description = property(get_description)
+    
+    @property
+    def isPotion(self):
+        return True
+
     # _______ METHODS _______
 
     def get_info_save(self):

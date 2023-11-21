@@ -22,7 +22,7 @@ class CauldronScreen(State):
         # We don't want to be able to close the game_inventory when we are in here
         self._drag_and_drop = DragAndDrop(self.sprites, self.game.game_inventory.update_slots)
 
-        self.nav_menu = Nav(0, 0*50, 50, self.sprites, 0, ["Chaudron en cours d'utilisation"])
+        self.nav_menu = Nav(0, 0*50, 64, self.sprites, 0, ["Chaudron en cours d'utilisation"])
         
         self._dragged_from_tool = False
         
@@ -41,13 +41,15 @@ class CauldronScreen(State):
                     
             elif event.type == pyg.MOUSEBUTTONDOWN:
                 self._drag_and_drop.take(self.game.game_inventory.slots["take"]+self.slots["take"], self.game.game_inventory.get_slot_list()+[self.cauldron.mixture_slot], event)
-                #If we pressed the finish button, we call the cauldron's finish function
+                # if we pressed the finish button, we call the cauldron's finish function
                 if self.cauldron.finish_button.rect.collidepoint(event.pos):
                     self.cauldron.finish()
-                else:
-                    #If we didnt drag the item from the cauldron output
-                    if not self._drag_and_drop.take([self.cauldron.mixture_slot], [self.cauldron.mixture_slot], event):
-                        pass
+                elif self.cauldron.mixture_slot.rect.collidepoint(event.pos):
+                    # if we dragged the item from the cauldron's output
+                    self._drag_and_drop.take([self.cauldron.mixture_slot], [self.cauldron.mixture_slot], event)
+                    newIndex = 2 if self._drag_and_drop.item.isPotion else 1
+                    self.game.game_inventory.change_nav_index(newIndex)
+                    # we open the right nav index so we don't have to do it manually
                     
             elif event.type == pyg.MOUSEBUTTONUP:  
                 itemAdded = [False]
