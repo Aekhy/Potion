@@ -1,0 +1,20 @@
+- Background pour chaque menu
+
+
+
+
+
+- Font
+
+- Sprites d'ui pour les onglets / slots / cases etc
+
+- sprites d'items
+
+    - ingredient
+    - potions
+    - mixtures astrale
+    - mixture élémentaire
+    - effet
+    - caractéristiques
+    - propriété alchimique
+

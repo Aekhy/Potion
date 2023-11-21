@@ -4,7 +4,7 @@ from knowledge.knowledge import Knowledge
 from inventory.game_inventory import GameInventory
 from items.potions import Base, Active, Potion
 
-KNOW_ALL = True
+KNOW_ALL = False
 
 INGREDIENTS = "ingredient"
 CHARACTERISITC = "characteristic"
