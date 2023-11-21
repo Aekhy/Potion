@@ -1,6 +1,8 @@
 import pygame
 from inventory.settings import *
+from general_settings.private_settings import *
 from general_settings.public_settings import outline
+
 class TextSprite(pygame.sprite.Sprite):
     def __init__(self, text, font_size=TEXT_FONT_SIZE_DEFAULT, font_color=TEXT_FONT_COLOR_DEFAULT, font_path=TEXT_FONT_PATH_DEFAULT):
         super().__init__()

@@ -446,21 +446,7 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot",
-                    "item_type": "base",
-                    "item_data": {
-                        "ingredients": [
-                            "eau"
-                        ],
-                        "type": "base",
-                        "node": "origine",
-                        "characteristics": [
-                            "liquide",
-                            "humide"
-                        ],
-                        "effect": null
-                    },
-                    "quantity": 1
+                    "type": "Slot"
                 },
                 {
                     "type": "Slot"
@@ -477,7 +463,21 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "base",
+                    "item_data": {
+                        "ingredients": [
+                            "eau"
+                        ],
+                        "type": "base",
+                        "node": "origine",
+                        "characteristics": [
+                            "liquide",
+                            "humide"
+                        ],
+                        "effect": null
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
