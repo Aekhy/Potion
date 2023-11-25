@@ -257,8 +257,7 @@ class Substance(Item):
         else:
             res = self.add_ingredient_V2(new_ingredient)
         return res
-
-
+    
 class Base(Substance):
     def __init__(self, make:dict=None):
         super().__init__(ID["origine"], ID["base"])
@@ -350,6 +349,8 @@ class Active(Substance):
             res["ingredients"].append(ingredient.name)
 
         return res
+    
+    
 
     def __eq__(self, other):
         result = False
@@ -377,7 +378,6 @@ class Potion(Item):
             self._base = Base(make["base"])
             self._active = Active(make["active"])
             self._alchemical_property = make["alchemical_property"]
-
             self.update_info()
 
     # _______ GETTER & SETTERS _______
@@ -451,7 +451,7 @@ class Potion(Item):
 
     def add_ingredient(self, *ingredients):
         """
-        The function adds ingredients to a recipe and updates the recipe's information.
+        The function adds ingredients
         """
         for new_ingredient in ingredients:
             self._ingredients.append(new_ingredient)

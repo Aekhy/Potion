@@ -14,10 +14,7 @@
                     "quantity": 2
                 },
                 {
-                    "type": "Slot",
-                    "item_type": "ingredient",
-                    "item_data": "eau",
-                    "quantity": 1
+                    "type": "Slot"
                 },
                 {
                     "type": "Slot"
@@ -37,7 +34,10 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "eau",
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -558,6 +558,12 @@
                     "type": "Slot"
                 },
                 {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
                     "type": "Slot",
                     "item_type": "base",
                     "item_data": {
@@ -573,12 +579,6 @@
                         "effect": null
                     },
                     "quantity": 1
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
                 },
                 {
                     "type": "Slot"

@@ -12,7 +12,7 @@ class CauldronScreen(State):
         self.sprites = pyg.sprite.LayeredUpdates()
         self.slots = {"take":[],"add":[]}
 
-        self.cauldron = Cauldron(self, self.sprites, SCREEN_WIDTH - 300, 100)
+        self.cauldron = Cauldron(self, self.sprites, SCREEN_WIDTH/2, 120)
         
         # Very important to do that in each state that use
         # game_inventory. It crashes if not done
