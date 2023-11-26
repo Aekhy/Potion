@@ -1,993 +1,1337 @@
 {
-    "ingredients": {
-        "meta": {
-            "number": 4,
-            "nb_row": 6,
-            "nb_col": 5
-        },
-        "0": [
-            [
-                {
-                    "type": "Slot",
-                    "item_type": "ingredient",
-                    "item_data": "eau",
-                    "quantity": 2
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot",
-                    "item_type": "ingredient",
-                    "item_data": "eau",
-                    "quantity": 1
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ]
-        ],
-        "1": [
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ]
-        ],
-        "2": [
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ]
-        ],
-        "3": [
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ]
-        ]
+  "ingredients": {
+    "meta": {
+      "number": 4,
+      "nb_row": 6,
+      "nb_col": 5
     },
-    "mixtures": {
-        "meta": {
-            "number": 3,
-            "nb_row": 6,
-            "nb_col": 5
+    "0": [
+      [
+        {
+          "type": "Slot",
+          "item_type": "ingredient",
+          "item_data": "eau",
+          "quantity": 2
         },
-        "0": [
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot",
-                    "item_type": "base",
-                    "item_data": {
-                        "ingredients": [
-                            "eau"
-                        ],
-                        "type": "base",
-                        "node": "origine",
-                        "characteristics": [
-                            "liquide",
-                            "humide"
-                        ],
-                        "effect": null
-                    },
-                    "quantity": 1
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ]
-        ],
-        "1": [
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot",
-                    "item_type": "base",
-                    "item_data": {
-                        "ingredients": [
-                            "eau"
-                        ],
-                        "type": "base",
-                        "node": "origine",
-                        "characteristics": [
-                            "liquide",
-                            "humide"
-                        ],
-                        "effect": null
-                    },
-                    "quantity": 1
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ]
-        ],
-        "2": [
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ]
-        ]
+        {
+          "type": "Slot",
+          "item_type": "ingredient",
+          "item_data": "lavande",
+          "quantity": 2
+        },
+        {
+          "type": "Slot",
+          "item_type": "ingredient",
+          "item_data": "crapaud",
+          "quantity": 1
+        },
+        {
+          "type": "Slot",
+          "item_type": "ingredient",
+          "item_data": "sel",
+          "quantity": 1
+        },
+        {
+          "type": "Slot",
+          "item_type": "ingredient",
+          "item_data": "braises",
+          "quantity": 1
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ],
+    "1": [
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ],
+    "2": [
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ],
+    "3": [
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ]
+  },
+  "mixtures": {
+    "meta": {
+      "number": 3,
+      "nb_row": 6,
+      "nb_col": 5
     },
-    "potions": {
-        "meta": {
-            "number": 2,
-            "nb_row": 6,
-            "nb_col": 5
+    "0": [
+      [
+        {
+          "type": "Slot"
         },
-        "0": [
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
+        {
+          "type": "Slot",
+          "item_type": "base",
+          "item_data": {
+            "ingredients": ["crapaud"],
+            "type": "active",
+            "node": "eau",
+            "characteristics": [],
+            "effect": null
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "base",
+          "item_data": {
+            "ingredients": ["braises", "braises"],
+            "type": "active",
+            "node": "feu",
+            "characteristics": [],
+            "effect": null
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "base",
+          "item_data": {
+            "ingredients": ["crapaud", "crapaud", "braises"],
+            "type": "active",
+            "node": "eau",
+            "characteristics": ["sec", "chaud"],
+            "effect": null
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "base",
+          "item_data": {
+            "ingredients": ["eau"],
+            "type": "base",
+            "node": "origine",
+            "characteristics": ["liquide", "humide"],
+            "effect": null
+          },
+          "quantity": 1
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ],
+    "1": [
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ],
+    "2": [
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "base",
+          "item_data": {
+            "ingredients": ["braises"],
+            "type": "active",
+            "node": "feu",
+            "characteristics": [],
+            "effect": null
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ]
+  },
+  "potions": {
+    "meta": {
+      "number": 2,
+      "nb_row": 6,
+      "nb_col": 5
+    },
+    "0": [
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "potion",
+          "item_data": {
+            "ingredients": ["crapaud", "sel"],
+            "base": {
+              "ingredients": ["eau"],
+              "type": "base",
+              "node": "origine",
+              "characteristics": ["liquide", "humide"],
+              "effect": null
+            },
+            "active": {
+              "ingredients": ["crapaud", "crapaud", "sel"],
+              "type": "active",
+              "node": "eau",
+              "characteristics": ["sec", "mineur"],
+              "effect": null
+            },
+            "alchemical_property": null
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "potion",
+          "item_data": {
+            "ingredients": ["eau", "lavande"],
+            "base": {
+              "ingredients": ["eau", "eau", "lavande"],
+              "type": "base",
+              "node": "origine",
+              "characteristics": ["liquide", "humide", "liquide", "lumineux"],
+              "effect": null
+            },
+            "active": {
+              "ingredients": ["sel"],
+              "type": "active",
+              "node": "neutre",
+              "characteristics": ["sec", "mineur"],
+              "effect": null
+            },
+            "alchemical_property": null
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "potion",
+          "item_data": {
+            "ingredients": [
+              "crapaud",
+              "sel",
+              "lavande",
+              "lavande",
+              "crapaud",
+              "sel"
             ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ]
-        ],
-        "1": [
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ]
-        ]
-    }
+            "base": {
+              "ingredients": ["eau", "lavande", "lavande"],
+              "type": "base",
+              "node": "terre",
+              "characteristics": ["lumineux", "sec"],
+              "effect": null
+            },
+            "active": {
+              "ingredients": ["crapaud", "crapaud", "sel", "crapaud", "sel"],
+              "type": "active",
+              "node": "eau",
+              "characteristics": ["mineur", "froid", "sec", "mineur"],
+              "effect": null
+            },
+            "alchemical_property": null
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ],
+    "1": [
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ]
+  },
+  "recipe": {
+    "meta": {
+      "number": 2,
+      "nb_row": 6,
+      "nb_col": 5
+    },
+    "0": [
+      [
+        {
+          "type": "Slot",
+          "item_type": "paper",
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "substanceRecipe",
+          "item_data": {
+            "name": "Recette eau",
+            "ingredients": ["crapaud", "crapaud", "braises"],
+            "effect": null,
+            "finished": false
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "substanceRecipe",
+          "item_data": {
+            "name": "Recette feu",
+            "ingredients": ["braises"],
+            "effect": null,
+            "finished": false
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot",
+          "item_type": "potionRecipe",
+          "item_data": {
+            "name": "Recette Mixture \u00e9trange",
+            "base_recipe": {
+              "name": "Recette origine",
+              "ingredients": ["eau", "eau"],
+              "effect": null,
+              "finished": false
+            },
+            "active_recipe": {
+              "name": "Recette neutre",
+              "ingredients": ["sel"],
+              "effect": null,
+              "finished": false
+            },
+            "finished": false
+          },
+          "quantity": 1
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ],
+    "1": [
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ],
+      [
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        },
+        {
+          "type": "Slot"
+        }
+      ]
+    ]
+  }
 }

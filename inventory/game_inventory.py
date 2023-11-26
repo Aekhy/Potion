@@ -1,7 +1,9 @@
 import pygame
 from inventory.multiple_inventory import MultipleInventory
 from items.potions import Potion, Base, Active
+from items.recipe import Paper, SubstanceRecipe, PotionRecipe
 from states.nav import Nav
+from general_settings.private_settings import *
 
 class GameInventory:
     def __init__(self, struct_json, x, y, locked=False) -> None:
@@ -16,9 +18,10 @@ class GameInventory:
         self._locked = locked
 
         self._multiple_inventories = {
-            0: MultipleInventory(self._struct["ingredients"], self._state, self, 0, self._y, {"black_list":[Potion, Base, Active],"white_list":None}),
+            0: MultipleInventory(self._struct["ingredients"], self._state, self, 0, self._y, {"black_list":[Potion, Base, Active, Paper, SubstanceRecipe, PotionRecipe],"white_list":None}),
             1: MultipleInventory(self._struct["mixtures"], self._state, self, 0, self._y, {"black_list":None,"white_list":[Base, Active]}),
-            2: MultipleInventory(self._struct["potions"], self._state, self, 0, self._y, {"black_list":None,"white_list":[Potion]})
+            2: MultipleInventory(self._struct["potions"], self._state, self, 0, self._y, {"black_list":None,"white_list":[Potion]}),
+            3: MultipleInventory(self._struct["recipe"], self._state, self, 0, self._y, {"black_list":None,"white_list":[Paper, SubstanceRecipe, PotionRecipe]})
         }
 
         self._open = False
@@ -56,7 +59,7 @@ class GameInventory:
         for sprite in self._nav_group:
             sprite.kill()
 
-        self.nav = Nav(0, self._y, 32, self._nav_group, index, ["Ingredients","Mixtures","Potions"], 500/3)
+        self.nav = Nav(0, self._y, TILE_SIZE/2, self._nav_group, index, ["Ingredients","Mixtures","Potions", "Recettes"], TILE_SIZE*2)
 
         for sprite in self._nav_group:
             sprite.add(self._group)

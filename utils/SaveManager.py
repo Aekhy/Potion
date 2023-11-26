@@ -3,6 +3,7 @@ from utils.json_functions import Read, Write
 from knowledge.knowledge import Knowledge
 from inventory.game_inventory import GameInventory
 from items.potions import Base, Active, Potion
+from items.recipe import Paper, SubstanceRecipe, PotionRecipe
 
 KNOW_ALL = False
 
@@ -204,6 +205,9 @@ class SaveManager:
             },
             "potions":{
                 "meta":{"number":2, "nb_row": 6, "nb_col" : 5}
+            },
+            "recipe":{
+                "meta":{"number":2, "nb_row": 6, "nb_col" : 5}
             }
         }
 
@@ -214,8 +218,12 @@ class SaveManager:
                 for j in range(0, value["meta"]["nb_row"]):
                     d_row = []
                     for k in range(0, value["meta"]["nb_col"]):
+                        # test
                         if i==0 and j==0 and k == 0 and key == "ingredients":
                             tmp = {"type":"Slot","item_type": "ingredient","item_data":"eau","quantity":5}
+                        elif i==0 and j==0 and k == 0 and key == "recipe":
+                            tmp = {"type":"Slot","item_type": "paper","item_data":"","quantity":5}
+                        # end test
                         else:
                             tmp = {"type":"Slot"}
                         d_row.append(tmp)
@@ -235,6 +243,9 @@ class SaveManager:
                 "meta":{"number":3, "nb_row": 6, "nb_col" : 5}
             },
             "potions":{
+                "meta":{"number":2, "nb_row": 6, "nb_col" : 5}
+            },
+            "recipe":{
                 "meta":{"number":2, "nb_row": 6, "nb_col" : 5}
             }
         }
@@ -265,6 +276,14 @@ class SaveManager:
                             elif isinstance(item, Potion):
                                 tmp["item_type"] = "potion"
                                 tmp["item_data"] = item.get_info_save()
+                            elif isinstance(item, SubstanceRecipe):
+                                tmp["item_type"] = "substanceRecipe"
+                                tmp["item_data"] = item.get_info_save()
+                            elif isinstance(item, PotionRecipe):
+                                tmp["item_type"] = "potionRecipe"
+                                tmp["item_data"] = item.get_info_save()
+                            elif isinstance(item, Paper):
+                                tmp["item_type"] = "paper"
                             else:
                                 tmp["item_type"] = "ingredient"
                                 tmp["item_data"] = item.name

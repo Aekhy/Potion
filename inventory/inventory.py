@@ -1,5 +1,6 @@
 from items.ingredients import Ingredient
 from items.potions import Potion, Base, Active
+from items.recipe import Paper, SubstanceRecipe, PotionRecipe
 from inventory.slot import Slot
 from inventory.case import Case
 from inventory.settings import *
@@ -59,7 +60,13 @@ class Inventory:
             elif element["item_type"] == "active":
                 item = Active(element["item_data"])
             elif element["item_type"] == "potion":
-                item = Potion(element["item_data"])
+                item = Potion("", Base(), Active(), element["item_data"])
+            elif element["item_type"] == "substanceRecipe":
+                item = SubstanceRecipe(element["item_data"])
+            elif element["item_type"] == "potionRecipe":
+                item = PotionRecipe(element["item_data"])
+            elif element["item_type"] == "paper":
+                item = Paper()
             else:
                 item = Ingredient(element["item_data"])
             quantity = element["quantity"]
