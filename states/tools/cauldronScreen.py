@@ -67,6 +67,7 @@ class CauldronScreen(State):
                     # we add the item into the cauldron's attributes
                     itemAdded = self.cauldron.add_thing(self._drag_and_drop.item, self._drag_and_drop._quantity)
                     # if the item was added, we update to the new quantity
+                    print(itemAdded)
                     if itemAdded[0]:
                         self._drag_and_drop.quantity = itemAdded[2]
                         # we update the recipe_draw.
@@ -91,7 +92,7 @@ class CauldronScreen(State):
                     case pyg.K_o:
                         self.game.states("Options").enter_state()
                     case _:
-                        print("Oulala cette touche va pas")
+                        pass
                         
             self.game.game_inventory.update(event, self._drag_and_drop.is_holding())
                 

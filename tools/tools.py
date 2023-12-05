@@ -119,7 +119,6 @@ class Ferment(Tool):
 class Cauldron(pyg.sprite.Sprite):
     def __init__(self, origin, spritesGroup, x, y):
         self._origin = origin
-        # The cauldron is always on the center of the screen
         self._x = x
         self._y = y
         self._layer = LAYERS['cauldron']
@@ -198,15 +197,20 @@ class Cauldron(pyg.sprite.Sprite):
                 if self._base == None:
                     self._base = Base()
                 res = self._base.add_ingredient(new_ingredient)
+                print("b:", res)
             # Add to self._active
             else:  # Type == ACTIVE
                 if self._active == None:
                     self._active = Active()
                 res = self._active.add_ingredient(new_ingredient)
+                print("a:", res)
+
             # Time to make a potion
             if self._base != None and self._active != None:
                 self._potion = Potion("Mixture", self._base, self._active)
                 res = self._potion.add_ingredient(new_ingredient)
+                print("m:", res)
+
 
         return res
 
@@ -249,8 +253,10 @@ class Cauldron(pyg.sprite.Sprite):
         If we can add something, return true.
         """
         if not self._finished:
+            print("smth:",something)
             if isinstance(something, Ingredient):
                 res = self.add_ingredient(something)
+                print("res:",res)
             elif isinstance(something, Base):
                 res = self.add_base(something)
             elif isinstance(something, Active):

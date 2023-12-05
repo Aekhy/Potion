@@ -12,6 +12,7 @@ from states.recipes_menu import RecipesMenu
 from states.options import Options
 from states.gameScreen import GameScreen
 from states.tools.cauldronScreen import CauldronScreen
+from states.popUp import PopUp
 from states.tools.toolsScreen import ToolsScreen
 
 from utils.SaveManager import SaveManager
@@ -55,6 +56,8 @@ class Game:
                     self._all_states[state] = CauldronScreen(self)
                 case "ToolsScreen":
                     self._all_states[state] = ToolsScreen(self)
+                case "PopUp":
+                    self._all_states[state] = PopUp(self)
                 case _:
                     pass
                     
