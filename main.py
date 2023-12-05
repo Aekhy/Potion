@@ -12,6 +12,7 @@ from states.recipes_menu import RecipesMenu
 from states.options import Options
 from states.gameScreen import GameScreen
 from states.tools.cauldronScreen import CauldronScreen
+from states.tools.toolsScreen import ToolsScreen
 
 from utils.SaveManager import SaveManager
 from utils.json_functions import Read
@@ -52,6 +53,8 @@ class Game:
                     self._all_states[state] = GameScreen(self)
                 case "CauldronScreen":
                     self._all_states[state] = CauldronScreen(self)
+                case "ToolsScreen":
+                    self._all_states[state] = ToolsScreen(self)
                 case _:
                     pass
                     

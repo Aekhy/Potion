@@ -457,6 +457,8 @@ class Potion(Item):
             self._ingredients.append(new_ingredient)
             self._base.add_ingredient(new_ingredient)
             self._active.add_ingredient(new_ingredient)
+        return True
+        
 
     def add_effect(self, *effects):
         """

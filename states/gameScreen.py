@@ -14,9 +14,14 @@ class GameScreen(State):
         self.cauldron_title = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4, "Chaudron", 1, font_size=50, font_color=COLORS['black'])
         self.cauldron_title.add_to_group(self.sprites)
 
+        # Link to tools_screen.
+        self.tools_title = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/3, "Outils", 1, font_size=50, font_color=COLORS['black'])
+        self.tools_title.add_to_group(self.sprites)
+
         self.choice = None
         self.onclick_redirect = {
             0:{"rect": self.cauldron_title.rect}
+            1:{"rect": self.tools_title.rect}
         }
 
     
@@ -46,7 +51,9 @@ class GameScreen(State):
             if self.choice == 0:
                 self.choice = None
                 self.game.states("CauldronScreen").enter_state()
-                
+            elif self.choice == 1:
+                self.choice = None
+                self.game.states("ToolsScreen").enter_state()   
             self.choice = None
                 
         self.sprites.update()
