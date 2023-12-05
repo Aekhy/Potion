@@ -20,7 +20,7 @@ class GameScreen(State):
 
         self.choice = None
         self.onclick_redirect = {
-            0:{"rect": self.cauldron_title.rect}
+            0:{"rect": self.cauldron_title.rect},
             1:{"rect": self.tools_title.rect}
         }
 

@@ -1,6 +1,7 @@
 from items.ingredients import Ingredient
 from items.settings import *
 from items.potions import Base, Active, Potion
+from items.recipe import *
 from inventory.slot import Slot
 from inventory.settings import CASE_SIZE_DEFAULT
 from utils.texts import TextOutlined
@@ -9,9 +10,9 @@ from general_settings.private_settings import LAYERS
 import pygame as pyg
 # we probably want this class to be a child of pygame.sprite.Sprite
 class Tool(pyg.sprite.Sprite):
-    def __init__(self, game, name: str, mixture_type: Base | Active, effect:str, x, y, color, size=100, path: str = "",):
+    def __init__(self, state, name: str, mixture_type: Base | Active, effect:str, x, y, color, size=100, path: str = "",):
         # Engine
-        self._game = game
+        self._state = state
         self._name = name
         # _mixture_type is used to know which kind of
         # subtances it can work with
@@ -22,11 +23,13 @@ class Tool(pyg.sprite.Sprite):
         # Active should have DISTILLATION, SUBLIMATION or FERMENTATION
         self._effect = effect
 
+        self._recipe = None
+
         # Graphism
         self._x = x
         self._y = y
         self._path = path
-        self.group = self._game.game_sprites
+        self.group = self._state.sprites
         self._layer = LAYERS["tools"]
         if path == "":
             self.image = pyg.Surface((size,size))
@@ -36,8 +39,13 @@ class Tool(pyg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
 
-        self._mixture_slot = Slot(self._game, self.group ,True,False,None,0,self._x - 10 ,self._y - 10 ,self._layer+0.1, 50)
-        
+        self._mixture_slot = Slot(self._state, self.group ,True,False,None,
+                                0,self._x - 10 ,self._y - 10 ,self._layer+0.1, 50)
+        self._recipe_slot = Slot(self._state, self.group ,True,True,None,
+                                0,self._x + 50+10 ,self._y - 10 ,self._layer+0.1, 50,
+                                {"black_list":None,"white_list":[SubstanceRecipe, PotionRecipe]})
+
+
         self.finish_button = TextOutlined(self._x , self._y + size, self._effect, self.layer+0.1,"topleft")
         self.finish_button.add_to_group(self.group)
         pyg.sprite.Sprite.__init__(self, self.group) 
@@ -60,6 +68,14 @@ class Tool(pyg.sprite.Sprite):
         else:
             end_res = (False,new_mixture,quantity)
         return end_res
+    
+    def add_recipe(self, new_recipe):
+        res = False
+        if self._recipe == None:
+            self._recipe = new_recipe
+            res = True
+        return res
+
 
     def apply_effect(self):
         if self._mixture != None:
@@ -67,8 +83,12 @@ class Tool(pyg.sprite.Sprite):
             if isinstance(self._mixture, Potion):
                 self._mixture.add_effect(self._effect)
                 self._mixture.update_info()
+                # recipe
+                self._recipe.update_data(self._mixture.get_base(), self._mixture.get_active(), self._mixture)
             else:
                 self._mixture.effect = self._effect
+                # recipe
+                self._recipe.update_data(self._mixture)
             self._mixture_slot.add_item(self._mixture)
             print("effet ajouté")
         else:
@@ -78,6 +98,7 @@ class Tool(pyg.sprite.Sprite):
     
     def reset(self):
         self._mixture = None
+        self._recipe = None
         
     def verify_slot(self, slot_to_verify):
         return slot_to_verify == self._mixture_slot
@@ -89,31 +110,31 @@ class Tool(pyg.sprite.Sprite):
 # Please change my class name and my name property
 # The heater will probably be one aspect of the cauldron
 class Heater(Tool):
-    def __init__(self, game, x, y):
-        super().__init__(game,"outil de chauffe", Base, ID["chauffer"], x, y, "orange")
+    def __init__(self, state, x, y):
+        super().__init__(state,"outil de chauffe", Base, ID["chauffer"], x, y, "orange")
 
 # Please change my class name and my name property
 class Freezer(Tool):
-    def __init__(self, game, x, y):
-        super().__init__(game, "outil de gèle", Base, ID["geler"], x, y, "blue")
+    def __init__(self, state, x, y):
+        super().__init__(state, "outil de gèle", Base, ID["geler"], x, y, "blue")
 
 class Mortar(Tool):
-    def __init__(self, game, x, y):
-        super().__init__(game, "mortier", Base, ID["mixer"], x, y, "brown")
+    def __init__(self, state, x, y):
+        super().__init__(state, "mortier", Base, ID["mixer"], x, y, "brown")
 
 class Alembic(Tool):
-    def __init__(self, game, x, y):
-        super().__init__(game, "alambic", Active, ID["distillation"], x, y, "pink")
+    def __init__(self, state, x, y):
+        super().__init__(state, "alambic", Active, ID["distillation"], x, y, "pink")
 
 # Please change my class name and my name property
 class Sublime(Tool):
-    def __init__(self, game, x, y):
-        super().__init__(game, "outil de sublimation", Active, ID["sublimation"], x, y, "purple")
+    def __init__(self, state, x, y):
+        super().__init__(state, "outil de sublimation", Active, ID["sublimation"], x, y, "purple")
 
 # Please change my class name and my name property
 class Ferment(Tool):
-    def __init__(self, game, x, y):
-        super().__init__(game, "outil de fermentation", Active, ID["fermentation"], x, y, "green")
+    def __init__(self, state, x, y):
+        super().__init__(state, "outil de fermentation", Active, ID["fermentation"], x, y, "green")
 
 # We propably want this class to herit from Tool
 class Cauldron(pyg.sprite.Sprite):

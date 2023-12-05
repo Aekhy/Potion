@@ -1,9 +1,9 @@
 from states.state import State
-from general_settings.private_settings import SCREEN_WIDTH
+from general_settings.private_settings import *
 from inventory.drag_and_drop import DragAndDrop
-from inventory.game_inventory import GameInventory
-from items.recipe import *
 from states.nav import Nav
+from tools.tools import Freezer, Alembic
+
 import pygame as pyg
 
 class ToolsScreen(State):
@@ -12,7 +12,6 @@ class ToolsScreen(State):
         self.sprites = pyg.sprite.LayeredUpdates()
         self.slots = {"take":[],"add":[]}
 
-        self.recipe_draw = RecipeDraw(self, ((SCREEN_WIDTH + TILE_SIZE )//TILE_SIZE)*2/3, 1, 6)
         # Very important to do that in each state that use
         # game_inventory. It crashes if not done
         self.game.game_inventory.set_state(self)
@@ -23,11 +22,12 @@ class ToolsScreen(State):
 
         self.nav_menu = Nav(0, 0*50, 64, self.sprites, 0, ["Chaudron en cours d'utilisation"])
         
-        self._dragged_from_tool = False
+        # Tools
+        self.freezer = Freezer(self,TILE_SIZE*8,TILE_SIZE*2)
+        self.alembic = Alembic(self,TILE_SIZE*10,TILE_SIZE*2) 
 
 
     def update_drag_and_drop(self):
-        self.recipe_draw.update_state()
         self.game.game_inventory.update_slots()
 
     def events(self):
@@ -44,20 +44,24 @@ class ToolsScreen(State):
                         break
                     
             elif event.type == pyg.MOUSEBUTTONDOWN:
-                authorized_slots_take = self._game.game_inventory.slots["take"]+self.slots["take"]
-                iterable_slots_take = self.game.game_inventory.get_slot_list() + self.recipe_draw.get_slots()
-                self._drag_and_drop.take(authorized_slots_take, iterable_slots_take, event)
-                # if we pressed the finish button, we call the cauldron's finish function
+                if self.alembic.finish_button.rect.collidepoint(event.pos):
+                    self.alembic.apply_effect()
+                elif self.freezer.finish_button.rect.collidepoint(event.pos):
+                    self.freezer.apply_effect()
+                else:
+                    authorized_slots_take = self._game.game_inventory.slots["take"]+self.slots["take"]
+                    iterable_slots_take = self.game.game_inventory.get_slot_list()
+                    self._drag_and_drop.take(authorized_slots_take, iterable_slots_take, event)
                       
             elif event.type == pyg.MOUSEBUTTONUP:  
                 itemAdded = [False]
                 # if we dropped in the cauldron sprite   
                
                 if not itemAdded[0]:
-                    fct = None if self._dragged_from_tool else self.cauldron.reset
+                    fct = None
                     # self._game.game_inventory.get_slot_list()
                     authorized_slots_add = self._game.game_inventory.slots["add"]+self.slots["add"]
-                    iterable_slots_add = self._game.game_inventory.get_slot_list() + self.recipe_draw.get_slots()
+                    iterable_slots_add = self._game.game_inventory.get_slot_list()
                     self._drag_and_drop.drop(authorized_slots_add, iterable_slots_add, event, fct)
 
             elif event.type == pyg.KEYDOWN:

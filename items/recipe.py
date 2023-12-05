@@ -56,8 +56,10 @@ class PotionRecipe(Item):
             self.name = make["name"]
 
     def update_data(self, base, active, potion):
-        self._base_recipe.update_data(base)
-        self._active_recipe.update_data(active)
+        if base != None:
+            self._base_recipe.update_data(base)
+        if active != None:
+            self._active_recipe.update_data(active)
         self.name = "Recette " + potion.name
 
     def get_info_save(self):

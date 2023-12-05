@@ -17,15 +17,15 @@ class Game:
     def start(self):
         # When we start the game at the beginning or after a pause for example
         self.inGame = True
-        # The game_sprites group will be updated at every tick
-        self.game_sprites = pyg.sprite.LayeredUpdates()
+        # The sprites group will be updated at every tick
+        self.sprites = pyg.sprite.LayeredUpdates()
 
         self.slots = {"take":[],"add":[]}
         self.holding_item = {'bool':False}
         
         # Game objects
-        self.cauldron = Cauldron(self, self.game_sprites, 100, 100)
-        self.inventory = Inventory(self, self.game_sprites, (SCREEN_WIDTH-5*INVENTORY_SLOT_SIZE)/2,SCREEN_HEIGHT-2*INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT)
+        self.cauldron = Cauldron(self, self.sprites, 100, 100)
+        self.inventory = Inventory(self, self.sprites, (SCREEN_WIDTH-5*INVENTORY_SLOT_SIZE)/2,SCREEN_HEIGHT-2*INVENTORY_SLOT_SIZE, INVENTORY_LAYOUT)
         self.freezer = Freezer(self,400,50)
         self.alembic = Alembic(self,500,50) 
 
@@ -101,9 +101,9 @@ class Game:
                                                             "bottomright",
                                                             slot.quantity_font_size,
                                                             slot.quantity_font_color)
-                self.game_sprites.add(self.holding_item['image'])
-                self.holding_item['name'].add_to_group(self.game_sprites)
-                self.holding_item['quantity_sprite'].add_to_group(self.game_sprites)
+                self.sprites.add(self.holding_item['image'])
+                self.holding_item['name'].add_to_group(self.sprites)
+                self.holding_item['quantity_sprite'].add_to_group(self.sprites)
 
 
     def drop(self, event):
@@ -158,7 +158,7 @@ class Game:
                                                             "bottomright",
                                                             QUANTITY_FONT_SIZE_DEFAULT,
                                                             QUANTITY_FONT_COLOR_DEFAULT)
-                holding_item['quantity_sprite'].add_to_group(self.game_sprites)               
+                holding_item['quantity_sprite'].add_to_group(self.sprites)               
             else:
                 if not drop_allowed:
                     self.slot_source.add_item(holding_item['item'], holding_item['quantity'])
@@ -173,7 +173,7 @@ class Game:
 
     def update(self):
         # Async game updates
-        self.game_sprites.update()
+        self.sprites.update()
 
     def draw(self):
         # Game sprite drawing loop
@@ -181,7 +181,7 @@ class Game:
         self.screen.fill(COLORS['white'])
 
         # Print our sprites
-        self.game_sprites.draw(self.screen)
+        self.sprites.draw(self.screen)
         
 
         # Show the final screen
