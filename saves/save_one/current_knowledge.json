@@ -256,10 +256,10 @@
     },
     "alchemical_property": {
         "sortilege": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "charme": {
             "img": false,
@@ -292,10 +292,10 @@
             "active_effect": false
         },
         "contre-sort": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "enchantement": {
             "name": false,
@@ -336,12 +336,12 @@
             "alchemical_property": false
         },
         "PotionRateBase": {
-            "name": false,
-            "description": false,
-            "img": false,
-            "base": false,
-            "active": false,
-            "alchemical_property": false
+            "name": true,
+            "description": true,
+            "img": true,
+            "base": true,
+            "active": true,
+            "alchemical_property": true
         },
         "PotionRateActive": {
             "name": false,

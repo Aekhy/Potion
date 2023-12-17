@@ -155,7 +155,6 @@ class Substance(Item):
         accordingly.
         :return: nothing (None). DO NOT USE THE RETURNED VALUE AS THE NODE FOUND BECAUSE IT'S NOT
         """
-        print("NOOOOODE", self._node)
         if self._node == None:
             if self._type == ID["base"]:
                 neutre = ID["origine"]
@@ -242,8 +241,6 @@ class Substance(Item):
         """
 
         res = new_ingredient.type == self._type
-        print(new_ingredient.type, self._type)
-        print("add_iv2",res)
         if res:
             self._ingredients.append(new_ingredient)
             self.add_characteristics_V2(new_ingredient)
@@ -283,7 +280,7 @@ class Base(Substance):
     effect = property(get_effect, set_effect)
 
     def get_name(self):
-        return f"Mixture astrale {self._node.capitalize()}"
+        return f"Mixture astrale {self._node.capitalize()} {self._effect.capitalize() if self._effect is not None else ""}"
 
     name = property(get_name)
 
@@ -327,13 +324,13 @@ class Active(Substance):
         return self._effect
 
     def set_effect(self, new_effect):
-        if self._effect == None and new_effect in [ID["fermentation"], ID["distillation"], ID["sublimation"]]:
+        if self._effect is None and new_effect in [ID["fermentation"], ID["distillation"], ID["sublimation"]]:
             self._effect = new_effect
 
     effect = property(get_effect, set_effect)
 
     def get_name(self):
-        return f"Mixture élémentaire {self._node.capitalize()}"
+        return f"Mixture élémentaire {self._node.capitalize()} {self._effect.capitalize() if self._effect is not None else ""}"
 
     name = property(get_name)
 
@@ -472,7 +469,7 @@ class Potion(Item):
                     self._active.effect = new_effect
 
     # for now, this code is in potion but it will be else where in the end (in the cauldron for example)
-    def update_info(self):
+    def update_info(self, game=None):
         """
         The function updates the name and description of a potion ID["base"]d on its
         planet, element and alchemical property.
@@ -491,6 +488,7 @@ class Potion(Item):
                     key = self._active.node
 
                 print("--------- tmp : ",tmp)
+                print("KEY", key)
                 if key in tmp.keys():
                     tmp = tmp[key]
                 else:
@@ -498,12 +496,26 @@ class Potion(Item):
                     # tmp = tmp[ID["neutre"]]
                     break
                 if tmp["level"] == END:
+                    print("j'atteins le lvl END")
                     break
 
             potion = tmp
+            if potion["level"] == END:
+               n = ID[potion["name"]]
+            elif potion["level"] == MIDDLE:
+                n = ID[potion["neutre"]["name"]]
+            elif potion["level"] == TOP:
+                n = ID[potion["origine"]["name"]]
             # potion["name"] is like an id
-            self._name = POTION_DATA[potion["name"]]["name"]
-            self._description = POTION_DATA[potion["name"]]["description"]
+            print("MON ARBRE\n",potion)
+            self._name = POTION_DATA[n]["name"]
+            self._description = POTION_DATA[n]["description"]
+            
+            # knowledge
+            if game is not None and potion["level"] == END:
+            # potion
+                game.knowledge.UpdatePotionKnowledge(n,
+                                                     "name", "img", "description", "base", "active", "alchemical_property")
 
     def __eq__(self, other):
         result = False

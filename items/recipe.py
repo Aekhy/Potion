@@ -164,9 +164,10 @@ class PotionRecipeDraw:
         self._sprites = sprites
         
         b = SubstanceRecipeDraw(recipe._base_recipe, state, sprites, x, y, width, 8, show)
-        h = b.get_height() 
-        a = SubstanceRecipeDraw(recipe._active_recipe, state, sprites, x, y+h, width, 8, show)
-        n = TextOutlined(x, y, recipe.name.replace("Recette ", ""), 1, "topleft")
+        h1 = b.get_height() 
+        a = SubstanceRecipeDraw(recipe._active_recipe, state, sprites, x, y+h1, width, 8, show)
+        h2 = a.get_height()
+        n = TextOutlined(x * TILE_SIZE, (y+h1+h2) * TILE_SIZE, recipe.name.replace("Recette ", ""), 1, "topleft")
         
         self._group = {
             "name": n,
@@ -182,7 +183,8 @@ class PotionRecipeDraw:
         self._group["active"].update_all(recipe._active_recipe)
 
         self._group["name"].kill()
-        self._group["name"] = TextOutlined(self._x, self._y, recipe.name, 1)
+        h = self._group["active"].get_height() + self._group["base"].get_height()
+        self._group["name"] = TextOutlined(self._x * TILE_SIZE , (self._y+h) * TILE_SIZE, recipe.name, 1)
         if show:
             self._group["name"].add_to_group(self._sprites)
 

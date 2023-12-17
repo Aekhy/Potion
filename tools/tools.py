@@ -9,9 +9,9 @@ from general_settings.private_settings import LAYERS
 import pygame as pyg
 # we probably want this class to be a child of pygame.sprite.Sprite
 class Tool(pyg.sprite.Sprite):
-    def __init__(self, game, name: str, mixture_type: Base | Active, effect:str, x, y, color, size=100, path: str = "",):
+    def __init__(self, state, name: str, mixture_type: Base | Active, effect:str, x, y, color, size=100, path: str = "",):
         # Engine
-        self._game = game
+        self._state = state
         self._name = name
         # _mixture_type is used to know which kind of
         # subtances it can work with
@@ -26,7 +26,7 @@ class Tool(pyg.sprite.Sprite):
         self._x = x
         self._y = y
         self._path = path
-        self.group = self._game.game_sprites
+        self.group = self._state.sprites
         self._layer = LAYERS["tools"]
         if path == "":
             self.image = pyg.Surface((size,size))
@@ -36,7 +36,7 @@ class Tool(pyg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
 
-        self._mixture_slot = Slot(self._game, self.group ,True,False,None,0,self._x - 10 ,self._y - 10 ,self._layer+0.1, 50)
+        self._mixture_slot = Slot(self._state, self.group ,True,False,None,0,self._x - 10 ,self._y - 10 ,self._layer+0.1, 50)
         
         self.finish_button = TextOutlined(self._x , self._y + size, self._effect, self.layer+0.1,"topleft")
         self.finish_button.add_to_group(self.group)
@@ -59,16 +59,24 @@ class Tool(pyg.sprite.Sprite):
             end_res = (True, res_s, res_q)
         else:
             end_res = (False,new_mixture,quantity)
+        print("end res:",end_res)
         return end_res
 
     def apply_effect(self):
-        if self._mixture != None:
+        if (self._mixture is not None):
             res = True
             if isinstance(self._mixture, Potion):
                 self._mixture.add_effect(self._effect)
-                self._mixture.update_info()
+                self._mixture.update_info(self._state.game)
+                # alchemical property
+                if self._mixture.alchemical_property is not None:
+                    self._state.game.knowledge.UpdateAlchemiclPropertyKnowledge(ID[self._mixture.alchemical_property], 
+                                                                "name", "img", "base_effect","active_effect")
             else:
                 self._mixture.effect = self._effect
+                # knowledge
+                self._state.game.knowledge.UpdateEffectKnowledge(ID[self._effect], "name", "img", "type")
+            self._mixture_slot.take_item()
             self._mixture_slot.add_item(self._mixture)
             print("effet ajouté")
         else:
@@ -197,19 +205,16 @@ class Cauldron(pyg.sprite.Sprite):
                 if self._base == None:
                     self._base = Base()
                 res = self._base.add_ingredient(new_ingredient)
-                print("b:", res)
             # Add to self._active
             else:  # Type == ACTIVE
                 if self._active == None:
                     self._active = Active()
                 res = self._active.add_ingredient(new_ingredient)
-                print("a:", res)
 
             # Time to make a potion
             if self._base != None and self._active != None:
                 self._potion = Potion("Mixture", self._base, self._active)
                 res = self._potion.add_ingredient(new_ingredient)
-                print("m:", res)
 
 
         return res
@@ -253,10 +258,8 @@ class Cauldron(pyg.sprite.Sprite):
         If we can add something, return true.
         """
         if not self._finished:
-            print("smth:",something)
             if isinstance(something, Ingredient):
                 res = self.add_ingredient(something)
-                print("res:",res)
             elif isinstance(something, Base):
                 res = self.add_base(something)
             elif isinstance(something, Active):
