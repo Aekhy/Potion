@@ -120,9 +120,9 @@
     },
     "effect": {
         "chauffer": {
-            "name": false,
-            "img": false,
-            "type": false
+            "name": true,
+            "img": true,
+            "type": true
         },
         "geler": {
             "name": false,
@@ -274,10 +274,10 @@
             "active_effect": false
         },
         "malefice": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "ensorcellement": {
             "name": false,

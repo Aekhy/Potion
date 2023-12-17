@@ -12,7 +12,6 @@ class CauldronScreen(State):
         super().__init__(game)
         self.sprites = pyg.sprite.LayeredUpdates()
         self.slots = {"take":[],"add":[]}
-
         self.cauldron = Cauldron(self, self.sprites, SCREEN_WIDTH/2, 120)
         self.recipe_draw = RecipeDraw(self, ((SCREEN_WIDTH + TILE_SIZE )//TILE_SIZE)*2/3, 1, 6)
         # Very important to do that in each state that use

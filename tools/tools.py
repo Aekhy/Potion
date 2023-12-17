@@ -286,6 +286,8 @@ class Cauldron(pyg.sprite.Sprite):
             print("potion finie")
             self._finished = True
             if self._mixture_slot.is_empty:
+                if isinstance(self.mixture, Potion):
+                    self.mixture.update_info(self._origin.game)
                 self._mixture_slot.add_item(self.mixture)
                 self.reset()
         else:

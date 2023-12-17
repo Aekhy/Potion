@@ -513,6 +513,9 @@ class Potion(Item):
             
             # knowledge
             if game is not None and potion["level"] == END:
+            # alchemical property 
+                game.knowledge.UpdateAlchemiclPropertyKnowledge(ID[self.alchemical_property], 
+                                                                "name", "img", "base_effect","active_effect")
             # potion
                 game.knowledge.UpdatePotionKnowledge(n,
                                                      "name", "img", "description", "base", "active", "alchemical_property")
