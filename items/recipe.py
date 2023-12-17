@@ -189,7 +189,8 @@ class PotionRecipeDraw:
             self._group["name"].add_to_group(self._sprites)
 
     def add_ingredient(self, ingredient: Ingredient, show=True):
-        self._group["ingredient.type"].add_ingredient(ingredient, show)
+        # changed
+        self._group[ingredient.type].add_ingredient(ingredient, show)
 
     def show(self):
         self.kill()
@@ -293,6 +294,7 @@ class RecipeDraw:
         return not self._visualise_recipe_slot.is_empty
 
     def update_draw(self):
+        print("update draw called")
         if self.has_visualise():
             recipe = self._visualise_recipe_slot.item
             x = self._x
@@ -318,6 +320,9 @@ class RecipeDraw:
                 b = Base(self._state.cauldron._base.get_info_save())
                 a = Active(self._state.cauldron._active.get_info_save())
                 p = Potion("", Base(), Active(), self._state.cauldron._potion.get_info_save())
+                print("info save base ",self._state.cauldron._base.get_info_save(), 
+                      ", info save active ",self._state.cauldron._active.get_info_save(), self._state.cauldron._active._ingredients,
+                        ",info save potion", self._state.cauldron._potion.get_info_save())
                 recipe.update_data(b, a ,p)
                 self._modify_recipe_slot.add_item(recipe)
                 
