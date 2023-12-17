@@ -145,9 +145,9 @@
             "type": false
         },
         "fermentation": {
-            "name": false,
-            "img": false,
-            "type": false
+            "name": true,
+            "img": true,
+            "type": true
         }
     },
     "base": {

@@ -37,6 +37,10 @@ class ToolsScreen(State):
         self._ferment = Ferment(self, 14*TILE_SIZE,6*TILE_SIZE)
 
 
+        # go to cauldron
+        self.cauldron_title = TextOutlined(TILE_SIZE, 11*TILE_SIZE, "Chaudron", 1, "topleft")
+        self.cauldron_title.add_to_group(self.sprites)
+
     def update_drag_and_drop(self):
         self.game.game_inventory.update_slots()
 
@@ -54,7 +58,12 @@ class ToolsScreen(State):
                         break
                     
             elif event.type == pyg.MOUSEBUTTONDOWN:
-                if self._heater.finish_button.rect.collidepoint(event.pos):
+                if self.cauldron_title.rect.collidepoint(event.pos):
+                    self.game.game_inventory.close()
+                    self.exit_state()
+                    self.game.states("CauldronScreen").enter_state()
+
+                elif self._heater.finish_button.rect.collidepoint(event.pos):
                     self._heater.apply_effect()
                 elif self._freezer.finish_button.rect.collidepoint(event.pos):
                     self._freezer.apply_effect()

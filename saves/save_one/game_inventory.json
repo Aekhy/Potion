@@ -11,13 +11,13 @@
                     "type": "Slot",
                     "item_type": "ingredient",
                     "item_data": "eau",
-                    "quantity": 5
+                    "quantity": 2
                 },
                 {
                     "type": "Slot",
                     "item_type": "ingredient",
-                    "item_data": "eau",
-                    "quantity": 2
+                    "item_data": "braises",
+                    "quantity": 1
                 },
                 {
                     "type": "Slot",
@@ -29,10 +29,13 @@
                     "type": "Slot",
                     "item_type": "ingredient",
                     "item_data": "sel",
-                    "quantity": 4
+                    "quantity": 2
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "sel",
+                    "quantity": 1
                 }
             ],
             [
@@ -40,7 +43,10 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "braises",
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -452,7 +458,21 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "base",
+                    "item_data": {
+                        "ingredients": [
+                            "lavande"
+                        ],
+                        "type": "base",
+                        "node": "origine",
+                        "characteristics": [
+                            "lumineux",
+                            "sec"
+                        ],
+                        "effect": null
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -498,7 +518,7 @@
                             "liquide",
                             "humide"
                         ],
-                        "effect": "geler"
+                        "effect": null
                     },
                     "quantity": 1
                 },
@@ -824,7 +844,38 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "potion",
+                    "item_data": {
+                        "ingredients": [],
+                        "base": {
+                            "ingredients": [
+                                "eau"
+                            ],
+                            "type": "base",
+                            "node": "origine",
+                            "characteristics": [
+                                "liquide",
+                                "humide"
+                            ],
+                            "effect": "geler"
+                        },
+                        "active": {
+                            "ingredients": [
+                                "braises",
+                                "sel"
+                            ],
+                            "type": "active",
+                            "node": "feu",
+                            "characteristics": [
+                                "sec",
+                                "mineur"
+                            ],
+                            "effect": "fermentation"
+                        },
+                        "alchemical_property": "ensorcellement"
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -833,7 +884,48 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "potion",
+                    "item_data": {
+                        "ingredients": [
+                            "lavande",
+                            "braises",
+                            "eau"
+                        ],
+                        "base": {
+                            "ingredients": [
+                                "lavande",
+                                "lavande",
+                                "eau"
+                            ],
+                            "type": "base",
+                            "node": "origine",
+                            "characteristics": [
+                                "lumineux",
+                                "sec",
+                                "lumineux",
+                                "liquide"
+                            ],
+                            "effect": null
+                        },
+                        "active": {
+                            "ingredients": [
+                                "sel",
+                                "braises"
+                            ],
+                            "type": "active",
+                            "node": "neutre",
+                            "characteristics": [
+                                "sec",
+                                "mineur",
+                                "sec",
+                                "chaud"
+                            ],
+                            "effect": null
+                        },
+                        "alchemical_property": null
+                    },
+                    "quantity": 1
                 }
             ],
             [
@@ -841,7 +933,36 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "potion",
+                    "item_data": {
+                        "ingredients": [
+                            "braises",
+                            "lavande"
+                        ],
+                        "base": {
+                            "ingredients": [
+                                "eau",
+                                "lavande"
+                            ],
+                            "type": "base",
+                            "node": "terre",
+                            "characteristics": [],
+                            "effect": "chauffer"
+                        },
+                        "active": {
+                            "ingredients": [
+                                "braises",
+                                "braises"
+                            ],
+                            "type": "active",
+                            "node": "feu",
+                            "characteristics": [],
+                            "effect": "sublimation"
+                        },
+                        "alchemical_property": "contre-sort"
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -898,29 +1019,6 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
                     "type": "Slot",
                     "item_type": "potion",
                     "item_data": {
@@ -952,6 +1050,29 @@
                         "alchemical_property": "sortilege"
                     },
                     "quantity": 1
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                }
+            ],
+            [
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
                 }
             ],
             [
@@ -1086,52 +1207,73 @@
         "0": [
             [
                 {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                }
+            ],
+            [
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                }
+            ],
+            [
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
                     "type": "Slot",
-                    "item_type": "paper",
-                    "quantity": 2
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
+                    "item_type": "potionRecipe",
+                    "item_data": {
+                        "name": "Recette Potion rat\u00e9",
+                        "base_recipe": {
+                            "name": "Recette origine",
+                            "ingredients": [
+                                "eau"
+                            ],
+                            "effect": "geler",
+                            "finished": false
+                        },
+                        "active_recipe": {
+                            "name": "Recette feu",
+                            "ingredients": [
+                                "braises",
+                                "sel"
+                            ],
+                            "effect": "fermentation",
+                            "finished": false
+                        },
+                        "finished": false
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
