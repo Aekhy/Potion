@@ -82,6 +82,7 @@ class DragAndDrop:
             if not interact_with_tool:
                 for slot in slots_iterable:
                     if slot.rect.collidepoint(event.pos) and (slot.has_room(self._item)) and (slot in slots_add):
+                        print("passed")
                         self._drop_allowed = True
                         item, quantity = slot.add_item(self._item, self._quantity)
                         if quantity == self._quantity:

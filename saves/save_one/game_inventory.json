@@ -8,35 +8,6 @@
         "0": [
             [
                 {
-                    "type": "Slot",
-                    "item_type": "ingredient",
-                    "item_data": "eau",
-                    "quantity": 1
-                },
-                {
-                    "type": "Slot",
-                    "item_type": "ingredient",
-                    "item_data": "braises",
-                    "quantity": 1
-                },
-                {
-                    "type": "Slot",
-                    "item_type": "ingredient",
-                    "item_data": "eau",
-                    "quantity": 5
-                },
-                {
-                    "type": "Slot",
-                    "item_type": "ingredient",
-                    "item_data": "braises",
-                    "quantity": 4
-                },
-                {
-                    "type": "Slot"
-                }
-            ],
-            [
-                {
                     "type": "Slot"
                 },
                 {
@@ -64,6 +35,26 @@
                 },
                 {
                     "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                }
+            ],
+            [
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "braises",
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -990,9 +981,7 @@
                     "quantity": 3
                 },
                 {
-                    "type": "Slot",
-                    "item_type": "paper",
-                    "quantity": 1
+                    "type": "Slot"
                 },
                 {
                     "type": "Slot"

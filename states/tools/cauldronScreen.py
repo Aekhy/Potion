@@ -85,6 +85,8 @@ class CauldronScreen(State):
                     authorized_slots_add = self._game.game_inventory.slots["add"]+self.slots["add"]
                     iterable_slots_add = self._game.game_inventory.get_slot_list() + self.recipe_draw.get_slots()
                     self._drag_and_drop.drop(authorized_slots_add, iterable_slots_add, event, fct)
+                    # self._drag_and_drop.drop(authorized_slots_add, authorized_slots_add, event, fct)
+
 
             elif event.type == pyg.KEYDOWN:
                 match event.key:
