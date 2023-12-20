@@ -33,6 +33,8 @@ class MultipleInventory():
 
         
         self._nav_group = pygame.sprite.LayeredUpdates()
+        # debug
+        self._nav_index = 0
         if self._state != None:
             self.reset()
      
