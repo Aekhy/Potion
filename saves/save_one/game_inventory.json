@@ -29,7 +29,7 @@
                     "type": "Slot",
                     "item_type": "ingredient",
                     "item_data": "braises",
-                    "quantity": 5
+                    "quantity": 4
                 },
                 {
                     "type": "Slot"
@@ -40,7 +40,10 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "braises",
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"

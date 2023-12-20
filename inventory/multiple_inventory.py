@@ -1,5 +1,6 @@
 import pygame
 from inventory.inventory import Inventory
+from general_settings.private_settings import *
 from states.nav import Nav
 
 class MultipleInventory():
@@ -25,7 +26,7 @@ class MultipleInventory():
             tmp["group"] =  pygame.sprite.LayeredUpdates()
             # We are passing _game_inventory to make sure that all the slots 
             # that are created, register themselves in _game_inventory._slots
-            tmp["inventory"] = Inventory(self._game_inventory, tmp["group"], self._x, self._y+60,self._struct[str(i)], self._authorized_classes)
+            tmp["inventory"] = Inventory(self._game_inventory, tmp["group"], self._x, self._y+TILE_SIZE,self._struct[str(i)], self._authorized_classes)
         
             self._inventories[i] = tmp
 
@@ -76,7 +77,8 @@ class MultipleInventory():
                     else:
                         self.hover_nav = [True, i]
                     break
-
+       
+        
         if self.change_nav_index:
             self.change_nav_index = False
             if self.previous_index != None:
@@ -85,7 +87,8 @@ class MultipleInventory():
             self.set_nav(self._nav_index)
             for sprite in self._inventories[self._nav_index]["group"]:
                 sprite.add(self._state.sprites)
-
+        
+        self.nav.reset_colors()
         if self.hover_nav[0] and self.hover_nav[1] != self._nav_index:
             self.nav.hover_tab(self.hover_nav[1])
 
