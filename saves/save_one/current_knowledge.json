@@ -262,10 +262,10 @@
             "active_effect": true
         },
         "charme": {
-            "img": false,
-            "name": false,
-            "base_effect": false,
-            "active_effect": false
+            "img": true,
+            "name": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "transfiguration": {
             "name": false,
@@ -312,12 +312,12 @@
     },
     "potion": {
         "AquaVivacite": {
-            "name": false,
-            "description": false,
-            "img": false,
-            "base": false,
-            "active": false,
-            "alchemical_property": false
+            "name": true,
+            "description": true,
+            "img": true,
+            "base": true,
+            "active": true,
+            "alchemical_property": true
         },
         "PyroRenouveau": {
             "name": false,

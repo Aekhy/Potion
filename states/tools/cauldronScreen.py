@@ -2,7 +2,6 @@ from states.state import State
 from tools.tools import Cauldron
 from general_settings.private_settings import SCREEN_WIDTH
 from inventory.drag_and_drop import DragAndDrop
-from inventory.game_inventory import GameInventory
 from items.recipe import *
 from states.nav import Nav
 import pygame as pyg
@@ -60,11 +59,12 @@ class CauldronScreen(State):
                     if self.cauldron.finish_button.rect.collidepoint(event.pos):
                         self.cauldron.finish()
                     elif self.cauldron.mixture_slot.rect.collidepoint(event.pos):
-                        # if we dragged the item from the cauldron's output
-                        self._drag_and_drop.take([self.cauldron.mixture_slot], [self.cauldron.mixture_slot], event)
-                        newIndex = 2 if self._drag_and_drop.item.isPotion else 1
-                        self.game.game_inventory.change_nav_index(newIndex)
-                        # we open the right nav index so we don't have to do it manually
+                        if not self.cauldron.mixture_slot.is_empty:
+                            # if we dragged the item from the cauldron's output
+                            self._drag_and_drop.take([self.cauldron.mixture_slot], [self.cauldron.mixture_slot], event)
+                            newIndex = 2 if self._drag_and_drop.item.isPotion else 1
+                            self.game.game_inventory.change_nav_index(newIndex)
+                            # we open the right nav index so we don't have to do it manually
                     
             elif event.type == pyg.MOUSEBUTTONUP:  
                 itemAdded = [False]

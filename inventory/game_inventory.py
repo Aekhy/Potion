@@ -56,14 +56,12 @@ class GameInventory:
         # 1.5 cause 1 is height of top nav bar
         trash_slot_y = height_of_inventory + 1.5
         trash_slot_layer = 0
-        print(len(self._slots["take"]))
         self._trash_slot = Slot(self,self._state.sprites,
                                 True,True,
                                 None,0,
                                 trash_slot_x * TILE_SIZE,
                                 trash_slot_y * TILE_SIZE,
                                 trash_slot_layer)
-        print(len(self._slots["take"]))
         self._trash_slot
         # hardcoded 
         trash_label_x = trash_slot_x + 0.5

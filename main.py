@@ -8,7 +8,8 @@ from states.inventory_menu import InventoryMenu
 from states.ingredients_menu import IngredientsMenu
 from states.mixtures_menu import MixturesMenu
 from states.potions_menu import PotionsMenu
-from states.recipes_menu import RecipesMenu
+# from states.recipes_menu import RecipesMenu
+from states.supply_menu import SupplyMenu
 from states.options import Options
 from states.gameScreen import GameScreen
 from states.tools.cauldronScreen import CauldronScreen
@@ -46,8 +47,10 @@ class Game:
                     self._all_states[state] = MixturesMenu(self)
                 case "PotionsMenu":
                     self._all_states[state] = PotionsMenu(self)
-                case "RecipesMenu":
-                    self._all_states[state] = RecipesMenu(self)
+                # case "RecipesMenu":
+                #     self._all_states[state] = RecipesMenu(self)
+                case "SupplyMenu":
+                    self._all_states[state] = SupplyMenu(self)
                 case "Options":
                     self._all_states[state] = Options(self)
                 case "GameScreen":

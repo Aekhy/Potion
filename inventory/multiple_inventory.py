@@ -4,7 +4,7 @@ from general_settings.private_settings import *
 from states.nav import Nav
 
 class MultipleInventory():
-    def __init__(self, struct_json:dict, state, game_inventory, x, y, authorized_classes:dict=None) -> None:
+    def __init__(self, struct_json:dict, state, game_inventory, x, y, authorized_classes:dict=None, can_take=True, can_add=True) -> None:
         self._struct = struct_json
  
         # The goal of self._state is to get the _sprites (group)
@@ -18,7 +18,8 @@ class MultipleInventory():
         self._inventories = {}
         self._nav_text = []
         self._authorized_classes = authorized_classes
-
+        self.can_take = can_take
+        self.can_add = can_add
         for i in range(0, self._len):
             self._nav_text.append(str(i))
             tmp = {}
@@ -26,7 +27,7 @@ class MultipleInventory():
             tmp["group"] =  pygame.sprite.LayeredUpdates()
             # We are passing _game_inventory to make sure that all the slots 
             # that are created, register themselves in _game_inventory._slots
-            tmp["inventory"] = Inventory(self._game_inventory, tmp["group"], self._x, self._y+TILE_SIZE,self._struct[str(i)], self._authorized_classes)
+            tmp["inventory"] = Inventory(self._game_inventory, tmp["group"], self._x, self._y+TILE_SIZE,self._struct[str(i)], self._authorized_classes, self.can_take, self.can_add)
         
             self._inventories[i] = tmp
 
