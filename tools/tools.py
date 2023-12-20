@@ -206,13 +206,11 @@ class Cauldron(pyg.sprite.Sprite):
                     if self._base == None:
                         self._base = Base()
                     res = self._base.add_ingredient(new_ingredient)
-                    print("Liste des ingredients de la base :",self._base.get_info_save())
                 # Add to self._active
                 else:  # Type == ACTIVE
                     if self._active == None:
                         self._active = Active()
                     res = self._active.add_ingredient(new_ingredient)
-                    print("Liste des ingredients de l'actif :",self._active.get_info_save())
 
             if (self._base is not None) and (self._active is not None):
                 # Time to make a potion
@@ -221,7 +219,6 @@ class Cauldron(pyg.sprite.Sprite):
                     res = True                
                 else:
                     res = self._potion.add_ingredient(new_ingredient)
-                print("dans potion" , self._potion.active.ingredients)
 
         return res
 
