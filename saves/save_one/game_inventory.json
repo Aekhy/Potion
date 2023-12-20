@@ -37,7 +37,7 @@
                     "type": "Slot",
                     "item_type": "ingredient",
                     "item_data": "eau",
-                    "quantity": 4
+                    "quantity": 2
                 },
                 {
                     "type": "Slot"
@@ -74,13 +74,13 @@
                     "type": "Slot",
                     "item_type": "ingredient",
                     "item_data": "sel",
-                    "quantity": 5
+                    "quantity": 4
                 },
                 {
                     "type": "Slot",
                     "item_type": "ingredient",
                     "item_data": "braises",
-                    "quantity": 4
+                    "quantity": 2
                 },
                 {
                     "type": "Slot"
@@ -486,7 +486,21 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "base",
+                    "item_data": {
+                        "ingredients": [
+                            "eau"
+                        ],
+                        "type": "base",
+                        "node": "origine",
+                        "characteristics": [
+                            "liquide",
+                            "humide"
+                        ],
+                        "effect": null
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -518,7 +532,18 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "base",
+                    "item_data": {
+                        "ingredients": [
+                            "braises"
+                        ],
+                        "type": "active",
+                        "node": "feu",
+                        "characteristics": [],
+                        "effect": null
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -1079,7 +1104,7 @@
                 {
                     "type": "Slot",
                     "item_type": "paper",
-                    "quantity": 3
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"

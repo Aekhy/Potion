@@ -60,7 +60,7 @@ class CauldronScreen(State):
                         self.cauldron.finish()
                     elif self.cauldron.mixture_slot.rect.collidepoint(event.pos):
                         if not self.cauldron.mixture_slot.is_empty:
-                            # if we dragged the item from the cauldron's output
+                        # if we dragged the item from the cauldron's output
                             self._drag_and_drop.take([self.cauldron.mixture_slot], [self.cauldron.mixture_slot], event)
                             newIndex = 2 if self._drag_and_drop.item.isPotion else 1
                             self.game.game_inventory.change_nav_index(newIndex)
