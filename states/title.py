@@ -79,12 +79,11 @@ class Title(State):
                 self.preselected_choice = 0
                 self._game.inGame = False
             elif self.preselected_choice == 0: # play
-                self.preselected_choice = 0
 
                 # Loading the informations about the dirname
                 self._game.save_manager.LoadSave("saves/save_one")
 
-                new_state = self._game.states("GameScreen")
+                new_state = self._game.states("CauldronScreen")
                 new_state.enter_state()
             # elif self.preselected_choice == 1:
             #     self.preselected_choice = 0
