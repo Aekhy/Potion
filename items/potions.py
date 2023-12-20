@@ -280,7 +280,7 @@ class Base(Substance):
     effect = property(get_effect, set_effect)
 
     def get_name(self):
-        return f"Mixture astrale {self._node.capitalize()} {self._effect.capitalize() if self._effect is not None else ""}"
+        return f"Mixture astrale {self._node.capitalize()} {self._effect.capitalize() if self._effect is not None else ''}"
 
     name = property(get_name)
 
