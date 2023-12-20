@@ -239,7 +239,7 @@ class RecipeDraw:
         x = (self._x + 1/2 + self._width//4) * TILE_SIZE
         y = (self._y) * TILE_SIZE
         layer = 1
-        text = "Réécrire"
+        text = "Ecrire"
         self._label_modifiy = TextOutlined(x, y, text, layer, "topleft")
         self._label_modifiy.add_to_group(self._state.sprites)
 
