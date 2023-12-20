@@ -16,13 +16,10 @@ class Options(State):
         self.play_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 2, "Retour au jeu", 1)
         self.play_button.add_to_group(self.sprites)
 
-        self.settings_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 3, "Paramètres", 1)
-        self.settings_button.add_to_group(self.sprites)
-
-        self.main_menu_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 4, "Retour au menu principal", 1)
+        self.main_menu_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 3, "Retour au menu principal", 1)
         self.main_menu_button.add_to_group(self.sprites)
 
-        self.exit_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 5, "Quitter le jeu", 1)
+        self.exit_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 4, "Quitter le jeu", 1)
         self.exit_button.add_to_group(self.sprites)
 
 
@@ -30,12 +27,11 @@ class Options(State):
         self.chose = False
         self.choices = {
             0:{"rect" :self.play_button.rect}, # Go back to game
-            1:{"rect" :self.settings_button.rect}, # Settings
-            2:{"rect" :self.main_menu_button.rect},  # Go back to main menu
-            3:{"rect" :self.exit_button.rect} # Quit game
+            1:{"rect" :self.main_menu_button.rect},  # Go back to main menu
+            2:{"rect" :self.exit_button.rect} # Quit game
         }
 
-        self.len_choice = 4
+        self.len_choice = 3
 
         self.preselection_sprite = pygame.sprite.Sprite(self.sprites)
         self.preselection_sprite.image = pygame.Surface((100,DEFAULT_FONT_SIZE))
@@ -87,7 +83,7 @@ class Options(State):
             # elif self.preselected_choice == 1:
             #     new_state = self._game.states("Settings")
             #     new_state.enter_state()
-            elif self.preselected_choice == 2: # Go back to main menu
+            elif self.preselected_choice == 1: # Go back to main menu
                 self._game.state_stack = []
                 new_state = self._game.states("Title")
                 new_state.enter_state()

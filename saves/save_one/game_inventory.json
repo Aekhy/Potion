@@ -11,13 +11,19 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "lavande",
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "crapaud",
+                    "quantity": 1
                 },
                 {
                     "type": "Slot",
@@ -30,6 +36,29 @@
                 {
                     "type": "Slot"
                 },
+                {
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "braises",
+                    "quantity": 4
+                },
+                {
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "lavande",
+                    "quantity": 4
+                },
+                {
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "sel",
+                    "quantity": 2
+                },
+                {
+                    "type": "Slot"
+                }
+            ],
+            [
                 {
                     "type": "Slot"
                 },
@@ -37,7 +66,7 @@
                     "type": "Slot",
                     "item_type": "ingredient",
                     "item_data": "eau",
-                    "quantity": 2
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -45,22 +74,8 @@
                 {
                     "type": "Slot",
                     "item_type": "ingredient",
-                    "item_data": "crapaud",
+                    "item_data": "braises",
                     "quantity": 3
-                }
-            ],
-            [
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
                 },
                 {
                     "type": "Slot"
@@ -74,16 +89,16 @@
                     "type": "Slot",
                     "item_type": "ingredient",
                     "item_data": "sel",
-                    "quantity": 4
-                },
-                {
-                    "type": "Slot",
-                    "item_type": "ingredient",
-                    "item_data": "braises",
                     "quantity": 2
                 },
                 {
                     "type": "Slot"
+                },
+                {
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "eau",
+                    "quantity": 3
                 },
                 {
                     "type": "Slot"
@@ -103,7 +118,10 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "sel",
+                    "quantity": 3
                 },
                 {
                     "type": "Slot"
@@ -117,7 +135,10 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "ingredient",
+                    "item_data": "braises",
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -455,7 +476,18 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "base",
+                    "item_data": {
+                        "ingredients": [
+                            "crapaud"
+                        ],
+                        "type": "active",
+                        "node": "eau",
+                        "characteristics": [],
+                        "effect": null
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -883,7 +915,42 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "potion",
+                    "item_data": {
+                        "ingredients": [
+                            "braises"
+                        ],
+                        "base": {
+                            "ingredients": [
+                                "eau"
+                            ],
+                            "type": "base",
+                            "node": "origine",
+                            "characteristics": [
+                                "liquide",
+                                "humide"
+                            ],
+                            "effect": "geler"
+                        },
+                        "active": {
+                            "ingredients": [
+                                "sel",
+                                "braises"
+                            ],
+                            "type": "active",
+                            "node": "neutre",
+                            "characteristics": [
+                                "sec",
+                                "mineur",
+                                "sec",
+                                "chaud"
+                            ],
+                            "effect": "sublimation"
+                        },
+                        "alchemical_property": "enchantement"
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -944,7 +1011,40 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "potion",
+                    "item_data": {
+                        "ingredients": [
+                            "sel"
+                        ],
+                        "base": {
+                            "ingredients": [
+                                "eau"
+                            ],
+                            "type": "base",
+                            "node": "origine",
+                            "characteristics": [
+                                "liquide",
+                                "humide"
+                            ],
+                            "effect": "mixer"
+                        },
+                        "active": {
+                            "ingredients": [
+                                "crapaud",
+                                "sel"
+                            ],
+                            "type": "active",
+                            "node": "eau",
+                            "characteristics": [
+                                "sec",
+                                "mineur"
+                            ],
+                            "effect": "distillation"
+                        },
+                        "alchemical_property": "transfiguration"
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -997,7 +1097,32 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "potion",
+                    "item_data": {
+                        "ingredients": [],
+                        "base": {
+                            "ingredients": [
+                                "eau",
+                                "lavande"
+                            ],
+                            "type": "base",
+                            "node": "terre",
+                            "characteristics": [],
+                            "effect": "geler"
+                        },
+                        "active": {
+                            "ingredients": [
+                                "braises"
+                            ],
+                            "type": "active",
+                            "node": "feu",
+                            "characteristics": [],
+                            "effect": "distillation"
+                        },
+                        "alchemical_property": "charme"
+                    },
+                    "quantity": 1
                 },
                 {
                     "type": "Slot"
@@ -1102,9 +1227,7 @@
         "0": [
             [
                 {
-                    "type": "Slot",
-                    "item_type": "paper",
-                    "quantity": 1
+                    "type": "Slot"
                 },
                 {
                     "type": "Slot"
@@ -1166,7 +1289,9 @@
                     "type": "Slot"
                 },
                 {
-                    "type": "Slot"
+                    "type": "Slot",
+                    "item_type": "paper",
+                    "quantity": 3
                 },
                 {
                     "type": "Slot"

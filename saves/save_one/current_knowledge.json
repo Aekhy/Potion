@@ -125,9 +125,9 @@
             "type": true
         },
         "geler": {
-            "name": false,
-            "img": false,
-            "type": false
+            "name": true,
+            "img": true,
+            "type": true
         },
         "mixer": {
             "name": false,
@@ -135,9 +135,9 @@
             "type": false
         },
         "distillation": {
-            "name": false,
-            "img": false,
-            "type": false
+            "name": true,
+            "img": true,
+            "type": true
         },
         "sublimation": {
             "name": false,
@@ -268,10 +268,10 @@
             "active_effect": true
         },
         "transfiguration": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "malefice": {
             "name": true,
@@ -298,10 +298,10 @@
             "active_effect": true
         },
         "enchantement": {
-            "name": false,
-            "img": false,
-            "base_effect": false,
-            "active_effect": false
+            "name": true,
+            "img": true,
+            "base_effect": true,
+            "active_effect": true
         },
         "benediction": {
             "name": false,
@@ -320,12 +320,12 @@
             "alchemical_property": true
         },
         "PyroRenouveau": {
-            "name": false,
-            "description": false,
-            "img": false,
-            "base": false,
-            "active": false,
-            "alchemical_property": false
+            "name": true,
+            "description": true,
+            "img": true,
+            "base": true,
+            "active": true,
+            "alchemical_property": true
         },
         "GuerisonStandard": {
             "name": false,
