@@ -16,21 +16,17 @@ class Title(State):
         self.play_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice*2, "Jouer", 1)
         self.play_button.add_to_group(self.sprites)
 
-        self.settings_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 3, "Paramètres", 1)
-        self.settings_button.add_to_group(self.sprites)
-
-        self.exit_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 4, "Quitter", 1)
+        self.exit_button = TextOutlined(SCREEN_WIDTH/2, SCREEN_HEIGHT/4+self.space_between_choice * 3, "Quitter", 1)
         self.exit_button.add_to_group(self.sprites)
 
         self.preselected_choice = 0
         self.chose = False
         self.choices = {
             0:{"rect":self.play_button.rect},
-            1:{"rect":self.settings_button.rect}, # Go to settings
-            2:{"rect":self.exit_button.rect}
+            1:{"rect":self.exit_button.rect}
         }
 
-        self.len_choice = 3
+        self.len_choice = len(self.choices)
 
         self.preselection_sprite = pygame.sprite.Sprite(self.sprites)
         self.preselection_sprite.image = pygame.Surface((100,DEFAULT_FONT_SIZE))
