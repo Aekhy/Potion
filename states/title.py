@@ -65,6 +65,8 @@ class Title(State):
                     self.preselected_choice = (self.preselected_choice - 1) % self.len_choice
                 elif event.key == pygame.K_DOWN:
                     self.preselected_choice = (self.preselected_choice + 1) % self.len_choice
+                elif event.key == pygame.K_q:
+                    self._game.states("PopUp").enter_state()
 
     def update(self):
         # DEV

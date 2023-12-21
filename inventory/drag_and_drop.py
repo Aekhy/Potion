@@ -3,11 +3,12 @@ from inventory.settings import QUANTITY_FONT_COLOR_DEFAULT, QUANTITY_FONT_SIZE_D
 from general_settings.private_settings import LAYERS
 from utils.texts import TextOutlined
 
-
 class DragAndDrop:
-    def __init__(self, group, update_function) -> None:
+    def __init__(self, group, update_function, state=None) -> None:
         self._group = group
         self.update_function = update_function
+        # if you give state in draganddrop, state need to have a _id attribute
+        self._state = state
         self._holding = False
         self._item = None
         self._image = None
@@ -15,6 +16,7 @@ class DragAndDrop:
         self._quantity = None
         self._slot_source = None
         self._drop_allowed = False
+
 
     def is_holding(self):
         return self._holding
@@ -56,22 +58,56 @@ class DragAndDrop:
 
     def drop(self, slots_add, slots_iterable, event, cauldron_reset=None):
         if self._holding:
-
             self._drop_allowed = False
-            for slot in slots_iterable:
-                if slot.rect.collidepoint(event.pos) and (slot.has_room(self._item)) and (slot in slots_add):
-                    self._drop_allowed = True
-                    item, quantity = slot.add_item(self._item, self._quantity)
-                    if quantity == self._quantity:
-                        self._drop_allowed = False
-                    self._item, self._quantity = item, quantity
-                    self.update_function()
-                    break
+            interact_with_tool = False
+            if self._state is not None and self._state.id == "ToolsScreen":
+                if self._state._heater.rect.collidepoint(event.pos):
+                    interact_with_tool = True
+                    self._drop_allowed, self._item, self._quantity = self._state._heater.add_mixture(self._item, self._quantity)
+                elif self._state._freezer.rect.collidepoint(event.pos):
+                    interact_with_tool = True
+                    self._drop_allowed, self._item, self._quantity = self._state._freezer.add_mixture(self._item, self._quantity)
+                elif self._state._mortar.rect.collidepoint(event.pos):
+                    interact_with_tool = True
+                    self._drop_allowed, self._item, self._quantity = self._state._mortar.add_mixture(self._item, self._quantity)
+                elif self._state._alembic.rect.collidepoint(event.pos):
+                    interact_with_tool = True
+                    self._drop_allowed, self._item, self._quantity = self._state._alembic.add_mixture(self._item, self._quantity)
+                elif self._state._sublime.rect.collidepoint(event.pos):
+                    interact_with_tool = True
+                    self._drop_allowed, self._item, self._quantity = self._state._sublime.add_mixture(self._item, self._quantity)
+                elif self._state._ferment.rect.collidepoint(event.pos):
+                    interact_with_tool = True
+                    self._drop_allowed, self._item, self._quantity = self._state._ferment.add_mixture(self._item, self._quantity)
+            if not interact_with_tool:
+                for slot in slots_iterable:
+                    if slot.rect.collidepoint(event.pos) and (slot.has_room(self._item)) and (slot in slots_add):
+                        print("passed")
+                        self._drop_allowed = True
+                        item, quantity = slot.add_item(self._item, self._quantity)
+                        if quantity == self._quantity:
+                            self._drop_allowed = False
+                        self._item, self._quantity = item, quantity
+                        self.update_function()
+                        break
 
             if self._quantity == 0:
                 self._holding = False
                 if cauldron_reset is not None:
                     cauldron_reset()
+                if self._state is not None and self._state.id == "ToolsScreen":
+                    if self._state._heater.verify_slot(self._slot_source):
+                        self._state._heater.reset()
+                    elif self._state._freezer.verify_slot(self._slot_source):
+                        self._state._freezer.reset()
+                    elif self._state._mortar.verify_slot(self._slot_source):
+                        self._state._mortar.reset()
+                    elif self._state._alembic.verify_slot(self._slot_source):
+                        self._state._alembic.reset() 
+                    elif self._state._sublime.verify_slot(self._slot_source):
+                        self._state._sublime.reset() 
+                    elif self._state._ferment.verify_slot(self._slot_source):
+                        self._state._ferment.reset() 
 
             if self._drop_allowed and self._holding:
                 self.update_sprites()

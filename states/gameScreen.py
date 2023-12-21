@@ -6,7 +6,6 @@ from inventory.inventory import Inventory
 import pygame as pyg
 
 class GameScreen(State):
-    # For now, the Game class looks pretty much the same as the title class since the gameplay isnt much different
     def __init__(self, game):
         super().__init__(game)
         self.sprites = pyg.sprite.LayeredUpdates()

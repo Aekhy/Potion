@@ -32,7 +32,7 @@ class TextOutlined():
                     if self.pas == 1 and (i==1 and j==1):
                         self.rect = tmp.rect
                     self.place_rect(tmp, x-1+i, y-1+j, rect_position)
-                    tmp._layer = tmp_layer # type: ignore
+                    tmp._layer = tmp_layer
                     self.sprites.append(tmp)
 
         if not outline or self.pas == 2 :
@@ -41,7 +41,7 @@ class TextOutlined():
             self.rect = tmp.rect
 
             self.place_rect(tmp, x, y, rect_position)
-            tmp._layer = layer # type: ignore
+            tmp._layer = layer
             self.sprites.append(tmp)
 
     def place_rect(self, sprite, x, y, rect_position="center"):

@@ -3,6 +3,8 @@ from inventory.multiple_inventory import MultipleInventory
 from items.potions import Potion, Base, Active
 from items.recipe import Paper, SubstanceRecipe, PotionRecipe
 from states.nav import Nav
+from inventory.slot import Slot
+from utils.texts import TextOutlined
 from general_settings.private_settings import *
 
 class GameInventory:
@@ -26,6 +28,9 @@ class GameInventory:
 
         self._open = False
 
+        self._trash_slot = None
+        self._trash_label = None
+
         self._nav_group = pygame.sprite.LayeredUpdates()
         self.reset()
 
@@ -33,6 +38,47 @@ class GameInventory:
         self._state = new_state
         for key, value in self._multiple_inventories.items():
             value.set_state(self._state)
+        
+        # trash can
+        self.kill_trashcan()
+        self.make_trashcan()
+
+    def kill_trashcan(self):
+        if self._trash_label is not None:
+            self._trash_label.kill()
+        if self._trash_slot is not None:
+            self._trash_slot.kill()
+        
+    def make_trashcan(self):
+        # trashcan
+        height_of_inventory = 7
+        trash_slot_x = self._x + 2
+        # 1.5 cause 1 is height of top nav bar
+        trash_slot_y = height_of_inventory + 1.5
+        trash_slot_layer = 0
+        self._trash_slot = Slot(self,self._state.sprites,
+                                True,True,
+                                None,0,
+                                trash_slot_x * TILE_SIZE,
+                                trash_slot_y * TILE_SIZE,
+                                trash_slot_layer)
+        self._trash_slot
+        # hardcoded 
+        trash_label_x = trash_slot_x + 0.5
+        trash_label_y = trash_slot_y + 1.25
+        trash_label_text = "Détruire l'item"
+        trash_label_layer = 0
+        self._trash_label = TextOutlined(trash_label_x * TILE_SIZE,
+                                         trash_label_y * TILE_SIZE,
+                                         trash_label_text,
+                                         trash_label_layer)
+        self._trash_label.add_to_group(self._state.sprites)
+
+    def empty_trashcan(self):
+        if self._trash_slot is not None:
+            q = self._trash_slot.quantity
+            if q > 0:
+                self._trash_slot.take_item(self._trash_slot.quantity)
 
     def lock(self):
         self._locked = True
@@ -48,7 +94,7 @@ class GameInventory:
         self.set_nav(self.nav_index)
 
     def get_slot_list(self):
-        return self._multiple_inventories[self.nav_index].get_slot_list()
+        return self._multiple_inventories[self.nav_index].get_slot_list()+[self._trash_slot]
     
     def get_slots(self):
         return self._slots
@@ -71,10 +117,13 @@ class GameInventory:
 
         if self._open:
             if event.type == pygame.MOUSEBUTTONDOWN:
-                for i in range(0, len(self.nav.tabs)):
-                    if self.nav.tabs[i]["space"].rect.collidepoint(event.pos):
-                        self.change_nav_index(i)
-                        break
+                if self._trash_label is not None and self._trash_label.rect.collidepoint(event.pos):
+                    self.empty_trashcan()
+                else:
+                    for i in range(0, len(self.nav.tabs)):
+                        if self.nav.tabs[i]["space"].rect.collidepoint(event.pos):
+                            self.change_nav_index(i)
+                            break
 
             elif event.type == pygame.MOUSEMOTION:
                 self.hover_nav = [False, -1]

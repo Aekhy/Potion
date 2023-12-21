@@ -166,9 +166,10 @@ class PotionRecipeDraw:
         self._sprites = sprites
         
         b = SubstanceRecipeDraw(recipe._base_recipe, state, sprites, x, y, width, 8, show)
-        h = b.get_height() 
-        a = SubstanceRecipeDraw(recipe._active_recipe, state, sprites, x, y+h, width, 8, show)
-        n = TextOutlined(x, y, recipe.name.replace("Recette ", ""), 1, "topleft")
+        h1 = b.get_height() 
+        a = SubstanceRecipeDraw(recipe._active_recipe, state, sprites, x, y+h1, width, 8, show)
+        h2 = a.get_height()
+        n = TextOutlined(x * TILE_SIZE, (y+h1+h2) * TILE_SIZE, recipe.name.replace("Recette ", ""), 1, "topleft")
         
         self._group = {
             "name": n,
@@ -184,12 +185,14 @@ class PotionRecipeDraw:
         self._group["active"].update_all(recipe._active_recipe)
 
         self._group["name"].kill()
-        self._group["name"] = TextOutlined(self._x, self._y, recipe.name, 1)
+        h = self._group["active"].get_height() + self._group["base"].get_height()
+        self._group["name"] = TextOutlined(self._x * TILE_SIZE , (self._y+h) * TILE_SIZE, recipe.name, 1)
         if show:
             self._group["name"].add_to_group(self._sprites)
 
     def add_ingredient(self, ingredient: Ingredient, show=True):
-        self._group["ingredient.type"].add_ingredient(ingredient, show)
+        # changed
+        self._group[ingredient.type].add_ingredient(ingredient, show)
 
     def show(self):
         self.kill()
@@ -238,7 +241,7 @@ class RecipeDraw:
         x = (self._x + 1/2 + self._width//4) * TILE_SIZE
         y = (self._y) * TILE_SIZE
         layer = 1
-        text = "Modifier"
+        text = "Réécrire"
         self._label_modifiy = TextOutlined(x, y, text, layer, "topleft")
         self._label_modifiy.add_to_group(self._state.sprites)
 
@@ -293,6 +296,7 @@ class RecipeDraw:
         return not self._visualise_recipe_slot.is_empty
 
     def update_draw(self):
+        print("update draw called")
         if self.has_visualise():
             recipe = self._visualise_recipe_slot.item
             x = self._x
@@ -318,6 +322,9 @@ class RecipeDraw:
                 b = Base(self._state.cauldron._base.get_info_save())
                 a = Active(self._state.cauldron._active.get_info_save())
                 p = Potion("", Base(), Active(), self._state.cauldron._potion.get_info_save())
+                print("info save base ",self._state.cauldron._base.get_info_save(), 
+                      ", info save active ",self._state.cauldron._active.get_info_save(), self._state.cauldron._active._ingredients,
+                        ",info save potion", self._state.cauldron._potion.get_info_save())
                 recipe.update_data(b, a ,p)
                 self._modify_recipe_slot.add_item(recipe)
                 

@@ -2,7 +2,6 @@ from states.state import State
 from tools.tools import Cauldron
 from general_settings.private_settings import SCREEN_WIDTH
 from inventory.drag_and_drop import DragAndDrop
-from inventory.game_inventory import GameInventory
 from items.recipe import *
 from states.nav import Nav
 import pygame as pyg
@@ -12,7 +11,6 @@ class CauldronScreen(State):
         super().__init__(game)
         self.sprites = pyg.sprite.LayeredUpdates()
         self.slots = {"take":[],"add":[]}
-
         self.cauldron = Cauldron(self, self.sprites, SCREEN_WIDTH/2, 120)
         self.recipe_draw = RecipeDraw(self, ((SCREEN_WIDTH + TILE_SIZE )//TILE_SIZE)*2/3, 1, 6)
         # Very important to do that in each state that use
@@ -27,6 +25,9 @@ class CauldronScreen(State):
         
         self._dragged_from_tool = False
 
+        # go to toolsscreen
+        self.tools_title = TextOutlined(TILE_SIZE, 11*TILE_SIZE, "Outils", 1, "topleft")
+        self.tools_title.add_to_group(self.sprites)
 
     def update_drag_and_drop(self):
         self.recipe_draw.update_state()
@@ -46,18 +47,24 @@ class CauldronScreen(State):
                         break
                     
             elif event.type == pyg.MOUSEBUTTONDOWN:
-                authorized_slots_take = self._game.game_inventory.slots["take"]+self.slots["take"]
-                iterable_slots_take = self.game.game_inventory.get_slot_list()+[self.cauldron.mixture_slot] + self.recipe_draw.get_slots()
-                self._drag_and_drop.take(authorized_slots_take, iterable_slots_take, event)
-                # if we pressed the finish button, we call the cauldron's finish function
-                if self.cauldron.finish_button.rect.collidepoint(event.pos):
-                    self.cauldron.finish()
-                elif self.cauldron.mixture_slot.rect.collidepoint(event.pos):
-                    # if we dragged the item from the cauldron's output
-                    self._drag_and_drop.take([self.cauldron.mixture_slot], [self.cauldron.mixture_slot], event)
-                    newIndex = 2 if self._drag_and_drop.item.isPotion else 1
-                    self.game.game_inventory.change_nav_index(newIndex)
-                    # we open the right nav index so we don't have to do it manually
+                if self.tools_title.rect.collidepoint(event.pos):
+                    self.game.game_inventory.close()
+                    self.exit_state()
+                    self.game.states("ToolsScreen").enter_state()
+                else:
+                    authorized_slots_take = self._game.game_inventory.slots["take"]+self.slots["take"]
+                    iterable_slots_take = self.game.game_inventory.get_slot_list()+[self.cauldron.mixture_slot] + self.recipe_draw.get_slots()
+                    self._drag_and_drop.take(authorized_slots_take, iterable_slots_take, event)
+                    # if we pressed the finish button, we call the cauldron's finish function
+                    if self.cauldron.finish_button.rect.collidepoint(event.pos):
+                        self.cauldron.finish()
+                    elif self.cauldron.mixture_slot.rect.collidepoint(event.pos):
+                        if not self.cauldron.mixture_slot.is_empty:
+                            # if we dragged the item from the cauldron's output
+                            self._drag_and_drop.take([self.cauldron.mixture_slot], [self.cauldron.mixture_slot], event)
+                            newIndex = 2 if self._drag_and_drop.item.isPotion else 1
+                            self.game.game_inventory.change_nav_index(newIndex)
+                            # we open the right nav index so we don't have to do it manually
                     
             elif event.type == pyg.MOUSEBUTTONUP:  
                 itemAdded = [False]
@@ -67,6 +74,7 @@ class CauldronScreen(State):
                     # we add the item into the cauldron's attributes
                     itemAdded = self.cauldron.add_thing(self._drag_and_drop.item, self._drag_and_drop._quantity)
                     # if the item was added, we update to the new quantity
+                    print(itemAdded)
                     if itemAdded[0]:
                         self._drag_and_drop.quantity = itemAdded[2]
                         # we update the recipe_draw.
@@ -77,6 +85,8 @@ class CauldronScreen(State):
                     authorized_slots_add = self._game.game_inventory.slots["add"]+self.slots["add"]
                     iterable_slots_add = self._game.game_inventory.get_slot_list() + self.recipe_draw.get_slots()
                     self._drag_and_drop.drop(authorized_slots_add, iterable_slots_add, event, fct)
+                    # self._drag_and_drop.drop(authorized_slots_add, authorized_slots_add, event, fct)
+
 
             elif event.type == pyg.KEYDOWN:
                 match event.key:
@@ -91,7 +101,7 @@ class CauldronScreen(State):
                     case pyg.K_o:
                         self.game.states("Options").enter_state()
                     case _:
-                        print("Oulala cette touche va pas")
+                        pass
                         
             self.game.game_inventory.update(event, self._drag_and_drop.is_holding())
                 
