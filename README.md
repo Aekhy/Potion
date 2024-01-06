@@ -39,7 +39,6 @@ Lancez le programme. Vous arrivez sur la page d'accueil.
 ## Accueil - "o"
 
     Cliquez sur "JOUER" pour lancer/continuer votre partie. 
-    Cliquer sur "PARAMETRE" ou "POTION" ne fait rien. 
     Cliquez sur "QUITTER" pour sauvegarder et quitter le jeu. 
     
     Affiché sur certains menus : "RETOUR AU MENU PRINCIPAL". 
@@ -49,9 +48,6 @@ Lancez le programme. Vous arrivez sur la page d'accueil.
 
 Si cliquer sur "JOUER" ne fait rien, réessayez encore une fois.
 
-## Page Chaudron / Outils
-
-    Cette page (qui est temporaire) permet de choisir le menu qu'on souhaite ouvrir. Cliquez sur "CHAUDRON" ou "OUTILS".
 ## Page Chaudron
 
     La partie 'gauche' laisse place à votre inventaire. 
@@ -69,13 +65,13 @@ Un slot spécifique est dédié à la destruction d'item. Pour l'utiliser, dépo
 Remarque : Pour déposer un item dans votre inventaire, vérifiez que l'onglet sélectionné (en gris foncé) correspond au type de votre item. Sinon, l'item retournera à son emplacement d'origine.
 
 ### Ingredients
-    Contient vos ingrédients
+    Contient vos ingrédients.
 ### Mixtures
-    Contient vos mixtures élémentaires et astrales
+    Contient vos mixtures élémentaires et astrales.
 ### Potions
-    Contient vos mixtures étranges, potions ratées et finies
+    Contient vos mixtures étranges, potions ratées et finies.
 ### Recettes
-    Contient votre papier, vos recettes
+    Contient votre papier, vos recettes.
 
 ## Chaudron
 

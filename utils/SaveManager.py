@@ -194,7 +194,34 @@ class SaveManager:
     
 
     # Game Inventory 
-
+    def MakeTutorialRecipe(self):
+        return {
+                    "type": "Slot",
+                    "item_type": "potionRecipe",
+                    "item_data": {
+                        "name": "Recette PyroRenouveau",
+                        "base_recipe": {
+                            "name": "Recette terre",
+                            "ingredients": [
+                                "lavande",
+                                "eau"
+                            ],
+                            "effect": "geler",
+                            "finished": False
+                        },
+                        "active_recipe": {
+                            "name": "Recette feu",
+                            "ingredients": [
+                                "braises"
+                            ],
+                            "effect": "distillation",
+                            "finished": False
+                        },
+                        "finished": False
+                    },
+                    "quantity": 1
+                }
+    
     def MakeDefaultGameInventoryLayout(self, path):
         res = {
             "ingredients":{
@@ -218,12 +245,8 @@ class SaveManager:
                 for j in range(0, value["meta"]["nb_row"]):
                     d_row = []
                     for k in range(0, value["meta"]["nb_col"]):
-                        # test
-                        if i==0 and j==0 and k == 0 and key == "ingredients":
-                            tmp = {"type":"Slot","item_type": "ingredient","item_data":"eau","quantity":5}
-                        elif i==0 and j==0 and k == 0 and key == "recipe":
-                            tmp = {"type":"Slot","item_type": "paper","item_data":"","quantity":5}
-                        # end test
+                        if i==0 and j==0 and k == 0 and key == "recipe":
+                            tmp = self.MakeTutorialRecipe()
                         else:
                             tmp = {"type":"Slot"}
                         d_row.append(tmp)

@@ -120,14 +120,14 @@
     },
     "effect": {
         "chauffer": {
-            "name": true,
-            "img": true,
-            "type": true
+            "name": false,
+            "img": false,
+            "type": false
         },
         "geler": {
-            "name": true,
-            "img": true,
-            "type": true
+            "name": false,
+            "img": false,
+            "type": false
         },
         "mixer": {
             "name": false,
@@ -135,9 +135,9 @@
             "type": false
         },
         "distillation": {
-            "name": true,
-            "img": true,
-            "type": true
+            "name": false,
+            "img": false,
+            "type": false
         },
         "sublimation": {
             "name": false,
@@ -145,9 +145,9 @@
             "type": false
         },
         "fermentation": {
-            "name": true,
-            "img": true,
-            "type": true
+            "name": false,
+            "img": false,
+            "type": false
         }
     },
     "base": {
@@ -256,28 +256,28 @@
     },
     "alchemical_property": {
         "sortilege": {
-            "name": true,
-            "img": true,
-            "base_effect": true,
-            "active_effect": true
+            "name": false,
+            "img": false,
+            "base_effect": false,
+            "active_effect": false
         },
         "charme": {
-            "img": true,
-            "name": true,
-            "base_effect": true,
-            "active_effect": true
+            "img": false,
+            "name": false,
+            "base_effect": false,
+            "active_effect": false
         },
         "transfiguration": {
-            "name": true,
-            "img": true,
-            "base_effect": true,
-            "active_effect": true
+            "name": false,
+            "img": false,
+            "base_effect": false,
+            "active_effect": false
         },
         "malefice": {
-            "name": true,
-            "img": true,
-            "base_effect": true,
-            "active_effect": true
+            "name": false,
+            "img": false,
+            "base_effect": false,
+            "active_effect": false
         },
         "ensorcellement": {
             "name": false,
@@ -292,16 +292,16 @@
             "active_effect": false
         },
         "contre-sort": {
-            "name": true,
-            "img": true,
-            "base_effect": true,
-            "active_effect": true
+            "name": false,
+            "img": false,
+            "base_effect": false,
+            "active_effect": false
         },
         "enchantement": {
-            "name": true,
-            "img": true,
-            "base_effect": true,
-            "active_effect": true
+            "name": false,
+            "img": false,
+            "base_effect": false,
+            "active_effect": false
         },
         "benediction": {
             "name": false,
@@ -312,20 +312,20 @@
     },
     "potion": {
         "AquaVivacite": {
-            "name": true,
-            "description": true,
-            "img": true,
-            "base": true,
-            "active": true,
-            "alchemical_property": true
+            "name": false,
+            "description": false,
+            "img": false,
+            "base": false,
+            "active": false,
+            "alchemical_property": false
         },
         "PyroRenouveau": {
-            "name": true,
-            "description": true,
-            "img": true,
-            "base": true,
-            "active": true,
-            "alchemical_property": true
+            "name": false,
+            "description": false,
+            "img": false,
+            "base": false,
+            "active": false,
+            "alchemical_property": false
         },
         "GuerisonStandard": {
             "name": false,
@@ -336,12 +336,12 @@
             "alchemical_property": false
         },
         "PotionRateBase": {
-            "name": true,
-            "description": true,
-            "img": true,
-            "base": true,
-            "active": true,
-            "alchemical_property": true
+            "name": false,
+            "description": false,
+            "img": false,
+            "base": false,
+            "active": false,
+            "alchemical_property": false
         },
         "PotionRateActive": {
             "name": false,

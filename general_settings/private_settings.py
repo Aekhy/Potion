@@ -29,8 +29,8 @@ DEFAULT_FONT_SIZE = 25
 # Font
 TEXT_FONT_COLOR_DEFAULT = "White"
 TEXT_OUTLINE_FONT_COLOR_DEFAULT = "Black"
-TEXT_FONT_SIZE_DEFAULT = 16
-TEXT_FONT_PATH_DEFAULT = "style/CinzelDecorative-Black.ttf"
+TEXT_FONT_SIZE_DEFAULT = 30
+TEXT_FONT_PATH_DEFAULT = None #"style/CinzelDecorative-Black.ttf"
 
 # Tile size
 TILE_SIZE = 64

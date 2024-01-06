@@ -134,7 +134,7 @@ class Knowledge():
                 j = 0
                 i += 1
 
-            res[i]["id"][key] = KnowledgeElement(knowledge, data, key, res[i]["group"], x+k, y+j, size)
+            res[i]["id"][key] = KnowledgeElement(knowledge, data, key, res[i]["group"], (0.5+x+k)*1.25, (y+j)*1.25, size)
 
             k += 1
 
