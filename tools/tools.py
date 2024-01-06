@@ -59,7 +59,6 @@ class Tool(pyg.sprite.Sprite):
             end_res = (True, res_s, res_q)
         else:
             end_res = (False,new_mixture,quantity)
-        print("end res:",end_res)
         return end_res
 
     def apply_effect(self):
@@ -78,10 +77,8 @@ class Tool(pyg.sprite.Sprite):
                 self._state.game.knowledge.UpdateEffectKnowledge(ID[self._effect], "name", "img", "type")
             self._mixture_slot.take_item()
             self._mixture_slot.add_item(self._mixture)
-            print("effet ajouté")
         else:
             res = False
-            print("effet appelé mais pas ajouté")
         return res
     
     def reset(self):
@@ -273,7 +270,6 @@ class Cauldron(pyg.sprite.Sprite):
                 res = False
             if res:
                 res_q = quantity - 1
-                print("quantity:",res_q)
                 res_s = something
                 if res_q == 0:
                     res_s = None
@@ -287,16 +283,13 @@ class Cauldron(pyg.sprite.Sprite):
 
     def finish(self):
         if self._base != None or self._active != None:
-            print("potion finie")
             self._finished = True
             if self._mixture_slot.is_empty:
                 if isinstance(self.mixture, Potion):
                     self.mixture.update_info(self._origin.game)
                 self._mixture_slot.add_item(self.mixture)
                 self.reset()
-        else:
-            print("finish clicked but potion has no ingredient yet")
-
+                
     def reset(self):
         self._finished = False
         self._base = None

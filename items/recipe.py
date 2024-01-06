@@ -92,7 +92,6 @@ class SubstanceRecipeDraw:
 
     def update_all(self, recipe: SubstanceRecipe, show):
         self.kill()
-        print(recipe.name)
         self.update_name(recipe.name.replace("Recette ", ""), show)
         self.set_effect(recipe._effect, show)
         
@@ -102,7 +101,6 @@ class SubstanceRecipeDraw:
 
     def add_ingredient(self, ingredient, show=True):
         x = (self._x + (len(self._group["ingredients"]) % self._nb_cols) * 3/2) * TILE_SIZE
-        print( ((len(self._group["ingredients"])) // 3) + 1)
         y = (self._y + (len(self._group["ingredients"])) // 3 + 1) * TILE_SIZE
         text = ingredient.name
         layer = 1
@@ -294,7 +292,6 @@ class RecipeDraw:
         return not self._visualise_recipe_slot.is_empty
 
     def update_draw(self):
-        print("update draw called")
         if self.has_visualise():
             recipe = self._visualise_recipe_slot.item
             x = self._x
@@ -320,9 +317,6 @@ class RecipeDraw:
                 b = Base(self._state.cauldron._base.get_info_save())
                 a = Active(self._state.cauldron._active.get_info_save())
                 p = Potion("", Base(), Active(), self._state.cauldron._potion.get_info_save())
-                print("info save base ",self._state.cauldron._base.get_info_save(), 
-                      ", info save active ",self._state.cauldron._active.get_info_save(), self._state.cauldron._active._ingredients,
-                        ",info save potion", self._state.cauldron._potion.get_info_save())
                 recipe.update_data(b, a ,p)
                 self._modify_recipe_slot.add_item(recipe)
                 
@@ -356,7 +350,6 @@ class RecipeDraw:
             self._modify_draw = None
 
     def reset_draw(self):
-        print("reset")
         if not self._visualise_draw is None:
             self._visualise_draw.kill()
         if not self._modify_draw is None:

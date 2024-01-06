@@ -175,10 +175,6 @@ class Knowledge():
             # update the knowledge element to fit the new knowledge
             self.grids["ingredient"][right_page]["id"][ingredient_id].Update(self._knowledge["ingredient"], INGREDIENT_DATA)
 
-        # DEBUG
-        else:
-            print("This ingredient was not found in our knowledge grid")
-
         return res
 
     def UpdateCharacteristicKnowledge(self, characteristic_id, *parameters, **opposites):
@@ -207,9 +203,6 @@ class Knowledge():
             # update the knowledge element to fit the new knowledge
             self.grids["characteristic"][right_page]["id"][characteristic_id].Update(self._knowledge["characteristic"], CHARACTERISTIC_DATA)
 
-        else:
-            print("This characteristic was not found in our knowledge grid")
-
         return False
     
     def UpdateEffectKnowledge(self, effect_id, *parameters):
@@ -233,10 +226,6 @@ class Knowledge():
 
             # update the knowledge element to fit the new knowledge
             self.grids["effect"][right_page]["id"][effect_id].Update(self._knowledge["effect"], EFFECT_DATA)
-
-        # DEBUG
-        else:
-            print("This effect was not found in our knowledge grid")
 
         return res
 
@@ -270,9 +259,6 @@ class Knowledge():
             # update the knowledge element to fit the new knowledge
             self.grids["base"][right_page]["id"][base_id].Update(self._knowledge["base"], BASE_DATA)
 
-        # DEBUG
-        else:
-            print("This base was not found in our knowledge grid")
 
         return res
     
@@ -307,10 +293,6 @@ class Knowledge():
             # update the knowledge element to fit the new knowledge
             self.grids["active"][right_page]["id"][active_id].Update(self._knowledge["active"], ACTIVE_DATA)
 
-        # DEBUG
-        else:
-            print("This active was not found in our knowledge grid")
-
         return res
 
     def UpdateAlchemiclPropertyKnowledge(self, alchemical_property_id, *parameters):
@@ -334,10 +316,6 @@ class Knowledge():
 
             # update the knowledge element to fit the new knowledge
             self.grids["alchemical_property"][right_page]["id"][alchemical_property_id].Update(self._knowledge["alchemical_property"], ALCHEMICAL_PROPERTY_DATA)
-
-        # DEBUG
-        else:
-            print("This alchemical_property was not found in our knowledge grid")
 
         return res
 
@@ -364,9 +342,5 @@ class Knowledge():
 
             # update the knowledge element to fit the new knowledge
             self.grids["potion"][right_page]["id"][potion_id].Update(self._knowledge["potion"], POTION_DATA)
-
-        # DEBUG
-        else:
-            print("This potion was not found in our knowledge grid")
 
         return res

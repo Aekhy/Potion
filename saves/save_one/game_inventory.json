@@ -971,6 +971,12 @@
                     "type": "Slot"
                 },
                 {
+                    "type": "Slot"
+                },
+                {
+                    "type": "Slot"
+                },
+                {
                     "type": "Slot",
                     "item_type": "potionRecipe",
                     "item_data": {
@@ -995,12 +1001,6 @@
                         "finished": false
                     },
                     "quantity": 1
-                },
-                {
-                    "type": "Slot"
-                },
-                {
-                    "type": "Slot"
                 }
             ],
             [

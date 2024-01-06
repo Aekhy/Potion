@@ -54,7 +54,6 @@ class SupplyMenu(TabMenu):
 
 
     def get_supply(self):
-        print("You are getting supplies !")
         # if empty
         empty = True
         for slot in self._supplies.get_slot_list():
@@ -63,7 +62,6 @@ class SupplyMenu(TabMenu):
                 break
 
         if empty:
-            print("Empty supplies you are getting refilled !")
             for slot in self._supplies.get_slot_list():
                 ingredient_or_paper = random.randint(1,6)
                 if ingredient_or_paper == 6:
