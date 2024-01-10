@@ -193,7 +193,6 @@ class Substance(Item):
 
         opposites = {ID["chaud"]: ID["froid"], ID["froid"]: ID["chaud"], ID["sec"]: ID["humide"], ID["humide"]: ID["sec"],
                      ID["lumineux"]: ID["sombre"], ID["sombre"]: ID["lumineux"], ID["majeur"]: ID["mineur"], ID["mineur"]: ID["majeur"]}
-        print("pas v2")
         for characterisitc in new_ingredient.characteristics:
             if DEBUG:
                 print(f" Je vais voir si {characterisitc} à un opposé")
@@ -487,16 +486,11 @@ class Potion(Item):
                 else:
                     key = self._active.node
 
-                print("--------- tmp : ",tmp)
-                print("KEY", key)
                 if key in tmp.keys():
                     tmp = tmp[key]
                 else:
-                    print("Je plante, regarde le code (c'est peut etre a voir avec les neutres et origines)")
-                    # tmp = tmp[ID["neutre"]]
                     break
                 if tmp["level"] == END:
-                    print("j'atteins le lvl END")
                     break
 
             potion = tmp
@@ -507,7 +501,6 @@ class Potion(Item):
             elif potion["level"] == TOP:
                 n = ID[potion["origine"]["name"]]
             # potion["name"] is like an id
-            print("MON ARBRE\n",potion)
             self._name = POTION_DATA[n]["name"]
             self._description = POTION_DATA[n]["description"]
             
