@@ -153,7 +153,7 @@ class IngredientDisplay(DataDisplay):
         self._characteristics_sprite.kill()
         self._max_stack_sprite.kill()
 
-        if self._knowledge["type"]:
+        if self._knowledge["type"] and self._known_type_sprite:
             self._known_type_sprite.kill()
         else:
             self._unknown_type_sprite.kill()
@@ -347,7 +347,7 @@ class PotionDisplay(DataDisplay):
         self._image_sprite.kill()
         self._name_sprite.kill()
         self._description_sprite.kill()
-        self._base_sprite.kill()
+        self._active_sprite.kill()
         self._base_sprite.kill() 
         self._alchemical_property_sprite.kill()
 

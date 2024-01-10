@@ -33,7 +33,7 @@ class InventoryMenu(TabMenu):
                     self._game.game_inventory.close()
                     self.exit_state()
 
-                elif event.key == pygame.K_o:
+                elif event.key == pygame.K_o or event.key == pygame.K_ESCAPE:
                     new_event = self._game.states("Options")
                     new_event.enter_state()
 

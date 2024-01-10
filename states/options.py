@@ -47,6 +47,8 @@ class Options(State):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_o:
                     self.exit_state()
+                elif event.key == pygame.K_ESCAPE:
+                    self.exit_state()
                 elif event.key == pygame.K_RETURN:
                     self.chose = True
                 elif event.key == pygame.K_UP:

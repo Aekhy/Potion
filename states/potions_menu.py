@@ -53,7 +53,7 @@ class PotionsMenu(TabMenu):
                             self.data_display_changed = True
                             self.display = None
                     self.exit_state()
-                elif event.key == pygame.K_o:
+                elif event.key == pygame.K_o or event.key == pygame.K_ESCAPE:
                     new_event = self._game.states("Options")
                     new_event.enter_state()
 
@@ -98,6 +98,8 @@ class PotionsMenu(TabMenu):
                 self.data_display_changed = True
                 self.display = None
             self._in_state = True
+            self._grids[self.nav_index].close()   
+            self._grids[self.nav_index].open()
 
         if self.data_display is not None and self.data_display_changed:
             self.data_display_changed = False
@@ -118,7 +120,7 @@ class PotionsMenu(TabMenu):
                 knowledge = self._game.knowledge.get_struct()["alchemical_property"][id]
                 data = ALCHEMICAL_PROPERTY_DATA[id]
                 self.display = AlchemicalPropertyDisplay(knowledge, data, self.sprites, x, y, ts)
-
+            
 
         if self.change_nav_index:
             if self.previous_index is not None:

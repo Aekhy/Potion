@@ -154,7 +154,7 @@ class Knowledge():
 
     def UpdateIngredientKnowledge(self, ingredient_id, *parameters):
         """
-        *parameters should be any of : "name", "img", "type", "characteristics", "img", "max_stack"
+        *parameters should be any of : "name", "img", "type", "characteristics", "max_stack"
         "max_stack" is special because it's currently arleady something known
         """
         # the res of the operation

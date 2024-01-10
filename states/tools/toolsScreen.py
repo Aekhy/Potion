@@ -94,8 +94,9 @@ class ToolsScreen(State):
             elif event.type == pyg.KEYDOWN:
                 match event.key:
                     case pyg.K_ESCAPE:
-                        self.game.game_inventory.close()
-                        self.exit_state()
+                        # self.game.game_inventory.close()
+                        # self.exit_state()
+                        self.game.states("Options").enter_state()
                     case pyg.K_TAB:
                         self.game.game_inventory.close()
                         self.game.states("InventoryMenu").enter_state()

@@ -149,7 +149,7 @@ class Substance(Item):
             i -= 1
         return found
 
-    def find_node_from_characteristics_V2(self):
+    def find_node_from_characteristics_V2(self, game=None):
         """
         The function finds a node in a graph based on its characteristics and updates the current node
         accordingly.
@@ -172,6 +172,14 @@ class Substance(Item):
             for node in graph[self._node]["neighbours"]:
                 for w in node["weight"]:
                     if w == self._characteristics:
+                        # we update the knowledge
+                        if game is not None:
+                            if self._type == ID["base"]:
+                                game.knowledge.UpdateBaseKnowledge(ID[self._node], "name", "img", one=ID[node["name"]])
+                                game.knowledge.UpdateBaseKnowledge(ID[node["name"]], "name", "img", one=ID[self._node])
+                            elif self._type == ID["active"]:
+                                game.knowledge.UpdateActiveKnowledge(ID[self._node], "name", "img", one=ID[node["name"]])
+                                game.knowledge.UpdateActiveKnowledge(ID[node["name"]], "name", "img", one=ID[self._node])
                         # If we found a valid weight, it means that we are
                         # moving to the corresponding node
                         self._node = node["name"]
@@ -181,7 +189,7 @@ class Substance(Item):
                         # "leave" the function
                         return
 
-    def add_characteristics_V2(self, new_ingredient):
+    def add_characteristics_V2(self, new_ingredient, game=None):
         """
         The function `add_characteristics_V2` adds new characteristics to an ingredient object, removes
         any opposite characteristics, and finds the corresponding node based on the characteristics.
@@ -221,13 +229,13 @@ class Substance(Item):
             if DEBUG:
                 print("je vais chercher une node")
                 print("je commence avec : ", self._node)
-            self.find_node_from_characteristics_V2()
+            self.find_node_from_characteristics_V2(game)
             if DEBUG:
                 # The above code is a Python code snippet that prints the value of the variable
                 # `self._node` with the message "je finis avec :".
                 print("je finis avec :", self._node)
 
-    def add_ingredient_V2(self, new_ingredient):
+    def add_ingredient_V2(self, new_ingredient, game=None):
         """
         The `add_ingredient_V2` method adds an ingredient to the substance and returns True if
         successful, False otherwise.
@@ -242,16 +250,16 @@ class Substance(Item):
         res = new_ingredient.type == self._type
         if res:
             self._ingredients.append(new_ingredient)
-            self.add_characteristics_V2(new_ingredient)
+            self.add_characteristics_V2(new_ingredient, game)
         return res
 
     # ___________________________
 
-    def add_ingredient(self, new_ingredient):
+    def add_ingredient(self, new_ingredient, game=None):
         if USE_V1:
             res = self.add_ingredient_V1(new_ingredient)
         else:
-            res = self.add_ingredient_V2(new_ingredient)
+            res = self.add_ingredient_V2(new_ingredient, game)
         return res
     
 class Base(Substance):

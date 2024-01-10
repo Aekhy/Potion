@@ -57,7 +57,7 @@ class IngredientsMenu(TabMenu):
                             self.data_display_changed = True
                             self.display = None
                         self.exit_state()
-                    elif event.key == pygame.K_o:
+                    elif event.key == pygame.K_o or event.key == pygame.K_ESCAPE:
                         new_event = self._game.states("Options")
                         new_event.enter_state()
 
@@ -104,10 +104,11 @@ class IngredientsMenu(TabMenu):
                 self.data_display_changed = True
                 self.display = None
             # self.reset_nav_body()
+            self._grids[self.nav_index].close()   
+            self._grids[self.nav_index].open()
 
         if self.data_display is not None and self.data_display_changed:
             self.data_display_changed = False
-
             if self.display is not None:
                 self.display.kill()
 
@@ -124,8 +125,6 @@ class IngredientsMenu(TabMenu):
                 knowledge = self._game.knowledge.get_struct()["characteristic"][id]
                 data = CHARACTERISTIC_DATA[id]
                 self.display = CharacteristicDisplay(knowledge, data, self.sprites, x, y, ts)
-           
-
 
         if self.change_nav_index:
             if self.previous_index is not None:

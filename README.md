@@ -6,10 +6,9 @@ Important : Lisez "Avant de commencer" pour éviter de perdre votre progression.
 ## Touches
 ### Clavier :
 
-    o - ouvrir/fermer le menu d'accueil
+    échappe / o - ouvrir/fermer le menu d'accueil
     tab - ouvrir/fermer le menu de gestion
     i - ouvrir/fermer l'inventaire (n'est pas souvent disponible, voire pas du tout)
-    échap - revenir à la page Chaudron/Outils depuis le menu Chaudron ou le menu Outils (page temporaire)
 
 ### Souris :
 
@@ -36,7 +35,7 @@ Important : Lisez "Avant de commencer" pour éviter de perdre votre progression.
 
 Lancez le programme. Vous arrivez sur la page d'accueil.
 
-## Accueil - "o"
+## Accueil - "échappe / o"
 
     Cliquez sur "JOUER" pour lancer/continuer votre partie. 
     Cliquez sur "QUITTER" pour sauvegarder et quitter le jeu. 
@@ -175,8 +174,7 @@ Remarque : Pour déposer un item dans votre inventaire, vérifiez que l'onglet s
 
 ## Menu gestion
 
-    C'est le menu où vous pouvez voir l'état de vos connaissances et récupérer de nouveaux ingrédients. 
-    Readme work in progress...
+    C'est le menu où vous pouvez voir l'état de vos connaissances et récupérer de nouveaux ingrédients.
 
 ### Provisions
     Vous pouvez obtenir plus d'ingrédients et de papier dans ce menu.

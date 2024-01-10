@@ -69,6 +69,21 @@ class SupplyMenu(TabMenu):
                     quantity = random.randint(1,5)
                 else:
                     ingredient_tuple = random.choice(list(INGREDIENT_DATA.items()))
+                    # update ingredient
+                    self._game.knowledge.UpdateIngredientKnowledge(ID[ingredient_tuple[0]],
+                                                                   "name",
+                                                                   "img",
+                                                                   "type",
+                                                                   "characteristics",
+                                                                   "max_stack")
+                    # update characteristics of ingredient
+                    for chara in INGREDIENT_DATA[ID[ingredient_tuple[0]]]["characteristics"]:
+                        self._game.knowledge.UpdateCharacteristicKnowledge(ID[chara],
+                                                                           "name",
+                                                                           "img")
+                        for opposite in CHARACTERISTIC_DATA[ID[chara]]["opposites"]:
+                            self._game.knowledge.UpdateCharacteristicKnowledge(ID[chara], op = ID[opposite])
+
                     item = Ingredient(ID[ingredient_tuple[0]])
                     quantity = random.randint(1,ingredient_tuple[1]["max_stack"])
                 slot.add_item(item, quantity)
@@ -93,7 +108,7 @@ class SupplyMenu(TabMenu):
 
                     self.exit_state()
 
-                elif event.key == pygame.K_o:
+                elif event.key == pygame.K_o or event.key == pygame.K_ESCAPE:
                     new_event = self._game.states("Options")
                     new_event.enter_state()
 

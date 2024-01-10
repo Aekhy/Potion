@@ -53,7 +53,7 @@ class MixturesMenu(TabMenu):
                         self.data_display_changed = True
                         self.display = None
                     self.exit_state()
-                elif event.key == pygame.K_o:
+                elif event.key == pygame.K_o or event.key == pygame.K_ESCAPE:
                     new_event = self._game.states("Options")
                     new_event.enter_state()
 
@@ -99,7 +99,9 @@ class MixturesMenu(TabMenu):
                 self.data_display = None
                 self.data_display_changed = True
                 self.display = None
-
+            self._grids[self.nav_index].close()   
+            self._grids[self.nav_index].open()
+            
         if self.data_display is not None and self.data_display_changed:
             self.data_display_changed = False
 
